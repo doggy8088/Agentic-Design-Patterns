@@ -109,10 +109,45 @@
     font-size: 14px;
     color: #555;
     line-height: 1.6;
+    font-weight: 600;
   }
 
   .site-footer-translation a {
     text-decoration: none;
-    color: inherit;
+    color: #0969da;
+    font-weight: 700;
+  }
+
+  .site-footer {
+    margin-top: -24px !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+    font-size: 0 !important;
+    text-align: right;
+  }
+
+  .site-footer::before {
+    content: "本網站為開放原始碼。";
+    font-size: 14px;
+    color: #606c71;
+    font-weight: 600;
+  }
+
+  .site-footer a {
+    font-size: 0 !important;
+  }
+
+  .site-footer a::before {
+    content: "改善這個頁面。";
+    font-size: 14px;
+    color: #0969da;
+    font-weight: 700;
+  }
+
+  @media (max-width: 640px) {
+    .site-footer {
+      margin-top: 12px !important;
+      text-align: left;
+    }
   }
 </style>
