@@ -91,7 +91,7 @@
 - [附錄 F：底層：代理推理引擎的內部觀察](05-Appendix/Appendix_F-Under_the_Hood_An_Inside_Look_at_the_Agents_Reasoning_Engines-14q3fQ-FZmDgiughno_WLSILMWkURvUgR7mlGiFtvwd4.md)
 - [附錄 G：Coding Agent](05-Appendix/Appendix_G-Coding_Agents-1tVyhgwrD4fu_D_pHUrwhNxoguRG3tLc1KObXFxrxE_s.md)
 
-## 執照
+## 授權
 
 該儲存庫已依據 [MIT 授權條款](LICENSE) 公開授權。
 
