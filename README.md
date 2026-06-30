@@ -103,16 +103,12 @@
 
 <style>
   .site-footer-translation {
-    position: fixed;
-    left: 12px;
-    bottom: 12px;
-    z-index: 999;
-    font-size: 12px;
-    background: transparent;
+    margin: 32px 0 0;
+    padding: 16px 0 0;
+    border-top: 1px solid #e5e7eb;
+    font-size: 14px;
     color: #555;
-    padding: 0;
-    margin: 0;
-    line-height: 1.4;
+    line-height: 1.6;
   }
 
   .site-footer-translation a {
