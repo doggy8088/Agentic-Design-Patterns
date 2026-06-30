@@ -1,14 +1,16 @@
-# Appendix C - Quick overview of Agentic Frameworks
+# 附錄 C - 代理式 框架快速概述
 
 ## LangChain
 
-LangChain is a framework for developing applications powered by LLMs. Its core strength lies in its LangChain Expression Language (LCEL), which allows you to "pipe" components together into a chain. This creates a clear, linear sequence where the output of one step becomes the input for the next. It's built for workflows that are Directed Acyclic Graphs (DAGs), meaning the process flows in one direction without loops.
+LangChain 是用於開發由大型語言模型支援的應用程式的框架。它的核心優勢在於它的 LangChain 表達式語言（LCEL），它允許您將元件「管道」到一個鏈中。這創建了一個清晰的線性序列，其中一個步驟的輸出成為下一步的輸入。它專為有向非循環圖 (DAG) 工作流程而構建，這意味著流程朝一個方向流動，沒有循環。
 
-Use it for:
+將其用於：
 
-* Simple RAG: Retrieve a document, create a prompt, get an answer from an LLM.  
-* Summarization: Take user text, feed it to a summarization prompt, and return the output.  
-* Extraction: Extract structured data (like JSON) from a block of text.
+* 簡單 RAG：檢索文件、建立提示、從大型語言模型獲得答案。
+
+* 摘要：取得使用者文本，將其提供給摘要提示，然後返回輸出。
+
+* 擷取：從文字區塊中擷取結構化資料（如 JSON）。
 
 Python
 
@@ -19,25 +21,28 @@ chain = prompt | model | output_parse
 
 ## LangGraph
 
-LangGraph is a library built on top of LangChain to handle more advanced agentic systems. It allows you to define your workflow as a graph with nodes (functions or LCEL chains) and edges (conditional logic). Its main advantage is the ability to create cycles, allowing the application to loop, retry, or call tools in a flexible order until a task is complete. It explicitly manages the application state, which is passed between nodes and updated throughout the process.
+LangGraph 是一個建構在 LangChain 之上的函式庫，用於處理更先進的代理系統。它允許您將工作流程定義為具有節點（函數或 LCEL 鏈）和邊（條件邏輯）的圖形。它的主要優點是能夠創建循環，允許應用程式以靈活的順序循環、重試或呼叫工具，直到任務完成。它明確管理應用程式狀態，該狀態在節點之間傳遞並在整個過程中更新。
 
-Use it for:
+將其用於：
 
-* Multi-agent Systems: A supervisor agent routes tasks to specialized worker agents, potentially looping until the goal is met.  
-* Plan-and-Execute Agents: An agent creates a plan, executes a step, and then loops back to update the plan based on the result.  
-* Human-in-the-Loop: The graph can wait for human input before deciding which node to go to next.
+* 多代理系統：主管代理將任務路由給專門的工作代理，可能會循環直到達到目標。
 
-| Feature | LangChain | LangGraph |
+* 規劃和執行代理：代理建立計劃，執行步驟，然後循環返回以根據結果更新計劃。
+
+* 人機循環：圖可以等待人類輸入，然後再決定下一步要轉到哪個節點。
+
+|特色|LangChain |LangGraph|
 | :---- | :---- | :---- |
-| Core Abstraction | Chain (using LCEL) | Graph of Nodes |
-| Workflow Type | Linear (Directed Acyclic Graph) | Cyclical (Graphs with loops) |
-| State Management | Generally stateless per run | Explicit and persistent state object |
-| Primary Use | Simple, predictable sequences | Complex, dynamic, stateful agents |
+|核心抽象|鏈條（使用 LCEL）|節點圖|
+|工作流程類型 |線性（有向無環圖） |循環（帶循環的圖形）|
+|國家管理|每次運行通常都是無狀態的 |明確且持久的狀態物件 |
+|主要用途 |簡單、可預測的序列 |複雜、動態、有狀態的代理 |
 
-### Which One Should You Use?
+### 您應該使用哪一個？
 
-* Choose LangChain when your application has a clear, predictable, and linear flow of steps. If you can define the process from A to B to C without needing to loop back, LangChain with LCEL is the perfect tool.  
-* Choose LangGraph when you need your application to reason, plan, or operate in a loop. If your agent needs to use tools, reflect on the results, and potentially try again with a different approach, you need the cyclical and stateful nature of LangGraph.
+* 當您的應用程式具有清晰、可預測且線性的步驟流程時，請選擇 LangChain。如果您可以定義從 A 到 B 到 C 的流程而不需要環回，那麼帶有 LCEL 的 LangChain 是完美的工具。
+
+* 當您需要應用程式在循環中進行推理、規劃或操作時，請選擇 LangGraph。如果您的代理需要使用工具、反思結果，並可能使用不同的方法重試，那麼您需要 LangGraph 的循環和狀態特性。
 
 ```python
 # Graph state
@@ -105,15 +110,15 @@ state = parallel_workflow.invoke({"topic": "cats"})
 print(state["combined_output"])
 ```
 
-This code defines and runs a LangGraph workflow that operates in parallel. Its main purpose is to simultaneously generate a joke, a story, and a poem about a given topic and then combine them into a single, formatted text output.
+此程式碼定義並執行平行操作的 LangGraph 工作流程。其主要目的是同時產生關於給定主題的笑話、故事和詩歌，然後將它們組合成單一格式化文字輸出。
 
-## Google's ADK
+## 谷歌的 ADK
 
-Google's Agent Development Kit, or ADK, provides a high-level, structured framework for building and deploying applications composed of multiple, interacting AI agents. It contrasts with LangChain and LangGraph by offering a more opinionated and production-oriented system for orchestrating agent collaboration, rather than providing the fundamental building blocks for an agent's internal logic.
+谷歌的代理開發套件（ADK）提供了一個高級的結構化框架，用於建立和部署由多個互動的人工智慧代理組成的應用程式。它與 LangChain 和 LangGraph 形成鮮明對比，它提供了一個更加固執和麵向生產的系統來協調代理協作，而不是為代理的內部邏輯提供基本構建塊。
 
-LangChain operates at the most foundational level, offering the components and standardized interfaces to create sequences of operations, such as calling a model and parsing its output. LangGraph extends this by introducing a more flexible and powerful control flow; it treats an agent's workflow as a stateful graph. Using LangGraph, a developer explicitly defines nodes, which are functions or tools, and edges, which dictate the path of execution. This graph structure allows for complex, cyclical reasoning where the system can loop, retry tasks, and make decisions based on an explicitly managed state object that is passed between nodes. It gives the developer fine-grained control over a single agent's thought process or the ability to construct a multi-agent system from first principles.
+LangChain 在最基礎的層面上運行，提供元件和標準化介面來建立操作序列，例如呼叫模型並解析其輸出。 LangGraph 透過引入更靈活、更強大的控制流程來擴展這一點；它將代理的工作流程視為狀態圖。使用 LangGraph，開發人員明確定義節點（函數或工具）和邊（指示執行路徑）。這種圖結構允許複雜的循環推理，系統可以循環、重試任務，並根據節點之間傳遞的明確管理的狀態物件做出決策。它使開發人員能夠對單一代理的思考過程進行細微控制，或能夠根據第一原理建立多代理系統。
 
-Google's ADK abstracts away much of this low-level graph construction. Instead of asking the developer to define every node and edge, it provides pre-built architectural patterns for multi-agent interaction. For instance, ADK has built-in agent types like SequentialAgent or ParallelAgent, which manage the flow of control between different agents automatically. It is architected around the concept of a "team" of agents, often with a primary agent delegating tasks to specialized sub-agents. State and session management are handled more implicitly by the framework, providing a more cohesive but less granular approach than LangGraph's explicit state passing. Therefore, while LangGraph gives you the detailed tools to design the intricate wiring of a single robot or a team, Google's ADK gives you a factory assembly line designed to build and manage a fleet of robots that already know how to work together.
+Google 的 ADK 抽象化了大部分這種低階圖構造。它不是要求開發人員定義每個節點和邊緣，而是為多代理互動提供預先建構的架構模式。例如，ADK 具有內建代理類型，如 SequentialAgent 或 ParallelAgent，它們可自動管理不同代理之間的控制流程。它是圍繞著代理“團隊”的概念構建的，通常有一個主要代理將任務委託給專門的子代理。狀態和會話管理由框架更隱式地處理，提供了比 LangGraph 的顯式狀態傳遞更具凝聚力但粒度更小的方法。因此，雖然 LangGraph 為您提供了設計單個機器人或團隊的複雜佈線的詳細工具，但 Google 的 ADK 為您提供了一條工廠裝配線，旨在建造和管理一組已經知道如何協同工作的機器人。
 
 ```python
 from google.adk.agents import LlmAgent
@@ -128,15 +133,15 @@ dice_agent = LlmAgent(
 )
 ```
 
-This code creates a search-augmented agent. When this agent receives a question, it will not just rely on its pre-existing knowledge. Instead, following its instructions, it will use the Google Search tool to find relevant, real-time information from the web and then use that information to construct its answer.
+此程式碼建立一個搜尋增強代理。當該代理收到問題時，它不會僅依賴其預先存在的知識。相反，它將按照指示使用 Google 搜尋工具從網路上尋找相關的即時訊息，然後使用該資訊建立答案。
 
-## Crew.AI
+## 船員.人工智慧
 
-CrewAI offers an orchestration framework for building multi-agent systems by focusing on collaborative roles and structured processes. It operates at a higher level of abstraction than foundational toolkits, providing a conceptual model that mirrors a human team. Instead of defining the granular flow of logic as a graph, the developer defines the actors and their assignments, and CrewAI manages their interaction.
+CrewAI 提供了一個編排框架，用於透過專注於協作角色和結構化流程來建立多代理系統。它在比基礎工具包更高的抽象層級上運行，提供反映人類團隊的概念模型。開發人員不是將細粒度的邏輯流定義為圖表，而是定義參與者及其任務，並由 CrewAI 管理他們的互動。
 
-The core components of this framework are Agents, Tasks, and the Crew. An Agent is defined not just by its function but by a persona, including a specific role, a goal, and a backstory, which guides its behavior and communication style. A Task is a discrete unit of work with a clear description and expected output, assigned to a specific Agent. The Crew is the cohesive unit that contains the Agents and the list of Tasks, and it executes a predefined Process. This process dictates the workflow, which is typically either sequential, where the output of one task becomes the input for the next in line, or hierarchical, where a manager-like agent delegates tasks and coordinates the workflow among other agents.
+該框架的核心元件是 代理、Tasks 和 Crew。代理不僅由其功能定義，還由角色定義，包括特定角色、目標和背景故事，指導其行為和溝通方式。任務是分配給特定代理的離散工作單元，具有清晰的描述和預期輸出。 Crew 是包含代理和任務清單的內聚單元，它執行預先定義的流程。此過程規定了工作流程，該工作流程通常是順序的（其中一個任務的輸出成為下一個任務的輸入）或分層的（其中類似經理的代理在其他代理之間委派任務並協調工作流程）。
 
-When compared to other frameworks, CrewAI occupies a distinct position. It moves away from the low-level, explicit state management and control flow of LangGraph, where a developer wires together every node and conditional edge. Instead of building a state machine, the developer designs a team charter. While Googlés ADK provides a comprehensive, production-oriented platform for the entire agent lifecycle, CrewAI concentrates specifically on the logic of agent collaboration and for simulating a team of specialists
+與其他框架相比，CrewAI 佔據著獨特的地位。它擺脫了 LangGraph 的低階、顯式狀態管理和控制流，在 LangGraph 中，開發人員將每個節點和條件邊連接在一起。開發人員設計了團隊章程，而不是建構狀態機。雖然 Googlés ADK 為整個代理生命週期提供了一個全面的、面向生產的平台，但 CrewAI 特別專注於代理協作的邏輯以及模擬專家團隊
 
 ```python
 @crew
@@ -150,31 +155,34 @@ def crew(self) -> Crew:
    )
 ```
 
-This code sets up a sequential workflow for a team of AI agents, where they tackle a list of tasks in a specific order, with detailed logging enabled to monitor their progress.
+這段程式碼為人工智慧代理團隊建立了一個連續的工作流程，他們按照特定的順序處理一系列任務，並啟用詳細的日誌記錄來監控他們的進度。
 
-## Other Agent Development Framework
+## 其他代理開發框架
 
-**Microsoft AutoGen**: AutoGen is a framework centered on orchestrating multiple agents that solve tasks through conversation. Its architecture enables agents with distinct capabilities to interact, allowing for complex problem decomposition and collaborative resolution. The primary advantage of AutoGen is its flexible, conversation-driven approach that supports dynamic and complex multi-agent interactions. However, this conversational paradigm can lead to less predictable execution paths and may require sophisticated prompt engineering to ensure tasks converge efficiently.
+**Microsoft AutoGen**：AutoGen 是一個以編排多個代理為中心的框架，這些代理透過對話解決任務。其架構使具有不同功能的代理能夠進行交互，從而實現複雜的問題分解和協作解決。 AutoGen 的主要優勢是其靈活的、對話驅動的方法，支援動態和複雜的多代理互動。然而，這種對話範例可能會導致執行路徑的可預測性較差，並且可能需要複雜的提示工程來確保任務有效聚合。
 
-**LlamaIndex**: LlamaIndex is fundamentally a data framework designed to connect large language models with external and private data sources. It excels at creating sophisticated data ingestion and retrieval pipelines, which are essential for building knowledgeable agents that can perform RAG. While its data indexing and querying capabilities are exceptionally powerful for creating context-aware agents, its native tools for complex agentic control flow and multi-agent orchestration are less developed compared to agent-first frameworks. LlamaIndex is optimal when the core technical challenge is data retrieval and synthesis.
+**LlamaIndex**：LlamaIndex 本質上是一個資料框架，旨在將大型語言模型與外部和私有資料來源連接起來。它擅長創建複雜的資料攝取和檢索管道，這對於建立能夠執行 RAG 的知識豐富的代理至關重要。雖然其資料索引和查詢功能對於建立上下文感知代理非常強大，但與代理優先框架相比，其用於複雜代理控制流和多代理編排的本機工具還不夠發達。當核心技術挑戰是資料檢索和合成時，LlamaIndex 是最佳選擇。
 
-**Haystac**k: Haystack is an open-source framework engineered for building scalable and production-ready search systems powered by language models. Its architecture is composed of modular, interoperable nodes that form pipelines for document retrieval, question answering, and summarization. The main strength of Haystack is its focus on performance and scalability for large-scale information retrieval tasks, making it suitable for enterprise-grade applications. A potential trade-off is that its design, optimized for search pipelines, can be more rigid for implementing highly dynamic and creative agentic behaviors.
+**Haystac**k：Haystack 是一個開源框架，旨在建立由語言模型支援的可擴展且可立即投入生產的搜尋系統。其架構由模組化、可互通的節點組成，這些節點形成文件檢索、問答和摘要的管道。 Haystack 的主要優勢在於其專注於大規模資訊檢索任務的效能和可擴展性，使其適合企業級應用程式。一個潛在的權衡是，它的設計針對搜尋管道進行了最佳化，可以更加嚴格地實現高度動態和創造性的代理行為。
 
-**MetaGPT**: MetaGPT implements a multi-agent system by assigning roles and tasks based on a predefined set of Standard Operating Procedures (SOPs). This framework structures agent collaboration to mimic a software development company, with agents taking on roles like product managers or engineers to complete complex tasks. This SOP-driven approach results in highly structured and coherent outputs, which is a significant advantage for specialized domains like code generation. The framework's primary limitation is its high degree of specialization, making it less adaptable for general-purpose agentic tasks outside of its core design.
+**MetaGPT**：MetaGPT 透過根據一組預先定義的標準作業程序 (SOP) 分配角色和任務來實現多代理系統。該框架建構代理協作來模仿軟體開發公司，代理扮演產品經理或工程師等角色來完成複雜的任務。這種 SOP 驅動的方法會產生高度結構化和一致的輸出，這對於程式碼生成等專業領域來說是一個顯著的優勢。該框架的主要限制是其高度專業化，使其不太適合其核心設計之外的通用代理任務。
 
-**SuperAGI**: SuperAGI is an open-source framework designed to provide a complete lifecycle management system for autonomous agents. It includes features for agent provisioning, monitoring, and a graphical interface, aiming to enhance the reliability of agent execution. The key benefit is its focus on production-readiness, with built-in mechanisms to handle common failure modes like looping and to provide observability into agent performance. A potential drawback is that its comprehensive platform approach can introduce more complexity and overhead than a more lightweight, library-based framework.
+**SuperAGI**：SuperAGI 是一個開源框架，旨在為自主代理提供完整的生命週期管理系統。它包括代理配置、監控和圖形介面功能，旨在提高代理執行的可靠性。主要好處是它專注於生產就緒性，具有內建機制來處理循環等常見故障模式，並提供代理性能的可觀察性。一個潛在的缺點是，與更輕量級的基於庫的框架相比，其綜合平台方法可能會帶來更多的複雜性和開銷。
 
-**Semantic Kernel**: Developed by Microsoft, Semantic Kernel is an SDK that integrates large language models with conventional programming code through a system of "plugins" and "planners." It allows an LLM to invoke native functions and orchestrate workflows, effectively treating the model as a reasoning engine within a larger software application. Its primary strength is its seamless integration with existing enterprise codebases, particularly in .NET and Python environments. The conceptual overhead of its plugin and planner architecture can present a steeper learning curve compared to more straightforward agent frameworks.
+**語意核心**：語意核心由微軟開發，是一個透過「外掛程式」和「規劃器」系統將大型語言模型與常規程式碼整合的 SDK。它允許大型語言模型調用本機函數並編排工作流程，有效地將模型視為大型軟體應用程式中的推理引擎。它的主要優勢是與現有企業程式碼庫的無縫集成，特別是在 .NET 和 Python 環境中。與更簡單的代理框架相比，其插件和規劃器架構的概念開銷可以呈現更陡峭的學習曲線。
 
-**Strands Agents:** An AWS lightweight and flexible SDK that uses a model-driven approach for building and running AI agents. It is designed to be simple and scalable, supporting everything from basic conversational assistants to complex multi-agent autonomous systems. The framework is model-agnostic, offering broad support for various LLM providers, and includes native integration with the MCP for easy access to external tools. Its core advantage is its simplicity and flexibility, with a customizable agent loop that is easy to get started with. A potential trade-off is that its lightweight design means developers may need to build out more of the surrounding operational infrastructure, such as advanced monitoring or lifecycle management systems, which more comprehensive frameworks might provide out-of-the-box.
+**Strands 代理：** AWS 輕量級且靈活的 SDK，使用模型驅動的方法來建置和運行 人工智慧 代理。它的設計簡單且可擴展，支援從基本對話助理到複雜的多代理自治系統的一切。該框架與模型無關，為各種 大型語言模型 提供者提供廣泛支持，並包括與 MCP 的本機集成，以便輕鬆存取外部工具。其核心優勢在於簡單性和靈活性，具有易於上手的可自訂代理循環。一個潛在的權衡是，其輕量級設計意味著開發人員可能需要建造更多的周圍操作基礎設施，例如高級監控或生命週期管理系統，更全面的框架可能會提供開箱即用的功能。
 
-## Conclusion
+## 結論
 
-The landscape of agentic frameworks offers a diverse spectrum of tools, from low-level libraries for defining agent logic to high-level platforms for orchestrating multi-agent collaboration. At the foundational level, LangChain enables simple, linear workflows, while LangGraph introduces stateful, cyclical graphs for more complex reasoning. Higher-level frameworks like CrewAI and Google's ADK shift the focus to orchestrating teams of agents with predefined roles, while others like LlamaIndex specialize in data-intensive applications. This variety presents developers with a core trade-off between the granular control of graph-based systems and the streamlined development of more opinionated platforms. Consequently, selecting the right framework hinges on whether the application requires a simple sequence, a dynamic reasoning loop, or a managed team of specialists. Ultimately, this evolving ecosystem empowers developers to build increasingly sophisticated AI systems by choosing the precise level of abstraction their project demands.
+代理框架提供了各種各樣的工具，從用於定義代理邏輯的低階庫到用於編排多代理協作的高級平台。在基礎層面上，LangChain 支援簡單的線性工作流程，而 LangGraph 則引入了有狀態的循環圖以實現更複雜的推理。 CrewAI 和 Google 的 ADK 等更高層級的框架將重點轉移到編排具有預定義角色的代理團隊，而 LlamaIndex 等其他框架則專注於資料密集型應用程式。這種多樣性為開發人員提供了基於圖形的系統的精細控制和更固執己見的平台的簡化開發之間的核心權衡。因此，選擇正確的框架取決於應用程式是否需要簡單的序列、動態推理循環或受管理的專家團隊。最終，這個不斷發展的生態系統使開發人員能夠透過選擇專案所需的精確抽象層級來建構日益複雜的人工智慧系統。
 
-References
+參考
 
-1. LangChain, [https://www.langchain.com/](https://www.langchain.com/)
-2. LangGraph, [https://www.langchain.com/langgraph](https://www.langchain.com/langgraph)
-3. Google's ADK, [https://google.github.io/adk-docs/](https://google.github.io/adk-docs/)
-4. Crew.AI, [https://docs.crewai.com/en/introduction](https://docs.crewai.com/en/introduction)
+1.LangChain，[https://www.langchain.com/](https://www.langchain.com/)
+
+2. LangGraph，[https://www.langchain.com/langgraph](https://www.langchain.com/langgraph)
+
+3. Google 的 ADK，[https://google.github.io/adk-docs/](https://google.github.io/adk-docs/)
+
+4.Crew.人工智慧，[https://docs.crewai.com/en/introduction](https://docs.crewai.com/en/introduction)

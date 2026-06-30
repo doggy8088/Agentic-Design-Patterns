@@ -1,28 +1,25 @@
-# A Thought Leader's Perspective: Power and Responsibility
+# 思想領袖的觀點：權力與責任
 
-Of all the technology cycles I’ve witnessed over the past four decades—from the birth of the personal computer and the web, to the revolutions in mobile and cloud—none has felt quite like this one. For years, the discourse around Artificial Intelligence was a familiar rhythm of hype and disillusionment, the so-called “AI summers” followed by long, cold winters. But this time, something is different. The conversation has palpably shifted. If the last eighteen months were  
-about the engine—the breathtaking, almost vertical ascent of Large Language Models (LLMs)—the next era will be about the car we build around it. It will be about the frameworks that harness this raw power, transforming it from a generator of plausible text into a true agent of action.
+在過去四十年我目睹的所有科技週期中——從個人電腦和網路的誕生，到行動和雲端的革命——沒有一個像這一次。多年來，圍繞人工智慧的討論都是炒作和幻滅的熟悉節奏，所謂的「人工智慧夏天」之後是漫長而寒冷的冬天。但這一次，情況有所不同。談話內容明顯發生了變化。如果說過去十八個月是關於引擎的——大型語言模型（LLM）驚人的、幾乎垂直的上升——那麼下一個時代將是關於我們圍繞它製造的汽車。它將涉及利用這種原始力量的框架，將其從看似合理的文本生成器轉變為真正的行動代理。
 
-I admit, I began as a skeptic. Plausibility, I’ve found, is often inversely proportional to one’s own knowledge of a subject. Early models, for all their fluency, felt like they were operating with a kind of impostor syndrome, optimized for credibility over correctness. But then came the inflection point, a step-change brought about by a new class of "reasoning" models. Suddenly, we weren't just conversing with a statistical machine that predicted the next word in a sequence;  
-we were getting a peek into a nascent form of cognition.
+我承認，我一開始是持懷疑態度的。我發現，合理性往往與一個人自己對某一學科的了解成反比。早期的模型儘管非常流暢，但感覺就像是在冒充者綜合症，針對可信度而不是正確性進行了優化。但隨後出現了拐點，一類新的「推理」模型帶來了階躍變化。突然間，我們不再只是與一台預測序列中下一個單字的統計機器對話；而是與一台預測序列中下一個單字的統計機器對話。我們正在窺視一種新生的認知形式。
 
-The first time I experimented with one of the new agentic coding tools, I felt that familiar spark of magic. I tasked it with a personal project I’d never found the time for: migrating a charity website from a simple web builder to a proper, modern CI/CD environment. For the next twenty minutes, it went to work, asking clarifying questions, requesting credentials, and providing status updates. It felt less like using a tool and more like collaborating with a junior developer. When it presented me with a fully deployable package, complete with impeccable documentation and unit tests, I was floored.
+當我第一次嘗試新的代理程式設計工具時，我感受到了熟悉的魔法火花。我給它分配了一個我從來沒有時間做的個人專案：將慈善網站從簡單的 Web 建立器遷移到適當的現代 CI/CD 環境。在接下來的二十分鐘裡，它開始工作，提出澄清問題，要求憑證，並提供狀態更新。感覺不太像使用工具，而更像是與初級開發人員合作。當它向我提供了一個完全可部署的包，並配有無可挑剔的文件和單元測試時，我驚呆了。
 
-Of course, it wasn't perfect. It made mistakes. It got stuck. It required my supervision and, crucially, my judgment to steer it back on course. The experience drove home a lesson I’ve learned the hard way over a long career: you cannot afford to trust blindly. Yet, the process was fascinating. Peeking into its "chain of thought" was like watching a mind at work—messy, non-linear, full of starts, stops, and self-corrections, not unlike our own human reasoning. It wasn’t a straight line; it was a random walk toward a solution. Here was the kernel of something new: not just an intelligence that could generate content, but one that could generate a *plan*.
+當然，它並不完美。它犯了錯誤。它被卡住了。它需要我的監督，更重要的是，需要我的判斷來引導它回到正軌。這次經歷讓我在漫長的職業生涯中慘痛地學到了一個教訓：你不能盲目信任。然而，這個過程還是很有趣的。窺視它的「思想鏈」就像觀察一個正在工作的思維——混亂、非線性、充滿開始、停止和自我糾正，與我們人類的推理沒有什麼不同。它不是一條直線；它是一條直線。這是一個隨機行走尋找解決方案的過程。這是新事物的核心：不僅是一種可以產生內容的智能，而且是一種可以產生「計劃」的智能。
 
-This is the promise of agentic frameworks. It’s the difference between a static subway map and a dynamic GPS that reroutes you in real-time. A classic rules-based automaton follows a fixed path; when it encounters an unexpected obstacle, it breaks. An AI agent, powered by a reasoning model, has the potential to observe, adapt, and find another way. It possesses a form of digital common sense that allows it to navigate the countless edge cases of reality. It represents a shift from simply telling a computer *what* to do, to explaining *why* we need something done and trusting it to figure out the *how*.
+這是代理框架的承諾。這就是靜態地鐵地圖和即時重新規劃路線的動態 GPS 之間的差異。經典的基於規則的自動機遵循固定的路徑；當它遇到意想不到的障礙時，它就會崩潰。由推理模型驅動的人工智慧代理具有觀察、適應和尋找另一種方式的潛力。它擁有某種形式的數位常識，使其能夠駕馭現實中無數的邊緣情況。它代表了從簡單地告訴計算機“做什麼”到解釋“為什麼”我們需要做某事並相信它能找出“如何做”的轉變。
 
-As exhilarating as this new frontier is, it brings a profound sense of responsibility, particularly from my vantage point as the CIO of a global financial institution. The stakes are immeasurably high. An agent that makes a mistake while creating a recipe for a "Chicken Salmon Fusion Pie" is a fun anecdote. An agent that makes a mistake while executing a trade, managing risk, or handling client data is a real problem. I’ve read the disclaimers and the cautionary tales: the web automation agent that, after failing a login, decided to email a member of parliament to complain about login walls. It’s a darkly humorous reminder that we are dealing with a technology we don’t fully understand.
+儘管這個新領域令人興奮，但它也帶來了深刻的責任感，特別是從我作為全球金融機構的資訊長的角度來看。賭注是不可估量的高。一名特工在製作“雞肉鮭魚融合派”食譜時犯了一個錯誤，這是一個有趣的軼事。代理在執行交易、管理風險或處理客戶資料時犯錯是一個真正的問題。我讀過免責聲明和警示故事：網路自動化代理在登入失敗後決定向一位國會議員發送電子郵件，抱怨登入牆。這是一個黑色幽默的提醒，提醒我們正在面對一項我們並不完全理解的技術。
 
-This is where craft, culture, and a relentless focus on our principles become our essential guide. Our Engineering Tenets are not just words on a page; they are our compass. We must *Build with Purpose*, ensuring that every agent we design starts from a clear understanding of the client problem we are solving. We must *Look Around Corners*, anticipating failure modes and designing systems that are resilient by design. And above all, we must *Inspire Trust*, by being transparent about our methods and accountable for our outcomes.
+在這裡，工藝、文化和對原則的不懈關注成為我們的基本指南。我們的工程原則不只是紙上的文字；而是紙上的文字。他們是我們的指南針。我們必須“有目的地構建”，確保我們設計的每個代理商都從對我們正在解決的客戶問題的清晰理解開始。我們必須“環顧四周”，預測故障模式並設計具有彈性的系統。最重要的是，我們必須透過對我們的方法保持透明並對我們的結果負責來「激發信任」。
 
-In an agentic world, these tenets take on new urgency. The hard truth is that you cannot simply overlay these powerful new tools onto messy, inconsistent systems and expect good results. Messy systems plus agents are a recipe for disaster. An AI trained on "garbage" data doesn’t just produce garbage-out; it produces plausible, confident garbage that can poison an entire process. Therefore, our first and most critical task is to prepare the ground. We must invest in clean data, consistent metadata, and well-defined APIs. We have to build the modern "interstate system" that allows these agents to operate safely and at high velocity. It is the hard,  
-foundational work of building a programmable enterprise, an "enterprise as software," where our processes are as well-architected as our code.
+在一個代理世界中，這些原則呈現出新的迫切性。殘酷的事實是，您不能簡單地將這些強大的新工具疊加到混亂、不一致的系統上並期望獲得良好的結果。混亂的系統加上代理會導致災難。經過「垃圾」資料訓練的人工智慧不僅會產生垃圾，還會產生垃圾。它會產生可信的、自信的垃圾，從而毒害整個過程。因此，我們首要的也是最關鍵的任務是準備好基礎。我們必須投資乾淨的資料、一致的元資料和定義明確的 API。我們必須建立現代的“州際系統”，使這些特工能夠安全、高速地運作。這是建立可編程企業（「企業即軟體」）的艱鉅的基礎工作，我們的流程與我們的程式碼一樣具有良好的架構。
 
-Ultimately, this journey is not about replacing human ingenuity, but about augmenting it. It demands a new set of skills from all of us: the ability to explain a task with clarity, the wisdom to delegate, and the diligence to verify the quality of the output. It requires us to be humble, to acknowledge what we don’t know, and to never stop learning. The pages that follow in this book offer a technical map for building these new frameworks. My hope is that you will use them not just to build what is possible, but to build what is right, what is robust, and what is responsible.
+最終，這趟旅程不是要取代人類的創造力，而是要增強它。它要求我們所有人具備一套新的技能：清楚解釋任務的能力、委派任務的智慧以及驗證輸出品質的勤奮。它要求我們保持謙虛，承認我們不知道的事情，並且永不停止學習。本書接下來的幾頁提供了建構這些新框架的技術地圖。我希望您不僅能利用它們來建立可能的事物，而且還能建立正確的、穩健的和負責任的事物。
 
-The world is asking every engineer to step up. I am confident we are ready for the challenge.
+世界要求每一位工程師挺身而出。我相信我們已經準備好迎接挑戰。
 
-Enjoy the journey.
+享受旅程。
 
-Marco Argenti, CIO, Goldman Sachs
+Marco Argenti，高盛資訊官

@@ -1,11 +1,11 @@
-To my son, Bruno,
+獻給我的兒子佈魯諾，
 
-who at two years old, brought a new and brilliant light into my life. As I explore the systems that will define our tomorrow, it is the world you will inherit that is foremost in my thoughts.
+兩歲的時候，他為我的生活帶來了新的、燦爛的光芒。當我探索將定義我們明天的系統時，我最關心的是你們將繼承的世界。
 
-To my sons, Leonardo and Lorenzo, and my daughter Aurora,
+我的兒子萊昂納多和洛倫佐，以及我的女兒奧羅拉，
 
-My heart is filled with pride for the women and men you have become and the wonderful world you are building.
+我的心中對你們所成為的女性和男性以及你們正在建立的美好世界充滿了自豪。
 
-This book is about how to build intelligent tools, but it is dedicated to the profound hope that your generation will guide them with wisdom and compassion. The future is incredibly bright, for you and for us all, if we learn to use these powerful technologies to serve humanity and help it progress.
+這本書是關於如何建立智慧工具的，但它也致力於深切希望你們這一代能夠用智慧和同情心來引導它們。如果我們學會使用這些強大的技術來服務人類並幫助人類進步，那麼對於您和我們所有人來說，未來都是非常光明的。
 
-With all my love.
+帶著我全部的愛。

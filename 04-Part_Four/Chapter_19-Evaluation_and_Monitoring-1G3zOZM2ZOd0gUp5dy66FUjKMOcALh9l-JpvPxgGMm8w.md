@@ -1,28 +1,34 @@
-# Chapter 19: Evaluation and Monitoring
+# 第 19 章：評估與監測
 
-This chapter examines methodologies that allow intelligent agents to systematically assess their performance, monitor progress toward goals, and detect operational anomalies. While Chapter 11 outlines goal setting and monitoring, and Chapter 17 addresses Reasoning mechanisms, this chapter focuses on the continuous, often external, measurement of an agent's effectiveness, efficiency, and compliance with requirements. This includes defining metrics, establishing feedback loops, and implementing reporting systems to ensure agent performance aligns with expectations in operational environments (see Fig.1)
+本章研究了允許智慧代理系統地評估其性能、監控目標進展並檢測操作異常的方法。雖然第 11 章概述了目標設定和監控，第 17 章討論了推理機制，但本章重點關注對代理的有效性、效率和對要求的遵守情況的連續（通常是外部的）測量。這包括定義指標、建立回饋循環和實施報告系統，以確保代理績效符合營運環境中的預期（見圖 1）
 
-![Monitoring and Evaluating Agent Performance](../assets/Monitoring_and_Evaluating_Agent_Performance.png)
+![監控與評估代理績效](../assets/Monitoring_and_Evaluating_Agent_Performance.png)
 
-Fig:1. Best practices for evaluation and monitoring
+圖：1.評估與監控的最佳實踐
 
-## Practical Applications & Use Cases
+## 實際應用程式和用例
 
-Most Common Applications and Use Cases:
+最常見的應用程式和用例：
 
-* **Performance Tracking in Live Systems:** Continuously monitoring the accuracy, latency, and resource consumption of an agent deployed in a production environment (e.g., a customer service chatbot's resolution rate, response time).  
-* **A/B Testing for Agent Improvements:** Systematically comparing the performance of different agent versions or strategies in parallel to identify optimal approaches (e.g., trying two different planning algorithms for a logistics agent).  
-* **Compliance and Safety Audits:** Generate automated audit reports that track an agent's compliance with ethical guidelines, regulatory requirements, and safety protocols over time. These reports can be verified by a human-in-the-loop or another agent, and can generate KPIs or trigger alerts upon identifying issues.  
-* **Enterprise systems:** To govern Agentic AI in corporate systems, a new control instrument, the AI "Contract," is needed. This dynamic agreement codifies the objectives, rules, and controls for AI-delegated tasks.  
-* **Drift Detection:** Monitoring the relevance or accuracy of an agent's outputs over time, detecting when its performance degrades due to changes in input data distribution (concept drift) or environmental shifts.  
-* **Anomaly Detection in Agent Behavior:** Identifying unusual or unexpected actions taken by an agent that might indicate an error, a malicious attack, or an emergent un-desired behavior.  
-* **Learning Progress Assessment:** For agents designed to learn, tracking their learning curve, improvement in specific skills, or generalization capabilities over different tasks or data sets.
+* **即時系統中的效能追蹤：** 持續監控生產環境中部署的代理的準確性、延遲和資源消耗（例如，客戶服務聊天機器人的解決率、回應時間）。
 
-## Hands-On Code Example
+* **針對代理改進的 A/B 測試：** 系統地並行比較不同代理版本或策略的性能，以確定最佳方法（例如，為物流代理嘗試兩種不同的規劃演算法）。
 
-Developing a comprehensive evaluation framework for AI agents is a challenging endeavor, comparable to an academic discipline or a substantial publication in its complexity. This difficulty stems from the multitude of factors to consider, such as model performance, user interaction, ethical implications, and broader societal impact. Nevertheless, for practical implementation, the focus can be narrowed to critical use cases essential for the efficient and effective functioning of AI agents.
+* **合規性和安全審計：** 產生自動審計報告，追蹤代理隨時間推移遵守道德準則、監管要求和安全協議的情況。這些報告可以由人類在回圈中或其他代理進行驗證，並且可以在識別問題時產生 KPI 或觸發警報。
 
-**Agent Response Assessment:** This core process is essential for evaluating the quality and accuracy of an agent's outputs. It involves determining if the agent delivers pertinent, correct,  logical, unbiased, and accurate information in response to given inputs. Assessment metrics may include factual correctness, fluency, grammatical precision, and adherence to the user's intended purpose.
+* **企業系統：** 為了管理企業系統中的代理工智慧，需要一種新的控制工具，即人工智慧「合約」。這種動態協定將人工智慧委託任務的目標、規則和控制編入法典。
+
+* **漂移偵測：** 隨著時間的推移監控代理輸出的相關性或準確性，偵測其效能何時會因輸入資料分佈的變化（概念漂移）或環境變化而下降。
+
+* **代理行為中的異常偵測：** 識別代理採取的異常或意外操作，這些操作可能表示錯誤、惡意攻擊或緊急的不良行為。
+
+* **學習進度評估：** 對於旨在學習的代理，追蹤其學習曲線、特定技能的改進或對不同任務或資料集的泛化能力。
+
+## 實踐程式碼範例
+
+為人工智慧代理開發一個全面的評估框架是一項具有挑戰性的工作，其複雜性堪比一門學科或一本實質出版物。這一困難源於需要考慮的多種因素，例如模型效能、使用者互動、道德影響和更廣泛的社會影響。然而，在實際實施中，重點可以縮小到對於人工智慧代理的高效和有效運作至關重要的關鍵用例。
+
+**代理響應評估：** 此核心流程對於評估代理輸出的品質和準確性至關重要。它涉及確定代理是否響應給定的輸入提供相關、正確、合乎邏輯、公正且準確的資訊。評估指標可能包括事實正確性、流暢性、語法準確性以及對使用者預期目的的遵守。
 
 ```python
 def evaluate_response_accuracy(agent_output: str, expected_output: str) -> float:
@@ -38,20 +44,21 @@ score = evaluate_response_accuracy(agent_response, ground_truth)
 print(f"Response accuracy: {score}")
 ```
 
-The Python function `evaluate_response_accuracy` calculates a basic accuracy score for an AI agent's response by performing an exact, case-insensitive comparison between the agent's output and the expected output, after removing leading or trailing whitespace. It returns a score of 1.0 for an exact match and 0.0 otherwise, representing a binary correct or incorrect evaluation. This method, while straightforward for simple checks, does not account for variations like paraphrasing or semantic equivalence.
+Python 函數 `evaluate_response_accuracy` 在刪除前導或尾隨空格後，透過在代理的輸出和預期輸出之間執行精確的、不區分大小寫的比較，計算 人工智慧 代理響應的基本準確性分數。對於完全匹配，它會傳回 1.0 的分數，否則傳回 0.0，表示二進位正確或不正確的評估。這種方法雖然對於簡單檢查來說很簡單，但沒有考慮釋義或語意等價等變化。
 
-The problem lies in its method of comparison. The function performs a strict, character-for-character comparison of the two strings. In the example provided:
+問題在於它的比較方法。此函數對兩個字串執行嚴格的逐字比較。在提供的範例中：
 
-* `agent_response`: "The capital of France is Paris."  
-* `ground_truth`: "Paris is the capital of France."
+* `agent_response`：“法國的首都是巴黎。”
 
-Even after removing whitespace and converting to lowercase, these two strings are not identical. As a result, the function will incorrectly return an accuracy score of `0.0`, even though both sentences convey the same meaning.
+* `ground_truth`：“巴黎是法國的首都。”
 
-A straightforward comparison falls short in assessing semantic similarity, only succeeding if an agent's response exactly matches the expected output. A more effective evaluation necessitates advanced Natural Language Processing (NLP) techniques to discern the meaning between sentences. For thorough AI agent evaluation in real-world scenarios, more sophisticated metrics are often indispensable. These metrics can encompass String Similarity Measures like Levenshtein distance and Jaccard similarity, Keyword Analysis for the presence or absence of specific keywords, Semantic Similarity using cosine similarity with embedding models, LLM-as-a-Judge Evaluations (discussed later for assessing nuanced correctness and helpfulness), and RAG-specific Metrics such as faithfulness and relevance.
+即使刪除空格並轉換為小寫後，這兩個字串也不相同。因此，函數將錯誤地傳回 `0.0` 的準確度分數，即使這兩個句子傳達相同的含義。
 
-**Latency Monitoring:** Latency Monitoring for Agent Actions is crucial in applications where the speed of an AI agent's response or action is a critical factor. This process measures the duration required for an agent to process requests and generate outputs. Elevated latency can adversely affect user experience and the agent's overall effectiveness, particularly in real-time or interactive environments. In practical applications, simply printing latency data to the console is insufficient. Logging this information to a persistent storage system is recommended. Options include structured log files (e.g., JSON), time-series databases (e.g., InfluxDB, Prometheus), data warehouses (e.g., Snowflake, BigQuery, PostgreSQL), or observability platforms (e.g., Datadog, Splunk, Grafana Cloud).
+直接比較無法評估語意相似性，只有當代理的反應與預期輸出完全匹配時才能成功。更有效的評估需要先進的自然語言處理（NLP）技術來辨別句子之間的含義。為了在現實場景中進行全面的人工智慧代理評估，更複雜的指標通常是必不可少的。這些指標可以包括字串相似性測量（例如 Levenshtein 距離和 Jaccard 相似性）、針對特定關鍵字是否存在的關鍵字分析、使用嵌入模型的餘弦相似性的語義相似性、大型語言模型 作為法官評估（稍後討論以評估細微的正確性和有用性）以及 RAG 特定的指標（例如忠實性和相關性）。
 
-**Tracking Token Usage for LLM Interactions:** For LLM-powered agents, tracking token usage is crucial for managing costs and optimizing resource allocation. Billing for LLM interactions often depends on the number of tokens processed (input and output). Therefore, efficient token usage directly reduces operational expenses. Additionally, monitoring token counts helps identify potential areas for improvement in prompt engineering or response generation processes.
+**延遲監控：** 在 人工智慧 代理的回應或操作速度是關鍵因素的應用程式中，代理操作的延遲監控至關重要。此過程測量代理處理請求和產生輸出所需的持續時間。延遲增加可能會對使用者體驗和代理的整體效率產生不利影響，特別是在即時或互動式環境中。在實際應用中，僅僅將延遲資料列印到控制台是不夠的。建議將此資訊記錄到持久性儲存系統。選項包括結構化日誌檔案（例如 JSON）、時間序列資料庫（例如 InfluxDB、Prometheus）、資料倉儲（例如 Snowflake、BigQuery、PostgreSQL）或可觀測平台（例如 Datadog、Splunk、Grafana Cloud）。
+
+**追蹤 大型語言模型 互動的令牌使用：** 對於 大型語言模型 支援的代理來說，追蹤令牌使用情況對於管理成本和最佳化資源分配至關重要。 大型語言模型 互動的計費通常取決於處理的令牌數量（輸入和輸出）。因此，有效的代幣使用直接降低了營運費用。此外，監控令牌計數有助於識別提示工程或回應產生過程中需要改進的潛在領域。
 
 ```python
 # This is conceptual as actual token counting depends on the LLM API
@@ -80,9 +87,9 @@ input_t, output_t = monitor.get_total_tokens()
 print(f"Total input tokens: {input_t}, Total output tokens: {output_t}")
 ```
 
-This section introduces a conceptual Python class, `LLMInteractionMonitor`, developed to track token usage in large language model interactions. The class incorporates counters for both input and output tokens. Its `record_interaction` method simulates token counting by splitting the prompt and response strings. In a practical implementation, specific LLM API tokenizers would be employed for precise token counts. As interactions occur, the monitor accumulates the total input and output token counts. The `get_total_tokens` method provides access to these cumulative totals, essential for cost management and optimization of LLM usage.
+本節介紹一個概念性 Python 類別 `LLMInteractionMonitor`，它是為追蹤大型語言模型互動中的標記使用情況而開發的。此類別包含輸入和輸出標記的計數器。它的 `record_interaction` 方法透過分割提示和回應字串來模擬令牌計數。在實際實作中，將採用特定的 大型語言模型 API 標記器來進行精確的標記計數。當互動發生時，監視器會累積總輸入和輸出令牌計數。 `get_total_tokens` 方法提供對這些累積總數的訪問，這對於成本管理和 大型語言模型 使用最佳化至關重要。
 
-**Custom Metric for "Helpfulness" using LLM-as-a-Judge:** Evaluating subjective qualities like an AI agent's "helpfulness" presents challenges beyond standard objective metrics. A potential framework involves using an LLM as an evaluator. This LLM-as-a-Judge approach assesses another AI agent's output based on predefined criteria for "helpfulness." Leveraging the advanced linguistic capabilities of LLMs, this method offers nuanced, human-like evaluations of subjective qualities, surpassing simple keyword matching or rule-based assessments. Though in development, this technique shows promise for automating and scaling qualitative evaluations.
+**使用大型語言模型作為法官的「樂於助人」的自訂指標：** 評估人工智慧代理的「樂於助人」等主觀品質提出了超出標準客觀指標的挑戰。一個潛在的框架涉及使用大型語言模型作為評估者。這種大型語言模型作為法官的方法根據預先定義的「有用性」標準評估另一個人工智慧代理的輸出。此方法利用大型語言模型的先進語言能力，提供細緻入微的、類似人類的主觀品質評估，超越簡單的關鍵字匹配或基於規則的評估。儘管處於開發階段，但該技術顯示出自動化和擴展定性評估的前景。
 
 ```python
 import os
@@ -234,105 +241,118 @@ if __name__ == "__main__":
         print(json.dumps(judgment_vague, indent=2))
 ```
 
-The Python code defines a class LLMJudgeForLegalSurvey designed to evaluate the quality of legal survey questions using a generative AI model. It utilizes the google.`generativeai` library to interact with Gemini models.
+Python 程式碼定義了一個 LLMJudgeForLegalSurvey 類，旨在使用生成式 人工智慧 模型評估法律調查問題的品質。它利用 google.`generativeai` 函式庫與 Gemini 模型進行互動。
 
-The core functionality involves sending a survey question to the model along with a detailed rubric for evaluation. The rubric specifies five criteria for judging survey questions: Clarity & Precision, Neutrality & Bias, Relevance & Focus, Completeness, and Appropriateness for Audience. For each criterion, a score from 1 to 5 is assigned, and a detailed rationale and feedback are required in the output. The code constructs a prompt that includes the rubric and the survey question to be evaluated.
+核心功能包括向模型發送調查問題以及詳細的評估標準。標題規定了判斷調查問題的五個標準：清晰度和精確性、中立性和偏見、相關性和焦點、完整性和受眾適當性。對於每個標準，都會分配 1 到 5 的分數，並且輸出中需要詳細的理由和回饋。該程式碼建立一個提示，其中包括要評估的標題和調查問題。
 
-The `judge_survey_question` method sends this prompt to the configured Gemini model, requesting a JSON response formatted according to the defined structure. The expected output JSON includes an overall score, a summary rationale, detailed feedback for each criterion, a list of concerns, and a recommended action. The class handles potential errors during the AI model interaction, such as JSON decoding issues or empty responses. The script demonstrates its operation by evaluating examples of legal survey questions, illustrating how the AI assesses quality based on the predefined criteria.
+`judge_survey_question` 方法將此提示傳送至配置的 Gemini 模型，請求根據定義的結構格式化的 JSON 回應。預期輸出 JSON 包括總體分數、摘要理由、每個標準的詳細回饋、問題清單和建議的操作。該類別處理 人工智慧 模型互動期間的潛在錯誤，例如 JSON 解碼問題或空響應。該腳本透過評估法律調查問題的範例來演示其操作，說明人工智慧如何根據預先定義的標準評估品質。
 
-Before we conclude, let's examine various evaluation methods, considering their strengths and weaknesses.
+在結束之前，讓我們檢查一下各種評估方法，並考慮它們的優點和缺點。
 
-| Evaluation Method | Strengths | Weaknesses |
+|評價方法|優點 |弱點|
 | :---- | :---- | :---- |
-| Human Evaluation  | Captures subtle behavior | Difficult to scale, expensive, and time-consuming, as it considers subjective human factors. |
-| LLM-as-a-Judge | Consistent, efficient, and scalable.  | Intermediate steps may be overlooked. Limited by LLM capabilities. |
-| Automated Metrics  | Scalable, efficient, and objective | Potential limitation in capturing complete capabilities. |
+|人類評估|捕捉微妙的行為 |由於考慮了主觀人為因素，難以擴展、昂貴且耗時。 |
+|法官大型語言模型|一致、高效且可擴展。  |中間步驟可能會被忽略。受 大型語言模型 能力限制。 |
+|自動化指標 |可擴展、有效率、客觀 |捕捉完整功能的潛在限制。 |
 
-## Agents trajectories
+## 代理軌跡
 
-Evaluating agents' trajectories is essential, as traditional software tests are insufficient. Standard code yields predictable pass/fail results, whereas agents operate probabilistically, necessitating qualitative assessment of both the final output and the agent's trajectory—the sequence of steps taken to reach a solution. Evaluating multi-agent systems is challenging because they are constantly in flux. This requires developing sophisticated metrics that go beyond individual performance to measure the effectiveness of communication and teamwork. Moreover, the environments themselves are not static, demanding that evaluation methods, including test cases, adapt over time.
+評估代理的軌跡至關重要，因為傳統的軟體測試是不夠的。標準代碼產生可預測的通過/失敗結果，而代理以機率方式操作，需要對最終輸出和代理的軌跡（達成解決方案所採取的步驟序列）進行定性評估。評估多代理系統具有挑戰性，因為它們不斷變化。這需要發展超越個人績效的複雜指標來衡量溝通和團隊合作的有效性。此外，環境本身不是靜態的，要求評估方法（包括測試案例）隨著時間的推移而適應。
 
-This involves examining the quality of decisions, the reasoning process, and the overall outcome. Implementing automated evaluations is valuable, particularly for development beyond the prototype stage. Analyzing trajectory and tool use includes evaluating the steps an agent employs to achieve a goal, such as tool selection, strategies, and task efficiency. For example, an agent addressing a customer's product query might ideally follow a trajectory involving intent determination, database search tool use, result review, and report generation. The agent's actual actions are compared to this expected, or ground truth, trajectory to identify errors and inefficiencies. Comparison methods include exact match (requiring a perfect match to the ideal sequence), in-order match (correct actions in order, allowing extra steps), any-order match (correct actions in any order, allowing extra steps), precision (measuring the relevance of predicted actions), recall (measuring how many essential actions are captured), and single-tool use (checking for a specific action). Metric selection depends on specific agent requirements, with high-stakes scenarios potentially demanding an exact match, while more flexible situations might use an in-order or any-order match.
+這涉及檢查決策的品質、推理過程和整體結果。實施自動化評估很有價值，特別是對於原型階段之後的開發。分析軌跡和工具使用包括評估代理實現目標所採用的步驟，例如工具選擇、策略和任務效率。例如，處理客戶產品查詢的代理在理想情況下可能會遵循涉及意圖確定、資料庫搜尋工具使用、結果審查和報告產生的軌跡。將代理的實際行動與預期的或真實的軌跡進行比較，以識別錯誤和低效率。比較方法包括精確匹配（要求與理想序列完美匹配）、有序匹配（按順序正確操作，允許額外步驟）、任意順序匹配（按任意順序正確操作，允許額外步驟）、精度（測量預測操作的相關性）、召回率（測量捕獲了多少基本操作）和單一工具使用（檢查特定操作）。指標選擇取決於特定的代理要求，高風險場景可能需要精確匹配，而更靈活的情況可能會使用按順序或任意順序匹配。
 
-Evaluation of AI agents involves two primary approaches: using test files and using evalset files. Test files, in JSON format, represent single, simple agent-model interactions or sessions and are ideal for unit testing during active development, focusing on rapid execution and simple session complexity. Each test file contains a single session with multiple turns, where a turn is a user-agent interaction including the user’s query, expected tool use trajectory, intermediate agent responses, and final response. For example, a test file might detail a user request to “Turn off `device_2` in the Bedroom,” specifying the agent’s use of a `set_device_info` tool with parameters like location: Bedroom, `device_id: device_2`, and status: OFF, and an expected final response of “I have set the `device_2` status to off.” Test files can be organized into folders and may include a `test_config`.json file to define evaluation criteria. Evalset files utilize a dataset called an “evalset” to evaluate interactions, containing multiple potentially lengthy sessions suited for simulating complex, multi-turn conversations and integration tests. An evalset file comprises multiple “evals,” each representing a distinct session with one or more “turns” that include user queries, expected tool use, intermediate responses, and a reference final response. An example evalset might include a session where the user first asks “What can you do?” and then says “Roll a 10 sided dice twice and then check if 9 is a prime or not,” defining expected `roll_die` tool calls and a `check_prime` tool call, along with the final response summarizing the dice rolls and the prime check.
+人工智慧 代理的評估涉及兩種主要方法：使用測試文件和使用評估集文件。 JSON 格式的測試檔案表示單一、簡單的代理模型互動或會話，非常適合主動開發期間的單元測試，重點在於快速執行和簡單的會話複雜性。每個測試文件包含具有多個回合的單一會話，其中回合是使用者與代理交互，包括使用者的查詢、預期工具使用軌跡、中間代理回應和最終回應。例如，測試檔案可能會詳細說明使用者要求“關閉臥室中的 `device_2`”，指定代理使用 `set_device_info` 工具，並帶有位置：臥室、`device_id: device_2` 和狀態：OFF 等參數，以及預期的最終回應「我已將 `device_2` 狀態關閉。測試檔案可以組織到資料夾中，並且可能包含 `test_config`.json 檔案來定義評估標準。評估集文件利用稱為「評估集」的資料集來評估交互，其中包含多個可能很長的會話，適合模擬複雜的多輪對話和整合測試。評估集檔案包含多個“評估”，每個“評估”代表一個具有一個或多個“回合”的不同會話，其中包括使用者查詢、預期工具使用、中間回應和參考最終回應。範例評估集可能包括使用者首先詢問「你能做什麼？」的會話。然後說“擲兩次 10 面骰子，然後檢查 9 是否是質數”，定義預期的 `roll_die` 工具調用和 `check_prime` 工具調用，以及總結骰子擲出和質數檢查的最終響應。
 
-**Multi-agents**: Evaluating a complex AI system with multiple agents is much like assessing a team project. Because there are many steps and handoffs, its complexity is an advantage, allowing you to check the quality of work at each stage. You can examine how well each individual "agent" performs its specific job, but you must also evaluate how the entire system is performing as a whole.
+**多代理**：評估具有多個代理的複雜人工智慧系統非常類似於評估團隊專案。因為有很多步驟和交接，所以它的複雜性是一個優勢，可以讓你檢查每個階段的工作品質。您可以檢查每個單獨的「代理」執行其特定工作的情況，但您還必須評估整個系統的整體執行情況。
 
-To do this, you ask key questions about the team's dynamics, supported by concrete examples:
+為此，您需要詢問有關團隊動態的關鍵問題，並輔以具體範例：
 
-* Are the agents cooperating effectively? For instance, after a 'Flight-Booking Agent' secures a flight, does it successfully pass the correct dates and destination to the 'Hotel-Booking Agent'? A failure in cooperation could lead to a hotel being booked for the wrong week.  
-* Did they create a good plan and stick to it? Imagine the plan is to first book a flight, then a hotel. If the 'Hotel Agent' tries to book a room before the flight is confirmed, it has deviated from the plan. You also check if an agent gets stuck, for example, endlessly searching for a "perfect" rental car and never moving on to the next step.  
-* Is the right agent being chosen for the right task? If a user asks about the weather for their trip, the system should use a specialized 'Weather Agent' that provides live data. If it instead uses a 'General Knowledge Agent' that gives a generic answer like "it's usually warm in summer," it has chosen the wrong tool for the job.  
-* Finally, does adding more agents improve performance? If you add a new 'Restaurant-Reservation Agent' to the team, does it make the overall trip-planning better and more efficient? Or does it create conflicts and slow the system down, indicating a problem with scalability?.
+* 代理是否有效合作？例如，在「航班預訂代理」預訂航班後，是否成功將正確的日期和目的地傳遞給「飯店預訂代理」？合作失敗可能會導致飯店預訂錯誤的一周。
 
-## From Agents to Advanced Contractors
+* 他們是否制定了良好的計劃並堅持執行？想像一下，計劃是先預訂航班，然後預訂酒店。如果「飯店代理」試圖在航班確認之前預訂房間，則偏離了計劃。您還可以檢查代理是否陷入困境，例如，無休止地尋找「完美」的租賃汽車並且永遠不會繼續下一步。
 
- Recently, it has been proposed (Agent Companion, gulli et al.) an evolution from simple AI agents to advanced "contractors", moving from probabilistic, often unreliable systems to more deterministic and accountable ones designed for complex, high-stakes environments (see Fig.2)
+* 是否為正確的任務選擇了正確的代理？如果用戶詢問其旅行的天氣，系統應使用專門的「天氣代理」來提供即時數據。如果它使用「常識代理」來給出諸如「夏天通常很溫暖」之類的通用答案，那麼它就選擇了錯誤的工具來完成這項工作。
 
- Today's common AI agents operate on brief, underspecified instructions, which makes them suitable for simple demonstrations but brittle in production, where ambiguity leads to failure. The "contractor" model addresses this by establishing a rigorous, formalized relationship between the user and the AI, built upon a foundation of clearly defined and mutually agreed-upon terms, much like a legal service agreement in the human world. This transformation is supported by four key pillars that collectively ensure clarity, reliability, and robust execution of tasks that were previously beyond the scope of autonomous systems
+* 最後，增加更多代理是否會提高效能？如果您在團隊中新增一個新的“餐廳預訂代理”，是否會使整體旅行計劃變得更好、更有效率？或者它會產生衝突並減慢系統速度，表明可擴展性存在問題？
 
-First is the pillar of the Formalized Contract, a detailed specification that serves as the single source of truth for a task. It goes far beyond a simple prompt. For example, a contract for a financial analysis task wouldn't just say "analyze last quarter's sales"; it would demand "a 20-page PDF report analyzing European market sales from Q1 2025, including five specific data visualizations, a comparative analysis against Q1 2024, and a risk assessment based on the included dataset of supply chain disruptions." This contract explicitly defines the required deliverables, their precise specifications, the acceptable data sources, the scope of work, and even the expected computational cost and completion time, making the outcome objectively verifiable.
+## 從代理到高級承包商
 
-Second is the pillar of a Dynamic Lifecycle of Negotiation and Feedback. The contract is not a static command but the start of a dialogue. The contractor agent can analyze the initial terms and negotiate. For instance, if a contract demands the use of a specific proprietary data source the agent cannot access, it can return feedback stating, "The specified XYZ database is inaccessible. Please provide credentials or approve the use of an alternative public database, which may slightly alter the data's granularity." This negotiation phase, which also allows the agent to flag ambiguities or potential risks, resolves misunderstandings before execution begins, preventing costly failures and ensuring the final output aligns perfectly with the user's actual intent.
+最近，有人提出（代理 Companion、gulli 等人）從簡單的人工智慧代理到高級「承包商」的演變，從機率性、通常不可靠的系統轉向為複雜、高風險環境設計的更具確定性和負責任的系統（見圖 2）
 
-![Contract Execution Example Among Agents](../assets/Contract_Execution_Example_Among_Agents.png)
+當今常見的人工智慧代理根據簡短的、未指定的指令進行操作，這使得它們適合簡單的演示，但在生產中卻很脆弱，模糊性會導致失敗。 「承包商」模型透過在使用者和人工智慧之間建立嚴格的、正式的關係來解決這個問題，這種關係建立在明確定義和共同商定的條款的基礎上，就像人類世界中的法律服務協議一樣。這一轉變得到了四個關鍵支柱的支持，這些支柱共同確保了以前超出自主系統範圍的任務的清晰度、可靠性和穩健執行
 
-Fig. 2: Contract execution example among agents
+首先是形式化合約的支柱，這是一個詳細的規範，作為任務的唯一事實來源。它遠遠超出了簡單的提示。例如，財務分析任務的合約不會只寫「分析上一季的銷售額」；還會寫「分析上一季的銷售額」。它將要求「一份 20 頁的 PDF 報告，分析 2025 年第一季的歐洲市場銷售情況，包括五個具體的數據可視化、與 2024 年第一季度的比較分析，以及基於所包含的供應鏈中斷數據集的風險評估。」該合約明確定義了所需的可交付成果、其精確的規格、可接受的數據源、工作範圍，甚至可完成預期的計算結果，使預期的計算結果，客觀的時間來源、可確定的時間來源，甚至可完成預期的計算結果，客觀的時間來源、可接受的數據源、可完成時間，甚至可實現預期的計算結果，客觀的時間來源、可接受的數據源、可完成時間，甚至可實現預期的計算結果，客觀的時間來源、可接受的數據源、可完成時間，甚至可完成計算結果，使預期的計算結果，客觀可完成的時間來源、確定時間，甚至可完成預期的計算結果，客觀的時間來源、可接受的數據源、可完成時間，甚至可實現預期的計算結果，客觀的時間來源、可接受的數據源、可完成時間，甚至可預期計算。
 
-The third pillar is Quality-Focused Iterative Execution. Unlike agents designed for low-latency responses, a contractor prioritizes correctness and quality. It operates on a principle of self-validation and correction. For a code generation contract, for example, the agent would not just write the code; it would generate multiple algorithmic approaches, compile and run them against a suite of unit tests defined within the contract, score each solution on metrics like performance, security, and readability, and only submit the version that passes all validation criteria. This internal loop of generating, reviewing, and improving its own work until the contract's specifications are met is crucial for building trust in its outputs.
+其次是談判和回饋動態生命週期的支柱。契約不是靜態的命令，而是對話的開始。承包商代理可以分析初始條款並進行談判。例如，如果合約要求使用代理無法存取的特定專有資料來源，它可以回傳
 
-Finally, the fourth pillar is Hierarchical Decomposition via Subcontracts. For tasks of significant complexity, a primary contractor agent can act as a project manager, breaking the main goal into smaller, more manageable sub-tasks. It achieves this by generating new, formal "subcontracts." For example, a master contract to "build an e-commerce mobile application" could be decomposed by the primary agent into subcontracts for "designing the UI/UX," "developing the user authentication module," "creating the product database schema," and "integrating a payment gateway." Each of these subcontracts is a complete, independent contract with its own deliverables and specifications, which could be assigned to other specialized agents. This structured decomposition allows the system to tackle immense, multifaceted projects in a highly organized and scalable manner, marking the transition of AI from a simple tool to a truly autonomous and reliable problem-solving engine.
+![代理間合約執行範例](../assets/Contract_Execution_Example_Among_Agents.png)
 
-Ultimately, this contractor framework reimagines AI interaction by embedding principles of formal specification, negotiation, and verifiable execution directly into the agent's core logic. This methodical approach elevates artificial intelligence from a promising but often unpredictable assistant into a dependable system capable of autonomously managing complex projects with auditable precision. By solving the critical challenges of ambiguity and reliability, this model paves the way for deploying AI in mission-critical domains where trust and accountability are paramount.
+圖2：代理之間的合約執行範例
 
-## Google's ADK
+第三個支柱是以品質為中心的迭代執行。與專為低延遲響應而設計的代理不同，承包商優先考慮正確性和品質。它的運作遵循自我驗證和糾正的原則。例如，對於程式碼產生合約，代理不僅要編寫程式碼，還要編寫程式碼。它將產生多種演算法方法，根據合約中定義的一套單元測試來編譯和運行它們，根據效能、安全性和可讀性等指標對每個解決方案進行評分，並且僅提交通過所有驗證標準的版本。這種生成、審查和改進自己的工作直到滿足合約規範的內部循環對於建立對其輸出的信任至關重要。
 
-Before concluding, let's look at a concrete example of a framework that supports evaluation. Agent evaluation with Google's ADK (see Fig.3) can be conducted via three methods: web-based UI (adk web) for interactive evaluation and dataset generation, programmatic integration using pytest for incorporation into testing pipelines, and direct command-line interface (adk eval) for automated evaluations suitable for regular build generation and verification processes.
+最後，第四個支柱是透過分包進行分層分解。對於非常複雜的任務，主承包商代理可以充當專案經理，將主要目標分解為更小、更易於管理的子任務。它透過產生新的、正式的「分包合約」來實現這一目標。例如，「建立電子商務行動應用程式」的主合約可以由主代理分解為「設計 UI/UX」、「開發用戶身份驗證模組」、「建立產品資料庫模式」和「整合支付網關」的子合約。每個分包合約都是完整、獨立的合同，具有自己的可交付成果和規格，可以分配給其他專業代理。這種結構化分解使系統能夠以高度組織和可擴展的方式處理巨大的、多方面的項目，標誌著人工智慧從簡單的工具轉變為真正自主且可靠的問題解決引擎。
 
-![Evaluation Support for Google ADK](../assets/Evaluation_Support_for_Google_ADK.png)
+最終，這個承包商框架透過將正式規範、協商和可驗證執行的原則直接嵌入到代理的核心邏輯中，重新構想了人工智慧互動。這種有條不紊的方法將人工智慧從一個有前途但往往不可預測的助手提升為一個可靠的系統，能夠以可審計的精度自主管理複雜的專案。透過解決模糊性和可靠性方面的關鍵挑戰，該模型為在信任和問責制至關重要的關鍵任務領域部署人工智慧鋪平了道路。
 
-Fig.3: Evaluation Support for Google ADK
+## 谷歌的 ADK
 
-The web-based UI enables interactive session creation and saving into existing or new eval sets, displaying evaluation status. Pytest integration allows running test files as part of integration tests by calling AgentEvaluator.evaluate, specifying the agent module and test file path.
+在結束之前，讓我們先來看一個支持評估的框架的具體範例。使用 Google ADK 進行代理評估（見圖 3）可以透過三種方法進行：用於互動式評估和資料集產生的基於 Web 的 UI (adk web)、使用 pytest 進行程式設計整合以納入測試管道，以及用於適合常規建置產生和驗證流程的自動評估的直接命令列介面 (adk eval)。
 
-The command-line interface facilitates automated evaluation by providing the agent module path and eval set file, with options to specify a configuration file or print detailed results. Specific evals within a larger eval set can be selected for execution by listing them after the eval set filename, separated by commas.
+![Google ADK 的評估支援](../assets/Evaluation_Support_for_Google_ADK.png)
 
-## At a Glance
+圖3：Google ADK的評估支持
 
-**What:** Agentic systems and LLMs operate in complex, dynamic environments where their performance can degrade over time. Their probabilistic and non-deterministic nature means that traditional software testing is insufficient for ensuring reliability. Evaluating dynamic multi-agent systems is a significant challenge because their constantly changing nature and that of their environments demand the development of adaptive testing methods and sophisticated metrics that can measure collaborative success beyond individual performance. Problems like data drift, unexpected interactions, tool calling, and deviations from intended goals can arise after deployment. Continuous assessment is therefore necessary to measure an agent's effectiveness, efficiency, and adherence to operational and safety requirements.
+基於 Web 的 UI 可以建立互動式會話並將其儲存到現有或新的評估集中，並顯示評估狀態。 Pytest 整合允許透過呼叫 AgentEvaluator.evaluate、指定代理模組和測試檔案路徑來執行測試檔案作為整合測試的一部分。
 
-**Why:** A standardized evaluation and monitoring framework provides a systematic way to assess and ensure the ongoing performance of intelligent agents. This involves defining clear metrics for accuracy, latency, and resource consumption, like token usage for LLMs. It also includes advanced techniques such as analyzing agentic trajectories to understand the reasoning process and employing an LLM-as-a-Judge for nuanced, qualitative assessments. By establishing feedback loops and reporting systems, this framework allows for continuous improvement, A/B testing, and the detection of anomalies or performance drift, ensuring the agent remains aligned with its objectives.
+命令列介面透過提供代理模組路徑和評估集檔案以及指定設定檔或列印詳細結果的選項來促進自動評估。可以透過在評估集檔案名稱後面列出並以逗號分隔來選擇較大評估集中的特定評估來執行。
 
-**Rule of Thumb:** Use this pattern when deploying agents in live, production environments where real-time performance and reliability are critical. Additionally, use it when needing to systematically compare different versions of an agent or its underlying models to drive improvements, and when operating in regulated or high-stakes domains requiring compliance, safety, and ethical audits. This pattern is also suitable when an agent's performance may degrade over time due to changes in data or the environment (drift), or when evaluating complex agentic behavior, including the sequence of actions (trajectory) and the quality of subjective outputs like helpfulness.
+## 概覽
 
-**Visual Summary:**
+**內容：** 代理系統和大型語言模型在複雜、動態的環境中運行，其性能可能會隨著時間的推移而下降。它們的機率性和非確定性本質意味著傳統的軟體測試不足以確保可靠性。評估動態多代理系統是一項重大挑戰，因為它們不斷變化的性質及其環境需要開發自適應測試方法和複雜的指標，以衡量超越個人績效的協作成功。部署後可能會出現資料漂移、意外互動、工具呼叫以及偏離預期目標等問題。因此，有必要進行持續評估，以衡量代理的有效性、效率以及對操作和安全要求的遵守情況。
 
-![Evaluation and Monitoring Design Pattern](../assets/Evaluation_and_Monitoring_Design_Pattern.png)
+**原因：** 標準化的評估和監控框架提供了一種系統化的方法來評估和確保智慧代理的持續性能。這涉及定義準確度、延遲和資源消耗的明確指標，例如大型語言模型的令牌使用情況。它還包括先進的技術，例如分析代理軌跡以了解推理過程，以及聘請大型語言模型作為法官進行細緻入微的定性評估。透過建立回饋循環和報告系統，該框架允許持續改進、A/B 測試以及異常或效能漂移的檢測，確保代理與其目標保持一致。
 
-Fig.4: Evaluation and Monitoring design pattern
+**經驗法則：** 在即時效能和可靠性至關重要的即時生產環境中部署代理時，請使用此模式。此外，當需要係統地比較代理的不同版本或其底層模型以推動改進時，以及在需要合規性、安全性和道德審計的受監管或高風險領域運作時，可以使用它。當代理的效能可能因資料或環境的變化（漂移）而隨著時間的推移而下降時，或在評估複雜的代理行為時，包括動作序列（軌跡）和主觀輸出的品質（如幫助性）時，此模式也適用。
 
-## Key Takeaways
+**視覺摘要：**
 
-* Evaluating intelligent agents goes beyond traditional tests to continuously measure their effectiveness, efficiency, and adherence to requirements in real-world environments.  
-* Practical applications of agent evaluation include performance tracking in live systems, A/B testing for improvements, compliance audits, and detecting drift or anomalies in behavior.  
-* Basic agent evaluation involves assessing response accuracy, while real-world scenarios demand more sophisticated metrics like latency monitoring and token usage tracking for LLM-powered agents.  
-* Agent trajectories, the sequence of steps an agent takes, are crucial for evaluation, comparing actual actions against an ideal, ground-truth path to identify errors and inefficiencies.  
-* The ADK provides structured evaluation methods through individual test files for unit testing and comprehensive evalset files for integration testing, both defining expected agent behavior.  
-* Agent evaluations can be executed via a web-based UI for interactive testing, programmatically with pytest for CI/CD integration, or through a command-line interface for automated workflows.  
-* In order to make AI reliable for complex, high-stakes tasks, we must move from simple prompts to formal "contracts" that precisely define verifiable deliverables and scope. This structured agreement allows the Agents to negotiate, clarify ambiguities, and iteratively validate its own work, transforming it from an unpredictable tool into an accountable and trustworthy system.
+![評估與監控設計模式](../assets/Evaluation_and_Monitoring_Design_Pattern.png)
 
-## Conclusions
+圖4：評估與監控設計模式
 
-In conclusion, effectively evaluating AI agents requires moving beyond simple accuracy checks to a continuous, multi-faceted assessment of their performance in dynamic environments. This involves practical monitoring of metrics like latency and resource consumption, as well as sophisticated analysis of an agent's decision-making process through its trajectory. For nuanced qualities like helpfulness, innovative methods such as the LLM-as-a-Judge are becoming essential, while frameworks like Google's ADK provide structured tools for both unit and integration testing. The challenge intensifies with multi-agent systems, where the focus shifts to evaluating collaborative success and effective cooperation.
+## 要點
 
-To ensure reliability in critical applications, the paradigm is shifting from simple, prompt-driven agents to advanced "contractors" bound by formal agreements. These contractor agents operate on explicit, verifiable terms, allowing them to negotiate, decompose tasks, and self-validate their work to meet rigorous quality standards. This structured approach transforms agents from unpredictable tools into accountable systems capable of handling complex, high-stakes tasks. Ultimately, this evolution is crucial for building the trust required to deploy sophisticated agentic AI in mission-critical domains.
+* 評估智能代理超越傳統測試，持續衡量其有效性、效率以及對現實環境中要求的遵守情況。
 
-## References
+* 代理評估的實際應用包括即時系統中的效能追蹤、改進的 A/B 測試、合規性審計以及檢測行為中的偏差或異常​​。
 
-Relevant research includes:
+* 基本代理評估涉及評估回應準確性，而現實場景需要更複雜的指標，例如 大型語言模型 支援的代理的延遲監控和令牌使用情況追蹤。
 
-1. ADK Web: [https://github.com/google/adk-web](https://github.com/google/adk-web)
-2. ADK Evaluate: [https://google.github.io/adk-docs/evaluate/](https://google.github.io/adk-docs/evaluate/)  
-3. Survey on Evaluation of LLM-based Agents, [https://arxiv.org/abs/2503.16416](https://arxiv.org/abs/2503.16416)
-4. Agent-as-a-Judge: Evaluate Agents with Agents, [https://arxiv.org/abs/2410.10934](https://arxiv.org/abs/2410.10934)
-5. Agent Companion, gulli et al: [https://www.kaggle.com/whitepaper-agent-companion](https://www.kaggle.com/whitepaper-agent-companion)
+* 代理軌跡（代理採取的步驟順序）對於評估、將實際行動與理想的、真實的路徑進行比較以識別錯誤和低效率至關重要。
+
+* ADK 透過用於單元測試的單獨測試文件和用於整合測試的綜合評估集文件提供結構化評估方法，兩者都定義了預期的代理行為。
+
+* 代理評估可以透過基於 Web 的 UI 執行互動式測試，使用 pytest 以程式設計方式執行 CI/CD 集成，或透過命令列介面執行自動化工作流程。
+
+* 為了使人工智慧可靠地執行複雜、高風險的任務，我們必須從簡單的提示轉向精確定義可驗證的可交付成果和範圍的正式「合約」。這種結構化協議允許代理進行談判、澄清歧義並迭代驗證自己的工作，將其從不可預測的工具轉變為負責任且值得信賴的系統。
+
+## 結論
+
+總之，有效評估人工智慧代理需要超越簡單的準確性檢查，而是對其在動態環境中的表現進行連續、多方面的評估。這涉及對延遲和資源消耗等指標的實際監控，以及透過代理的軌跡對其決策過程進行複雜的分析。對於諸如樂於助人之類的細緻入微的品質，像 大型語言模型-as-a-Judge 這樣的創新方法正變得至關重要，而像 Google 的 ADK 這樣的框架則為單元測試和集成測試提供了結構化工具。隨著多代理系統的發展，這項挑戰變得更加嚴峻，重點轉向評估協作成功和有效合作。
+
+為了確保關鍵應用的可靠性，範式正在從簡單的、即時驅動的代理轉變為受正式協議約束的高級「承包商」。這些承包商代理按照明確、可驗證的條款運作，使他們能夠談判、分解任務並自我驗證其工作，以滿足嚴格的品質標準。這種結構化方法將代理從不可預測的工具轉變為能夠處理複雜、高風險任務的負責任的系統。最終，這種演進對於建立在關鍵任務領域部署複雜的代理工智慧所需的信任至關重要。
+
+## 參考
+
+相關研究包括：
+
+1. ADK 網站：[https://github.com/google/adk-web](https://github.com/google/adk-web)
+
+2. ADK 評估：[https://google.github.io/adk-docs/evaluate/](https://google.github.io/adk-docs/evaluate/)
+
+3. 大型語言模型 代理評估調查，[https://arxiv.org/abs/2503.16416](https://arxiv.org/abs/2503.16416)
+
+4. 代理為法官：與代理一起評估代理，[https://arxiv.org/abs/2410.10934](https://arxiv.org/abs/2410.10934)
+
+5. 代理 Companion，gulli 等人：[https://www.kaggle.com/whitepaper-代理-companion](https://www.kaggle.com/whitepaper-agent-companion)

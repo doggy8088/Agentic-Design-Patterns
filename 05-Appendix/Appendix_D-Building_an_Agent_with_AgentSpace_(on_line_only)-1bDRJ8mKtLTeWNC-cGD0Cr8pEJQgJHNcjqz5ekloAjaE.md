@@ -1,60 +1,61 @@
-# Appendix D - Building an Agent with AgentSpace
+# 附錄 D - 使用 AgentSpace 建構代理
 
-## Overview
+## 概述
 
-AgentSpace is a platform designed to facilitate an "agent-driven enterprise" by integrating artificial intelligence into daily workflows. At its core, it provides a unified search capability across an organization's entire digital footprint, including documents, emails, and databases. This system utilizes advanced AI models, like Google's Gemini, to comprehend and synthesize information from these varied sources.
+AgentSpace 是一個旨在透過將人工智慧整合到日常工作流程中來促進「代理驅動的企業」的平台。它的核心是在組織的整個數位足跡（包括文件、電子郵件和資料庫）中提供統一的搜尋功能。該系統利用先進的人工智慧模型（例如Google的 Gemini）來理解和綜合來自這些不同來源的資訊。
 
-The platform enables the creation and deployment of specialized AI "agents" that can perform complex tasks and automate processes. These agents are not merely chatbots; they can reason, plan, and execute multi-step actions autonomously. For instance, an agent could research a topic, compile a report with citations, and even generate an audio summary.
+該平台支援創建和部署專門的人工智慧“代理”，這些“代理”可以執行複雜的任務並自動化流程。這些代理不僅僅是聊天機器人，而是聊天機器人。他們可以自主推理、規劃和執行多步驟行動。例如，代理可以研究某個主題、撰寫帶有引文的報告，甚至產生音訊摘要。
 
-To achieve this, AgentSpace constructs an enterprise knowledge graph, mapping the relationships between people, documents, and data. This allows the AI to understand context and deliver more relevant and personalized results. The platform also includes a no-code interface called Agent Designer for creating custom agents without requiring deep technical expertise.
+為了實現這一目標，AgentSpace 建構了一個企業知識圖譜，以繪製人員、文件和資料之間的關係。這使得人工智慧能夠理解上下文並提供更相關和個性化的結果。該平台還包括一個名為 代理 Designer 的無程式碼介面，用於創建自訂代理，而無需深厚的技術專業知識。
 
-Furthermore, AgentSpace supports a multi-agent system where different AI agents can communicate and collaborate through an open protocol known as the Agent2Agent (A2A) Protocol. This interoperability allows for more complex and orchestrated workflows. Security is a foundational component, with features like role-based access controls and data encryption to protect sensitive enterprise information. Ultimately, AgentSpace aims to enhance productivity and decision-making by embedding intelligent, autonomous systems directly into an organization's operational fabric.
+此外，AgentSpace 支援多代理系統，其中不同的 人工智慧 代理可以透過稱為 Agent2Agent (A2A) 協定的開放協定進行通訊和協作。這種互通性允許更複雜和精心安排的工作流程。安全性是一個基礎元件，具有基於角色的存取控制和資料加密等功能來保護敏感的企業資訊。最終，AgentSpace 的目標是透過將智慧、自主系統直接嵌入組織的營運結構中來提高生產力和決策能力。
 
-## How to build an Agent with AgentSpace UI
+## 如何使用 AgentSpace UI 建置 代理
 
-Figure 1 illustrates how to access AgentSpace by selecting AI Applications from the Google Cloud Console.
+圖 1 說明如何透過從 Google Cloud Console 中選擇 人工智慧 應用程式來存取 AgentSpace。
 
-![GCP: Access AgentSpace](../assets/GCP_Access_AgentSpace.png)
+![GCP：存取 AgentSpace](../assets/GCP_Access_AgentSpace.png)
 
-Fig. 1:  How to use Google Cloud Console to access AgentSpace
+圖1：如何使用Google Cloud Console存取AgentSpace
 
-Your agent can be connected to various services, including Calendar, Google Mail, Workaday, Jira, Outlook, and Service Now (see Fig. 2).
+您的代理可以連接到各種服務，包括日曆、Google Mail、Workaday、Jira、Outlook 和 Service Now（見圖 2）。
 
-![GCP: Integrate with diverse services](../assets/GCP_Integrate_with_diverse_services.png)
+![GCP：與多種服務整合](../assets/GCP_Integrate_with_diverse_services.png)
 
-Fig. 2: Integrate with diverse services, including Google and third-party platforms.
+圖 2：與各種服務集成，包括 Google 和第三方平台。
 
-The Agent can then utilize its own prompt, chosen from a gallery of pre-made prompts provided by Google, as illustrated in Fig. 3\.
+然後，代理可以使用自己的提示，該提示是從 Google 提供的預製提示庫中選擇的，如圖 3\ 所示。
 
-![GCP: Googles Gallery of Pre-Assembled Prompts](../assets/GCP_Googles_Gallery_of_Pre_Assembled_Prompts.png)
+![GCP：Google 預組裝提示圖庫](../assets/GCP_Googles_Gallery_of_Pre_Assembled_Prompts.png)
 
-Fig.3: Google's Gallery of Pre-assembled  prompts
+圖 3：Google 的預組裝提示庫
 
-In alternative you can create your own prompt as in Fig.4, which will be then used by your agent  
+或者，您可以建立自己的提示，如圖 4 所示，然後您的代理將使用該提示
 
-![GCP: Customizing the Agent's Prompt](../assets/GCP_Customizing_the_Agents_Prompt.png)
+![GCP：自訂代理的提示](../assets/GCP_Customizing_the_Agents_Prompt.png)
 
-Fig.4: Customizing the Agent's Prompt
+圖4：自訂代理提示
 
-AgentSpace offers a number of advanced features such as integration with datastores to store your own data, integration with Google Knowledge Graph or with your private Knowledge Graph, Web interface for exposing your agent to the Web, and Analytics to monitor usage, and more (see Fig. 5\)
+AgentSpace 提供了許多高級功能，例如與資料儲存整合以儲存您自己的資料、與 Google Knowledge Graph 或您的私人知識圖整合、用於將您的代理公開到 Web 的 Web 介面以及用於監控使用情況的分析等等（請參閱圖 5\）
 
-![GCP: AgentSpace Advanced Capabilities](../assets/GCP_AgentSpace_Advanced_Capabilities.png)
+![GCP：AgentSpace 高階功能](../assets/GCP_AgentSpace_Advanced_Capabilities.png)
 
-Fig. 5: AgentSpace advanced capabilities
+圖 5：AgentSpace 進階功能
 
-Upon completion, the AgentSpace chat interface (Fig. 6\) will be accessible.
+完成後，即可存取 AgentSpace 聊天介面（圖 6\）。
 
-![GCP: AgentSpace User Interface for initiating a chat with your Agent](../assets/GCP_AgentSpace_User_Interface_for_initiating_a_chat_with_your_Agent.png)
+![GCP：用於發起與代理聊天的 AgentSpace 使用者介面](../assets/GCP_AgentSpace_User_Interface_for_initiating_a_chat_with_your_Agent.png)
 
-Fig. 6: The AgentSpace User Interface for initiating a chat with your Agent.
+圖 6：用於啟動與代理聊天的 AgentSpace 使用者介面。
 
-## Conclusion
+## 結論
 
-In conclusion, AgentSpace provides a functional framework for developing and deploying AI agents within an organization's existing digital infrastructure. The system's architecture links complex backend processes, such as autonomous reasoning and enterprise knowledge graph mapping, to a graphical user interface for agent construction. Through this interface, users can configure agents by integrating various data services and defining their operational parameters via prompts, resulting in customized, context-aware automated systems.
+總之，AgentSpace 提供了一個功能框架，用於在組織現有的數位基礎設施中開發和部署 人工智慧 代理。該系統的架構將複雜的後端流程（例如自主推理和企業知識圖映射）連結到用於代理構建的圖形使用者介面。透過此介面，使用者可以透過整合各種資料服務並透過提示定義其操作參數來配置代理，從而形成客製化的上下文感知自動化系統。
 
-This approach abstracts the underlying technical complexity, enabling the construction of specialized multi-agent systems without requiring deep programming expertise. The primary objective is to embed automated analytical and operational capabilities directly into workflows, thereby increasing process efficiency and enhancing data-driven analysis. For practical instruction, hands-on learning modules are available, such as the "Build a Gen AI Agent with Agentspace" lab on Google Cloud Skills Boost, which provides a structured environment for skill acquisition.
+這種方法抽象化了底層技術的複雜性，無需深厚的程式設計專業知識即可建立專門的多代理系統。主要目標是將自動化分析和操作功能直接嵌入到工作流程中，從而提高流程效率並增強資料驅動的分析。對於實踐指導，可以使用實踐學習模組，例如 Google Cloud Skills Boost 上的「使用 Agentspace 建立 Gen 人工智慧 代理」實驗室，該實驗室為技能獲取提供了結構化環境。
 
-## References
+## 參考
 
-1. Create a no-code agent with Agent Designer, [https://cloud.google.com/agentspace/agentspace-enterprise/docs/agent-designer](https://cloud.google.com/agentspace/agentspace-enterprise/docs/agent-designer)
-2. Google Cloud Skills Boost, [https://www.cloudskillsboost.google/](https://www.cloudskillsboost.google/)
+1. 使用 代理 Designer 建立無程式碼代理，[https://cloud.google.com/agentspace/agentspace-enterprise/docs/代理-designer](https://cloud.google.com/agentspace/agentspace-enterprise/docs/agent-designer)
+
+2. Google Cloud Skills Boost，[https://www.cloudskillsboost.google/](https://www.cloudskillsboost.google/)

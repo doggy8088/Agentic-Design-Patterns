@@ -1,450 +1,450 @@
-# Glossary
+# 詞彙表
 
-## Fundamental Concepts
+## 基本概念
 
-- **Prompt**: A prompt is the input, typically in the form of a question, instruction, or statement, that a user provides to an AI model to elicit a response. The quality and structure of the prompt heavily influence the model's output, making prompt engineering a key skill for effectively using AI.
+- **提示**：提示是使用者提供給 AI 模型以引發回應的輸入，通常採用問題、指示或陳述的形式。提示的品質和結構在很大程度上影響模型的輸出，使得提示工程成為有效使用人工智慧的關鍵技能。
 
-- **Context Window**: The context window is the maximum number of tokens an AI model can process at once, including both the input and its generated output. This fixed size is a critical limitation, as information outside the window is ignored, while larger windows enable more complex conversations and document analysis.
+- **上下文視窗**：上下文視窗是人工智慧模型可以一次處理的最大標記數，包括輸入及其產生的輸出。這種固定大小是一個關鍵限制，因為視窗外部的資訊將被忽略，而較大的視窗可以實現更複雜的對話和文件分析。
 
-- **In-Context Learning**: In-context learning is an AI's ability to learn a new task from examples provided directly in the prompt, without requiring any retraining. This powerful feature allows a single, general-purpose model to be adapted to countless specific tasks on the fly.
+- **情境學習**：情境學習是人工智慧從提示中直接提供的範例中學習新任務的能力，無需任何重新訓練。這項強大的功能使單一通用模型能夠適應無數的動態特定任務。
 
-- **Zero-Shot, One-Shot, & Few-Shot Prompting**: These are prompting techniques where a model is given zero, one, or a few examples of a task to guide its response. Providing more examples generally helps the model better understand the user's intent and improves its accuracy for the specific task.
+- **零射擊、單射擊和少射擊提示**：這些是提示技術，其中為模型提供零個、一個或幾個任務範例來指導其反應。提供更多範例通常有助於模型更好地理解使用者的意圖並提高其特定任務的準確性。
 
-- **Multimodality**: Multimodality is an AI's ability to understand and process information across multiple data types like text, images, and audio. This allows for more versatile and human-like interactions, such as describing an image or answering a spoken question.
+- **多模態**：多模態是人工智慧理解和處理多種資料類型（如文字、圖像和音訊）資訊的能力。這允許更通用和類人的交互，例如描述圖像或回答口頭問題。
 
-**Grounding**: Grounding is the process of connecting a model's outputs to verifiable, real-world information sources to ensure factual accuracy and reduce hallucinations. This is often achieved with techniques like RAG to make AI systems more trustworthy.
+**接地**：接地是將模型的輸出連接到可驗證的現實世界資訊來源的過程，以確保事實準確性並減少幻覺。這通常是透過 檢索增強生成（RAG） 等技術來實現的，以使人工智慧系統更值得信賴。
 
-## Core AI Model Architectures
+## 核心AI模型架構
 
-- **Transformers**: The Transformer is the foundational neural network architecture for most modern LLMs. Its key innovation is the self-attention mechanism, which efficiently processes long sequences of text and captures complex relationships between words.
+- **Transformers**：Transformer 是大多數現代大型語言模型（LLM）的基礎神經網路架構。其關鍵創新在於自註意力機制，可有效處理長文本序列並捕捉單字之間的複雜關係。
 
-- **Recurrent Neural Network (RNN)**: The Recurrent Neural Network is a foundational architecture that preceded the Transformer. RNNs process information sequentially, using loops to maintain a "memory" of previous inputs, which made them suitable for tasks like text and speech processing.
+- **循環神經網路 (RNN)**：循環神經網路是 Transformer 之前的基礎架構。 RNN 按順序處理訊息，使用循環來維護先前輸入的“記憶”，這使得它們適合文字和語音處理等任務。
 
-- **Mixture of Experts (MoE)**: Mixture of Experts is an efficient model architecture where a "router" network dynamically selects a small subset of "expert" networks to handle any given input. This allows models to have a massive number of parameters while keeping computational costs manageable.
+- **專家混合 (MoE)**：專家混合是一種高效的模型架構，其中「路由器」網路動態選擇一小部分「專家」網路來處理任何給定的輸入。這使得模型能夠擁有大量參數，同時保持運算成本可控。
 
-- **Diffusion Models**: Diffusion models are generative models that excel at creating high-quality images. They work by adding random noise to data and then training a model to meticulously reverse the process, allowing them to generate novel data from a random starting point.
+- **擴散模型**：擴散模型是擅長創建高品質影像的生成模型。他們的工作方式是向資料中添加隨機噪聲，然後訓練模型來精心反轉該過程，使他們能夠從隨機起點生成新資料。
 
-- **Mamba**: Mamba is a recent AI architecture using a Selective State Space Model (SSM) to process sequences with high efficiency, especially for very long contexts. Its selective mechanism allows it to focus on relevant information while filtering out noise, making it a potential alternative to the Transformer.
+- **Mamba**：Mamba 是一種最新的人工智慧架構，使用選擇性狀態空間模型（SSM）來高效處理序列，特別是對於很長的上下文。其選擇機制使其能夠專注於相關訊息，同時濾除噪音，使其成為 Transformer 的潛在替代品。
 
-## The LLM Development Lifecycle
+## 大型語言模型（LLM）發展生命週期
 
-- The development of a powerful language model follows a distinct sequence. It begins with Pre-training, where a massive base model is built by training it on a vast dataset of general internet text to learn language, reasoning, and world knowledge. Next is Fine-tuning, a specialization phase where the general model is further trained on smaller, task-specific datasets to adapt its capabilities for a particular purpose. The final stage is Alignment, where the specialized model's behavior is adjusted to ensure its outputs are helpful, harmless, and aligned with human values.
+- 強大的語言模型的發展遵循獨特的順序。它從預訓練開始，透過在龐大的一般網路文字資料集上進行訓練來建立一個龐大的基礎模型，以學習語言、推理和世界知識。接下來是微調，這是一個專業化階段，在較小的、特定任務的資料集上進一步訓練通用模型，以適應特定目的的功能。最後階段是對齊，調整專門模型的行為以確保其輸出是有用的、無害的並且符合人類價值。
 
-- Pre-training Techniques: Pre-training is the initial phase where a model learns general knowledge from vast amounts of data. The top techniques for this involve different objectives for the model to learn from. The most common is Causal Language Modeling (CLM), where the model predicts the next word in a sentence. Another is Masked Language Modeling (MLM), where the model fills in intentionally hidden words in a text. Other important methods include Denoising Objectives, where the model learns to restore a corrupted input to its original state, Contrastive Learning, where it learns to distinguish between similar and dissimilar pieces of data, and Next Sentence Prediction (NSP), where it determines if two sentences logically follow each other.
+- 預訓練技術：預訓練是模型從大量資料中學習一般知識的初始階段。最重要的技術涉及模型學習的不同目標。最常見的是因果語言模型 (CLM)，其中模型預測句子中的下一個單字。另一個是掩碼語言建模（MLM），其中模型會填充文本中有意隱藏的單字。其他重要方法包括去雜訊目標（模型學習將損壞的輸入恢復到原始狀態）、對比學習（學習區分相似和不相似的資料）以及下一句預測 (NSP)（確定兩個句子在邏輯上是否相互遵循）。
 
-- Fine-tuning Techniques: Fine-tuning is the process of adapting a general pre-trained model to a specific task using a smaller, specialized dataset. The most common approach is Supervised Fine-Tuning (SFT), where the model is trained on labeled examples of correct input-output pairs. A popular variant is Instruction Tuning, which focuses on training the model to better follow user commands. To make this process more efficient, Parameter-Efficient Fine-Tuning (PEFT) methods are used, with top techniques including LoRA (Low-Rank Adaptation), which only updates a small number of parameters, and its memory-optimized version, QLoRA. Another technique, Retrieval-Augmented Generation (RAG), enhances the model by connecting it to an external knowledge source during the fine-tuning or inference stage.
+- 微調技術：微調是使用較小的專用資料集使通用預訓練模型適應特定任務的過程。最常見的方法是監督微調（SFT），其中模型根據正確輸入輸出對的標記範例進行訓練。一個流行的變體是指令調優，它專注於訓練模型以更好地遵循使用者命令。為了使這個過程更加高效，使用了參數高效微調（PEFT）方法，其中包括僅更新少量參數的 LoRA（低秩適應）及其記憶體最佳化版本 QLoRA 等頂級技術。另一種技術是檢索增強生成（檢索增強生成（RAG）），透過在微調或推理階段將模型連接到外部知識來源來增強模型。
 
-- Alignment & Safety Techniques: Alignment is the process of ensuring an AI model's behavior aligns with human values and expectations, making it helpful and harmless. The most prominent technique is Reinforcement Learning from Human Feedback (RLHF), where a "reward model" trained on human preferences guides the AI's learning process, often using an algorithm like Proximal Policy Optimization (PPO) for stability. Simpler alternatives have emerged, such as Direct Preference Optimization (DPO), which bypasses the need for a separate reward model, and Kahneman-Tversky Optimization (KTO), which simplifies data collection further. To ensure safe deployment, Guardrails are implemented as a final safety layer to filter outputs and block harmful actions in real-time.
+- 對齊和安全技術：對齊是確保人工智慧模型的行為符合人類價值和期望，使其有益且無害的過程。最突出的技術是人類回饋強化學習（RLHF），其中根據人類偏好訓練的「獎勵模型」指導人工智慧的學習過程，通常使用近端策略優化（PPO）等演算法來保持穩定性。更簡單的替代方案已經出現，例如直接偏好優化（DPO），它繞過了對單獨獎勵模型的需要，以及卡尼曼-特沃斯基優化（KTO），它進一步簡化了數據收集。為了確保安全部署，Guardrails 被當作最終安全層來過濾輸出並即時阻止有害行為。
 
-## Enhancing AI Agent Capabilities
+## 增強AI代理能力
 
-- AI agents are systems that can perceive their environment and take autonomous actions to achieve goals. Their effectiveness is enhanced by robust reasoning frameworks.
+- 人工智慧代理是能夠感知環境並採取自主行動來實現目標的系統。強大的推理框架增強了它們的有效性。
 
-- **Chain of Thought (CoT)**: This prompting technique encourages a model to explain its reasoning step-by-step before giving a final answer. This process of "thinking out loud" often leads to more accurate results on complex reasoning tasks.
+- **思想鏈（CoT）**：這種提示技術鼓勵模型在給出最終答案之前逐步解釋其推理。這種「大聲思考」的過程通常會在複雜的推理任務上帶來更準確的結果。
 
-- **Tree of Thoughts (ToT)**: Tree of Thoughts is an advanced reasoning framework where an agent explores multiple reasoning paths simultaneously, like branches on a tree. It allows the agent to self-evaluate different lines of thought and choose the most promising one to pursue, making it more effective at complex problem-solving.
+- **思想樹 (ToT)**：思想樹是一種高階推理框架，其中代理人同時探索多個推理路徑，就像樹上的分支一樣。它允許智能體自我評估不同的思路，並選擇最有希望的思路，從而更有效地解決複雜的問題。
 
-**ReAct (Reason and Act)**: ReAct is an agent framework that combines reasoning and acting in a loop. The agent first "thinks" about what to do, then takes an "action" using a tool, and uses the resulting observation to inform its next thought, making it highly effective at solving complex tasks.
+**ReAct（Reason and Act）**：ReAct 是一個將推理和行動結合在一個循環中的代理框架。智能體首先“思考”要做什麼，然後使用工具採取“行動”，並使用所得的觀察結果來告知其下一步的想法，從而使其能夠非常有效地解決複雜的任務。
 
-- **Planning**: This is an agent's ability to break down a high-level goal into a sequence of smaller, manageable sub-tasks. The agent then creates a plan to execute these steps in order, allowing it to handle complex, multi-step assignments.
+- **規劃**：這是代理人將高階目標分解為一系列較小的、可管理的子任務的能力。然後，代理建立一個計劃來按順序執行這些步驟，使其能夠處理複雜的多步驟任務。
 
-- **Deep Research**: Deep research refers to an agent's capability to autonomously explore a topic in-depth by iteratively searching for information, synthesizing findings, and identifying new questions. This allows the agent to build a comprehensive understanding of a subject far beyond a single search query.
+- **深度研究**：深度研究是指智能體透過迭代搜尋資訊、綜合發現和辨識新問題來自主深入探索某個主題的能力。這使得代理能夠對主題建立全面的理解，遠遠超出單一搜尋查詢的範圍。
 
-- **Critique Model**: A critique model is a specialized AI model trained to review, evaluate, and provide feedback on the output of another AI model. It acts as an automated critic, helping to identify errors, improve reasoning, and ensure the final output meets a desired quality standard.
+- **批判模型**：批判模型是一種經過訓練的專門人工智慧模型，用於審查、評估另一個人工智慧模型的輸出並提供回饋。它充當自動批評者，幫助識別錯誤、改進推理並確保最終輸出符合所需的品質標準。
 
-## Index of Terms
+## 術語索引
 
-This index of terms was generated using Gemini Pro 2.5. The prompt and reasoning steps are included at the end to demonstrate the time-saving benefits and for educational purposes.
+這個術語索引是使用 Gemini Pro 2.5 產生的。最後包含提示和推理步驟，以顯示節省時間的好處並用於教育目的。
 
-### A
+### 一個
 
-- A/B Testing - Chapter 3: Parallelization  
-- Action Selection - Chapter 20: Prioritization  
-- Adaptation - Chapter 9: Learning and Adaptation  
-- Adaptive Task Allocation - Chapter 16: Resource-Aware Optimization  
-- Adaptive Tool Use & Selection - Chapter 16: Resource-Aware Optimization  
-- Agent - What makes an AI system an Agent?  
-- Agent-Computer Interfaces (ACIs) - Appendix B  
-- Agent-Driven Economy - What makes an AI system an Agent?  
-- Agent as a Tool - Chapter 7: Multi-Agent Collaboration  
-- Agent Cards - Chapter 15: Inter-Agent Communication (A2A)  
-- Agent Development Kit (ADK) - Chapter 2: Routing, Chapter 3: Parallelization, Chapter 4: Reflection, Chapter 5: Tool Use, Chapter 7: Multi-Agent Collaboration, Chapter 8: Memory Management, Chapter 12: Exception Handling and Recovery, Chapter 13: Human-in-the-Loop, Chapter 15: Inter-Agent Communication (A2A), Chapter 16: Resource-Aware Optimization, Chapter 19: Evaluation and Monitoring, Appendix C  
-- Agent Discovery - Chapter 15: Inter-Agent Communication (A2A)  
-- Agent Trajectories - Chapter 19: Evaluation and Monitoring  
-- Agentic Design Patterns - Introduction  
-- Agentic RAG - Chapter 14: Knowledge Retrieval (RAG)  
-- Agentic Systems - Introduction  
-- AI Co-scientist - Chapter 21: Exploration and Discovery  
-- Alignment - Glossary  
-- AlphaEvolve - Chapter 9: Learning and Adaptation  
-- Analogies - Appendix A  
-- Anomaly Detection - Chapter 19: Evaluation and Monitoring  
-- Anthropic's Claude 4 Series - Appendix B  
-- Anthropic's Computer Use - Appendix B  
-- API Interaction - Chapter 10: Model Context Protocol (MCP)  
-- Artifacts - Chapter 15: Inter-Agent Communication (A2A)  
-- Asynchronous Polling - Chapter 15: Inter-Agent Communication (A2A)  
-- Audit Logs - Chapter 15: Inter-Agent Communication (A2A)  
-- Automated Metrics - Chapter 19: Evaluation and Monitoring  
-- Automatic Prompt Engineering (APE) - Appendix A  
-- Autonomy - Introduction  
-- A2A (Agent-to-Agent) - Chapter 15: Inter-Agent Communication (A2A)
+- A/B 測試 - 第 3 章：平行化
+- 行動選擇 - 第 20 章：優先順序
+- 適應 - 第 9 章：學習與適應
+- 自適應任務分配 - 第 16 章：資源感知最佳化
+- 自適應工具的使用與選擇 - 第 16 章：資源感知最佳化
+- 代理 - 是什麼讓人工智慧系統成為代理？
+- 代理計算機介面 (ACI) - 附錄 B
+- 代理驅動經濟 - 是什麼讓人工智慧系統成為代理？
+- 代理作為工具 - 第 7 章：多代理協作
+- 代理卡 - 第 15 章：代理間通訊（A2A）
+- 代理開發套件 (ADK) - 第 2 章：路由、第 3 章：並行化、第 4 章：反思、第 5 章：工具使用、第 7 章：多代理協作、第 8 章：記憶體管理、第 12 章：例外處理和恢復、第 13 章：人類在回圈中、第 15 章：優化代理間通信 (A2A) 章
+- 代理發現 - 第 15 章：代理間通訊（A2A）
+- 代理軌跡 - 第 19 章：評估與監控
+- 代理設計模式 - 簡介
+- 代理式 檢索增強生成（RAG） - 第 14 章：知識檢索 (檢索增強生成（RAG）)
+- 代理系統 - 簡介
+- AI 聯合科學家 - 第 21 章：探索與發現
+- 對齊 - 術語表
+- AlphaEvolve - 第 9 章：學習與適應
+- 類比 - 附錄 A
+- 異常檢測 - 第 19 章：評估與監控
+- Anthropic 的 Claude 4 系列 - 附錄 B
+- Anthropic 的電腦使用 - 附錄 B
+- API 互動 - 第 10 章：模型上下文協定（MCP）
+- 工件 - 第 15 章：代理間通訊（A2A）
+- 非同步輪詢 - 第 15 章：代理間通訊（A2A）
+- 審核日誌 - 第 15 章：代理間通訊（A2A）
+- 自動化指標 - 第 19 章：評估與監控
+- 自動提示工程 (APE) - 附錄 A
+- 自治 - 簡介
+- A2A（代理到代理）- 第 15 章：代理間通訊（A2A）
 
-### B
+### 乙
 
-- Behavioral Constraints - Chapter 18: Guardrails/Safety Patterns  
-- Browser Use - Appendix B
+- 行為約束 - 第 18 章：護欄/安全模式
+- 瀏覽器使用 - 附錄 B
 
 ### C
 
-- Callbacks - Chapter 18: Guardrails/Safety Patterns  
-- Causal Language Modeling (CLM) - Glossary  
-- Chain of Debates (CoD) - Chapter 17: Reasoning Techniques  
-- Chain-of-Thought (CoT) - Chapter 17: Reasoning Techniques, Appendix A  
-- Chatbots - Chapter 8: Memory Management  
-- ChatMessageHistory - Chapter 8: Memory Management  
-- Checkpoint and Rollback - Chapter 18: Guardrails/Safety Patterns  
-- Chunking - Chapter 14: Knowledge Retrieval (RAG)  
-- Clarity and Specificity - Appendix A  
-- Client Agent - Chapter 15: Inter-Agent Communication (A2A)  
-- Code Generation - Chapter 1: Prompt Chaining, Chapter 4: Reflection  
-- Code Prompting - Appendix A  
-- CoD (Chain of Debates) - Chapter 17: Reasoning Techniques  
-- CoT (Chain of Thought) - Chapter 17: Reasoning Techniques, Appendix A  
-- Collaboration - Chapter 7: Multi-Agent Collaboration  
-- Compliance - Chapter 19: Evaluation and Monitoring  
-- Conciseness - Appendix A  
-- Content Generation - Chapter 1: Prompt Chaining, Chapter 4: Reflection  
-- Context Engineering - Chapter 1: Prompt Chaining  
-- Context Window - Glossary  
-- Contextual Pruning & Summarization - Chapter 16: Resource-Aware Optimization  
-- Contextual Prompting - Appendix A  
-- Contractor Model - Chapter 19: Evaluation and Monitoring  
-- ConversationBufferMemory - Chapter 8: Memory Management  
-- Conversational Agents - Chapter 1: Prompt Chaining, Chapter 4: Reflection  
-- Cost-Sensitive Exploration - Chapter 16: Resource-Aware Optimization  
-- CrewAI - Chapter 3: Parallelization, Chapter 5: Tool Use, Chapter 6: Planning, Chapter 7: Multi-Agent Collaboration, Chapter 18: Guardrails/Safety Patterns, Appendix C  
-- Critique Agent - Chapter 16: Resource-Aware Optimization  
-- Critique Model - Glossary  
-- Customer Support - Chapter 13: Human-in-the-Loop
+- 回呼 - 第 18 章：護欄/安全模式
+- 因果語言建模 (CLM) - 術語表
+- 辯論鏈 (CoD) - 第 17 章：推理技巧
+- 思想鏈 (CoT) - 第 17 章：推理技術，附錄 A
+- 聊天機器人 - 第 8 章：記憶體管理
+- ChatMessageHistory - 第 8 章：記憶體管理
+- 檢查點與回滾 - 第 18 章：護欄/安全模式
+- Chunking - Chapter 14: Knowledge Retrieval (檢索增強生成（RAG）)
+- 清晰度和特異性 - 附錄 A
+- 用戶端代理 - 第 15 章：代理間通訊（A2A）
+- 程式碼產生 - 第 1 章：提示鏈，第 4 章：反思
+- 程式碼提示 - 附錄 A
+- CoD（辯論鏈）- 第 17 章：推理技巧
+- CoT（思想鏈）- 第 17 章：推理技術，附錄 A
+- 協作 - 第 7 章：多代理協作
+- 合規性 - 第 19 章：評估與監控
+- 簡潔性 - 附錄 A
+- 內容生成 - 第 1 章：提示鏈，第 4 章：反思
+- 上下文工程 - 第 1 章：提示鏈
+- 上下文視窗 - 術語表
+- 情境修剪與總結 - 第 16 章：資源感知最佳化
+- 上下文提示 - 附錄 A
+- 承包商模型 - 第 19 章：評估與監控
+- ConversationBufferMemory - 第 8 章：記憶體管理
+- 會話代理 - 第 1 章：提示鏈，第 4 章：反思
+- 成本敏感型探索 - 第 16 章：資源感知最佳化
+- CrewAI - 第 3 章：平行化、第 5 章：工具使用、第 6 章：規劃、第 7 章：多代理協作、第 18 章：護欄/安全模式、附錄 C
+- Critique 代理 - 第 16 章：資源感知優化
+- 批評模型 - 術語表
+- 客戶支援 - 第 13 章：人類在回圈中
 
 ### D
 
-- Data Extraction - Chapter 1: Prompt Chaining  
-- Data Labeling - Chapter 13: Human-in-the-Loop  
-- Database Integration - Chapter 10: Model Context Protocol (MCP)  
-- DatabaseSessionService - Chapter 8: Memory Management  
-- Debate and Consensus - Chapter 7: Multi-Agent Collaboration  
-- Decision Augmentation - Chapter 13: Human-in-the-Loop  
-- Decomposition - Appendix A  
-- Deep Research - Chapter 6: Planning, Chapter 17: Reasoning Techniques, Glossary  
-- Delimiters - Appendix A  
-- Denoising Objectives - Glossary  
-- Dependencies - Chapter 20: Prioritization  
-- Diffusion Models - Glossary  
-- Direct Preference Optimization (DPO) - Chapter 9: Learning and Adaptation  
-- Discoverability - Chapter 10: Model Context Protocol (MCP)  
-- Drift Detection - Chapter 19: Evaluation and Monitoring  
-- Dynamic Model Switching - Chapter 16: Resource-Aware Optimization  
-- Dynamic Re-prioritization - Chapter 20: Prioritization
+- 資料提取 - 第 1 章：提示鏈
+- 資料標籤 - 第 13 章：人機交互
+- 資料庫整合 - 第 10 章：模型上下文協定（MCP）
+- DatabaseSessionService - 第 8 章：記憶體管理
+- 辯論與共識 - 第 7 章：多代理協作
+- 決策增強 - 第 13 章：人類在回圈中
+- 分解 - 附錄 A
+- 深入研究 - 第 6 章：規劃、第 17 章：推理技術、名詞表
+- 分隔符號 - 附錄 A
+- 去噪目標 - 術語表
+- 依賴關係 - 第 20 章：優先級
+- 擴散模型 - 術語表
+- 直接偏好最佳化 (DPO) - 第 9 章：學習與適應
+- 可發現性 - 第 10 章：模型情境協定 (MCP)
+- 漂移檢測 - 第 19 章：評估與監控
+- 動態模型切換 - 第 16 章：資源感知最佳化
+- 動態重新確定優先順序 - 第 20 章：優先順序確定
 
-### E
+### 乙
 
-- Embeddings - Chapter 14: Knowledge Retrieval (RAG)  
-- Embodiment - What makes an AI system an Agent?  
-- Energy-Efficient Deployment - Chapter 16: Resource-Aware Optimization  
-- Episodic Memory - Chapter 8: Memory Management  
-- Error Detection - Chapter 12: Exception Handling and Recovery  
-- Error Handling - Chapter 12: Exception Handling and Recovery  
-- Escalation Policies - Chapter 13: Human-in-the-Loop  
-- Evaluation - Chapter 19: Evaluation and Monitoring  
-- Exception Handling - Chapter 12: Exception Handling and Recovery  
-- Expert Teams - Chapter 7: Multi-Agent Collaboration  
-- Exploration and Discovery - Chapter 21: Exploration and Discovery  
-- External Moderation APIs - Chapter 18: Guardrails/Safety Patterns
+- 嵌入 - 第 14 章：知識檢索 (檢索增強生成（RAG）)
+- Embodiment - What makes an AI system an 代理?
+- 節能部署 - 第 16 章：資源感知最佳化
+- 情景記憶 - 第 8 章：記憶體管理
+- 錯誤偵測 - 第 12 章：例外處理與恢復
+- 錯誤處理 - 第 12 章：例外處理與恢復
+- 升級政策 - 第 13 章：人類在回圈中
+- 評估 - 第 19 章：評估與監測
+- 例外處理 - 第 12 章：例外處理與恢復
+- 專家團隊 - 第 7 章：多代理協作
+- 探索與發現 - 第 21 章：探索與發現
+- 外部審核 API - 第 18 章：護欄/安全模式
 
 ### F
 
-- Factored Cognition - Appendix A  
-- FastMCP - Chapter 10: Model Context Protocol (MCP)  
-- Fault Tolerance - Chapter 18: Guardrails/Safety Patterns  
-- Few-Shot Learning - Chapter 9: Learning and Adaptation  
-- Few-Shot Prompting - Appendix A  
-- Fine-tuning - Glossary  
-- Formalized Contract - Chapter 19: Evaluation and Monitoring  
-- Function Calling - Chapter 5: Tool Use, Appendix A
+- 因子認知 - 附錄 A
+- FastMCP - 第 10 章：模型上下文協定（MCP）
+- 容錯 - 第 18 章：護欄/安全模式
+- Few-Shot Learning - 第 9 章：學習與適應
+- 少樣本提示 - 附錄 A
+- 微調 - 術語表
+- Formalized Contract - Chapter 19: Evaluation and Monitoring
+- 函數呼叫 - 第 5 章：工具使用，附錄 A
 
 ### G
 
-- Gemini Live - Appendix B  
-- Gems - Appendix A  
-- Generative Media Orchestration - Chapter 10: Model Context Protocol (MCP)  
-- Goal Setting - Chapter 11: Goal Setting and Monitoring  
-- GoD (Graph of Debates) - Chapter 17: Reasoning Techniques  
-- Google Agent Development Kit (ADK) - Chapter 2: Routing, Chapter 3: Parallelization, Chapter 4: Reflection, Chapter 5: Tool Use, Chapter 7: Multi-Agent Collaboration, Chapter 8: Memory Management, Chapter 12: Exception Handling and Recovery, Chapter 13: Human-in-the-Loop, Chapter 15: Inter-Agent Communication (A2A), Chapter 16: Resource-Aware Optimization, Chapter 19: Evaluation and Monitoring, Appendix C  
-- Google Co-Scientist - Chapter 21: Exploration and Discovery  
-- Google DeepResearch - Chapter 6: Planning  
-- Google Project Mariner - Appendix B  
-- Graceful Degradation - Chapter 12: Exception Handling and Recovery, Chapter 16: Resource-Aware Optimization  
-- Graph of Debates (GoD) - Chapter 17: Reasoning Techniques  
-- Grounding - Glossary  
-- Guardrails - Chapter 18: Guardrails/Safety Patterns
+- Gemini Live - 附錄 B
+- 寶石 - 附錄 A
+- 產生媒體編排 - 第 10 章：模型上下文協定（MCP）
+- 目標設定 - 第 11 章：目標設定與監控
+- GoD（辯論圖）- 第 17 章：推理技巧
+- Google 代理開發套件 (ADK) - 第 2 章：路由、第 3 章：並行化、第 4 章：反思、第 5 章：工具使用、第 7 章：多代理協作、第 8 章：記憶體管理、第 12 章：例外處理和恢復、第 13 章：人類在回圈中、第 15 章：優化代理間通信 (A213 章：感知 196A 章）
+- Google 聯合科學家 - 第 21 章：探索與發現
+- Google DeepResearch - 第 6 章：規劃
+- Google 水手計畫 - 附錄 B
+- 優雅降級 - 第 12 章：例外處理與恢復，第 16 章：資源感知最佳化
+- 辯論圖 (GoD) - 第 17 章：推理技巧
+- 接地 - 術語表
+- 護欄 - 第 18 章：護欄/安全模式
 
 ### H
 
-- Haystack - Appendix C  
-- Hierarchical Decomposition - Chapter 19: Evaluation and Monitoring  
-- Hierarchical Structures - Chapter 7: Multi-Agent Collaboration  
-- HITL (Human-in-the-Loop) - Chapter 13: Human-in-the-Loop  
-- Human-in-the-Loop (HITL) - Chapter 13: Human-in-the-Loop  
-- Human-on-the-loop - Chapter 13: Human-in-the-Loop  
-- Human Oversight - Chapter 13: Human-in-the-Loop, Chapter 18: Guardrails/Safety Patterns
+- Haystack - 附錄 C
+- 層次分解 - 第 19 章：評估與監控
+- 層次結構 - 第 7 章：多代理協作
+- HITL（人類在回圈中）- 第 13 章：人類在回圈中
+- 人類在回圈中 (HITL) - 第 13 章：人類在回圈中
+- 人類在回圈中 - 第 13 章：人類在回圈中
+- 人類監督 - 第 13 章：人類在回圈中，第 18 章：護欄/安全模式
 
-### I
+### 我
 
-- In-Context Learning - Glossary  
-- InMemoryMemoryService - Chapter 8: Memory Management  
-- InMemorySessionService - Chapter 8: Memory Management  
-- Input Validation/Sanitization - Chapter 18: Guardrails/Safety Patterns  
-- Instructions Over Constraints - Appendix A  
-- Inter-Agent Communication (A2A) - Chapter 15: Inter-Agent Communication (A2A)  
-- Intervention and Correction - Chapter 13: Human-in-the-Loop  
-- IoT Device Control - Chapter 10: Model Context Protocol (MCP)  
-- Iterative Prompting / Refinement - Appendix A
+- 情境學習 - 術語表
+- InMemoryMemoryService - 第 8 章：記憶體管理
+- InMemorySessionService - 第 8 章：記憶體管理
+- 輸入驗證/清理 - 第 18 章：護欄/安全模式
+- 指令優於約束 - 附錄 A
+- 代理間通訊 (A2A) - 第 15 章：代理間通訊（A2A）
+- 介入與糾正 - 第 13 章：人類在回圈中
+- IoT 設備控制 - 第 10 章：模型上下文協定（MCP）
+- 迭代提示/細化 - 附錄 A
 
 ### J
 
-- Jailbreaking - Chapter 18: Guardrails/Safety Patterns
+- 越獄 - 第 18 章：護欄/安全模式
 
 ### K
 
-- Kahneman-Tversky Optimization (KTO) - Glossary  
-- Knowledge Retrieval (RAG) - Chapter 14: Knowledge Retrieval (RAG)
+- 卡尼曼-特沃斯基優化 (KTO) - 術語表
+- 知識檢索 (檢索增強生成（RAG）) - 第 14 章：知識檢索 (檢索增強生成（RAG）)
 
 ### L
 
-- LangChain - Chapter 1: Prompt Chaining, Chapter 2: Routing, Chapter 3: Parallelization, Chapter 4: Reflection, Chapter 5: Tool Use, Chapter 8: Memory Management, Chapter 20: Prioritization, Appendix C  
-- LangGraph - Chapter 1: Prompt Chaining, Chapter 2: Routing, Chapter 3: Parallelization, Chapter 4: Reflection, Chapter 5: Tool Use, Chapter 8: Memory Management, Appendix C  
-- Latency Monitoring - Chapter 19: Evaluation and Monitoring  
-- Learned Resource Allocation Policies - Chapter 16: Resource-Aware Optimization  
-- Learning and Adaptation - Chapter 9: Learning and Adaptation  
-- LLM-as-a-Judge - Chapter 19: Evaluation and Monitoring  
-- LlamaIndex - Appendix C  
-- LoRA (Low-Rank Adaptation) - Glossary  
-- Low-Rank Adaptation (LoRA) - Glossary
+- LangChain - 第 1 章：提示鏈、第 2 章：路由、第 3 章：平行化、第 4 章：反思、第 5 章：工具使用、第 8 章：記憶體管理、第 20 章：優先權、附錄 C
+- LangGraph - 第 1 章：提示鏈、第 2 章：路由、第 3 章：平行化、第 4 章：反思、第 5 章：工具使用、第 8 章：記憶體管理、附錄 C
+- 延遲監控 - 第 19 章：評估與監控
+- 學習資源分配策略 - 第 16 章：資源感知最佳化
+- 學習與適應 - 第 9 章：學習與適應
+- 法官大型語言模型（LLM） - 第 19 章：評估與監控
+- LlamaIndex - 附錄 C
+- LoRA（低階適應）- 術語表
+- 低階適應 (LoRA) - 術語表
 
-### M
+### 中號
 
-- Mamba - Glossary  
-- Masked Language Modeling (MLM) - Glossary  
-- MASS (Multi-Agent System Search) - Chapter 17: Reasoning Techniques  
-- MCP (Model Context Protocol) - Chapter 10: Model Context Protocol (MCP)  
-- Memory Management - Chapter 8: Memory Management  
-- Memory-Based Learning - Chapter 9: Learning and Adaptation  
-- MetaGPT - Appendix C  
-- Microsoft AutoGen - Appendix C  
-- Mixture of Experts (MoE) - Glossary  
-- Model Context Protocol (MCP) - Chapter 10: Model Context Protocol (MCP)  
-- Modularity - Chapter 18: Guardrails/Safety Patterns  
-- Monitoring - Chapter 11: Goal Setting and Monitoring, Chapter 19: Evaluation and Monitoring  
-- Multi-Agent Collaboration - Chapter 7: Multi-Agent Collaboration  
-- Multi-Agent System Search (MASS) - Chapter 17: Reasoning Techniques  
-- Multimodality - Glossary  
-- Multimodal Prompting - Appendix A
+- 曼巴 - 術語表
+- 掩碼語言建模 (MLM) - 術語表
+- MASS（多代理系統搜尋）- 第 17 章：推理技術
+- MCP（模型上下文協定）- 第 10 章：模型上下文協定（MCP）
+- 記憶體管理 - 第 8 章：記憶體管理
+- 基於記憶的學習 - 第 9 章：學習與適應
+- MetaGPT - 附錄 C
+- Microsoft AutoGen - 附錄 C
+- 混合專家 (MoE) - 術語表
+- 模型上下文協定 (MCP) - 第 10 章：模型上下文協定（MCP）
+- 模組化 - 第 18 章：護欄/安全模式
+- 監控 - 第 11 章：目標設定與監控，第 19 章：評估與監控
+- 多代理協作 - 第 7 章：多代理協作
+- 多代理系統搜尋 (MASS) - 第 17 章：推理技術
+- 多模態 - 術語表
+- 多模式提示 - 附錄 A
 
-### N
+### 氮
 
-- Negative Examples - Appendix A  
-- Next Sentence Prediction (NSP) - Glossary
+- 反面範例 - 附錄 A
+- 下一句話預測 (NSP) - 術語表
 
-### O
+### 氧
 
-- Observability - Chapter 18: Guardrails/Safety Patterns  
-- One-Shot Prompting - Appendix A  
-- Online Learning - Chapter 9: Learning and Adaptation  
-- OpenAI Deep Research API - Chapter 6: Planning  
-- OpenEvolve - Chapter 9: Learning and Adaptation  
-- OpenRouter - Chapter 16: Resource-Aware Optimization  
-- Output Filtering/Post-processing - Chapter 18: Guardrails/Safety Patterns
+- 可觀察性 - 第 18 章：護欄/安全模式
+- 一次性提示 - 附錄 A
+- 線上學習 - 第 9 章：學習與適應
+- OpenAI Deep Research API - 第 6 章：規劃
+- OpenEvolve - 第 9 章：學習與適應
+- OpenRouter - 第 16 章：資源感知最佳化
+- 輸出過濾/後處理 - 第 18 章：護欄/安全模式
 
-### P
+### 磷
 
-- PAL (Program-Aided Language Models) - Chapter 17: Reasoning Techniques  
-- Parallelization - Chapter 3: Parallelization  
-- Parallelization & Distributed Computing Awareness - Chapter 16: Resource-Aware Optimization  
-- Parameter-Efficient Fine-Tuning (PEFT) - Glossary  
-- PEFT (Parameter-Efficient Fine-Tuning) - Glossary  
-- Performance Tracking - Chapter 19: Evaluation and Monitoring  
-- Persona Pattern - Appendix A  
-- Personalization - What makes an AI system an Agent?  
-- Planning - Chapter 6: Planning, Glossary  
-- Prioritization - Chapter 20: Prioritization  
-- Principle of Least Privilege - Chapter 18: Guardrails/Safety Patterns  
-- Proactive Resource Prediction - Chapter 16: Resource-Aware Optimization  
-- Procedural Memory - Chapter 8: Memory Management  
-- Program-Aided Language Models (PAL) - Chapter 17: Reasoning Techniques  
-- Project Astra - Appendix B  
-- Prompt - Glossary  
-- Prompt Chaining - Chapter 1: Prompt Chaining  
-- Prompt Engineering - Appendix A  
-- Proximal Policy Optimization (PPO) - Chapter 9: Learning and Adaptation  
-- Push Notifications - Chapter 15: Inter-Agent Communication (A2A)
+- PAL（程式輔助語言模型）- 第 17 章：推理技術
+- 並行化 - 第 3 章：平行化
+- 平行化與分散式運算意識 - 第 16 章：資源感知最佳化
+- 參數高效微調 (PEFT) - 術語表
+- PEFT（參數高效率微調）- 術語表
+- 績效追蹤 - 第 19 章：評估與監控
+- 角色模式 - 附錄 A
+- 個人化 - 是什麼讓人工智慧系統成為代理？
+- 規劃 - 第 6 章：規劃、名詞表
+- 優先級 - 第 20 章：優先級
+- 最小特權原則 - 第 18 章：護欄/安全模式
+- 主動資源預測 - 第 16 章：資源感知最佳化
+- 程式記憶體 - 第 8 章：記憶體管理
+- Program-Aided Language Models (PAL) - Chapter 17: Reasoning Techniques
+- 阿斯特拉計劃 - 附錄 B
+- 提示 - 術語表
+- 提示鏈 - 第 1 章：提示鏈
+- 快速工程 - 附錄 A
+- 近端策略優化 (PPO) - 第 9 章：學習與適應
+- 推播通知 - 第 15 章：代理間通訊（A2A）
 
-### Q
+### 問
 
-- QLoRA - Glossary  
-- Quality-Focused Iterative Execution - Chapter 19: Evaluation and Monitoring
+- QLoRA - 術語表
+- 以品質為中心的迭代執行 - 第 19 章：評估與監控
 
-### R
+### 右
 
-- RAG (Retrieval-Augmented Generation) - Chapter 8: Memory Management, Chapter 14: Knowledge Retrieval (RAG), Appendix A  
-- ReAct (Reason and Act) - Chapter 17: Reasoning Techniques, Appendix A, Glossary  
-- Reasoning - Chapter 17: Reasoning Techniques  
-- Reasoning-Based Information Extraction - Chapter 10: Model Context Protocol (MCP)  
-- Recovery - Chapter 12: Exception Handling and Recovery  
-- Recurrent Neural Network (RNN) - Glossary  
-- Reflection - Chapter 4: Reflection  
-- Reinforcement Learning - Chapter 9: Learning and Adaptation  
-- Reinforcement Learning from Human Feedback (RLHF) - Glossary  
-- Reinforcement Learning with Verifiable Rewards (RLVR) - Chapter 17: Reasoning Techniques  
-- Remote Agent - Chapter 15: Inter-Agent Communication (A2A)  
-- Request/Response (Polling) - Chapter 15: Inter-Agent Communication (A2A)  
-- Resource-Aware Optimization - Chapter 16: Resource-Aware Optimization  
-- Retrieval-Augmented Generation (RAG) - Chapter 8: Memory Management, Chapter 14: Knowledge Retrieval (RAG), Appendix A  
-- RLHF (Reinforcement Learning from Human Feedback) - Glossary  
-- RLVR (Reinforcement Learning with Verifiable Rewards) - Chapter 17: Reasoning Techniques  
-- RNN (Recurrent Neural Network) - Glossary  
-- Role Prompting - Appendix A  
-- Router Agent - Chapter 16: Resource-Aware Optimization  
-- Routing - Chapter 2: Routing
+- 檢索增強生成（RAG）（檢索增強生成）- 第 8 章：記憶體管理，第 14 章：知識檢索 (檢索增強生成（RAG）)，附錄 A
+- ReAct（理性與行動）- 第 17 章：推理技術，附錄 A，術語表
+- 推理 - 第 17 章：推理技巧
+- 基於推理的資訊擷取 - 第 10 章：模型上下文協定 (MCP)
+- 恢復 - 第 12 章：例外處理與恢復
+- 循環神經網路 (RNN) - 術語表
+- 反思 - 第 4 章：反思
+- 強化學習 - 第 9 章：學習與適應
+- Reinforcement Learning from Human Feedback (RLHF) - Glossary
+- 具有可驗證獎勵的強化學習 (RLVR) - 第 17 章：推理技術
+- 遠端代理 - 第 15 章：代理間通訊（A2A）
+- 請求/回應（輪詢）- 第 15 章：代理間通訊（A2A）
+- 資源感知最佳化 - 第 16 章：資源感知最佳化
+- 檢索增強生成 (檢索增強生成（RAG）) - 第 8 章：記憶體管理，第 14 章：知識檢索 (檢索增強生成（RAG）)，附錄 A
+- RLHF（根據人類回饋進行強化學習）- 術語表
+- RLVR（具有可驗證獎勵的強化學習）- 第 17 章：推理技術
+- RNN（循環神經網路）- 術語表
+- 角色提示 - 附錄 A
+- 路由器代理 - 第 16 章：資源感知最佳化
+- 路由 - 第 2 章：路由
 
 ### S
 
-- Safety - Chapter 18: Guardrails/Safety Patterns  
-- Scaling Inference Law - Chapter 17: Reasoning Techniques  
-- Scheduling - Chapter 20: Prioritization  
-- Self-Consistency - Appendix A  
-- Self-Correction - Chapter 4: Reflection, Chapter 17: Reasoning Techniques  
-- Self-Improving Coding Agent (SICA) - Chapter 9: Learning and Adaptation  
-- Self-Refinement - Chapter 17: Reasoning Techniques  
-- Semantic Kernel - Appendix C  
-- Semantic Memory - Chapter 8: Memory Management  
-- Semantic Similarity - Chapter 14: Knowledge Retrieval (RAG)  
-- Separation of Concerns - Chapter 18: Guardrails/Safety Patterns  
-- Sequential Handoffs - Chapter 7: Multi-Agent Collaboration  
-- Server-Sent Events (SSE) - Chapter 15: Inter-Agent Communication (A2A)  
-- Session - Chapter 8: Memory Management  
-- SICA (Self-Improving Coding Agent) - Chapter 9: Learning and Adaptation  
-- SMART Goals - Chapter 11: Goal Setting and Monitoring  
-- State - Chapter 8: Memory Management  
-- State Rollback - Chapter 12: Exception Handling and Recovery  
-- Step-Back Prompting - Appendix A  
-- Streaming Updates - Chapter 15: Inter-Agent Communication (A2A)  
-- Structured Logging - Chapter 18: Guardrails/Safety Patterns  
-- Structured Output - Chapter 1: Prompt Chaining, Appendix A  
-- SuperAGI - Appendix C  
-- Supervised Fine-Tuning (SFT) - Glossary  
-- Supervised Learning - Chapter 9: Learning and Adaptation  
-- System Prompting - Appendix A
+- 安全 - 第 18 章：護欄/安全模式
+- 縮放推理法 - 第 17 章：推理技術
+- 調度 - 第 20 章：優先級
+- 自我一致性 - 附錄 A
+- 自我修正 - 第 4 章：反思，第 17 章：推理技巧
+- 自我改進Coding Agent (SICA) - 第 9 章：學習與適應
+- 自我完善 - 第十七章：推理技巧
+- 語意內核 - 附錄 C
+- 語意記憶 - 第 8 章：記憶體管理
+- 語意相似性 - 第 14 章：知識檢索 (檢索增強生成（RAG）)
+- 關注點分離 - 第 18 章：護欄/安全模式
+- Sequential Handoffs - Chapter 7: 多代理 Collaboration
+- 伺服器發送事件 (SSE) - 第 15 章：代理間通訊（A2A）
+- 會議 - 第 8 章：記憶體管理
+- SICA（自我改進Coding Agent）- 第 9 章：學習與適應
+- SMART 目標 - 第 11 章：目標設定與監控
+- 狀態 - 第 8 章：記憶體管理
+- 狀態回滾 - 第 12 章：例外處理與恢復
+- 後退提示 - 附錄 A
+- 串流更新 - 第 15 章：代理間通訊（A2A）
+- 結構化日誌記錄 - 第 18 章：護欄/安全模式
+- 結構化輸出 - 第 1 章：提示鏈，附錄 A
+- SuperAGI - 附錄 C
+- 有監督微調 (SFT) - 術語表
+- 監督學習 - 第 9 章：學習與適應
+- 系統提示 - 附錄 A
 
-### T
+### 時間
 
-- Task Evaluation - Chapter 20: Prioritization  
-- Text Similarity - Chapter 14: Knowledge Retrieval (RAG)  
-- Token Usage - Chapter 19: Evaluation and Monitoring  
-- Tool Use - Chapter 5: Tool Use, Appendix A  
-- Tool Use Restrictions - Chapter 18: Guardrails/Safety Patterns  
-- ToT (Tree of Thoughts) - Chapter 17: Reasoning Techniques, Appendix A, Glossary  
-- Transformers - Glossary  
-- Tree of Thoughts (ToT) - Chapter 17: Reasoning Techniques, Appendix A, Glossary
+- 任務評估 - 第 20 章：優先級
+- 文本相似度 - 第 14 章：知識檢索 (檢索增強生成（RAG）)
+- 代幣使用 - 第 19 章：評估與監控
+- 工具使用 - 第 5 章：工具使用，附錄 A
+- 工具使用限制 - 第 18 章：護欄/安全模式
+- ToT（思想樹）- 第 17 章：推理技巧，附錄 A，術語表
+- 變形金剛 - 術語表
+- 思想之樹 (ToT) - 第 17 章：推理技巧，附錄 A，術語表
 
 ### U
 
-- Unsupervised Learning - Chapter 9: Learning and Adaptation  
-- User Persona - Appendix A
+- 無監督學習 - 第 9 章：學習與適應
+- 使用者角色 - 附錄 A
 
 ### V
 
-- Validation - Chapter 3: Parallelization  
-- Vector Search - Chapter 14: Knowledge Retrieval (RAG)  
-- VertexAiRagMemoryService - Chapter 8: Memory Management  
-- VertexAiSessionService - Chapter 8: Memory Management  
-- Vibe Coding - Appendix B  
-- Visual Perception - Appendix B
+- 驗證 - 第 3 章：平行化
+- 向量搜尋 - 第 14 章：知識檢索 (檢索增強生成（RAG）)
+- VertexAiRagMemoryService - 第 8 章：記憶體管理
+- VertexAiSessionService - 第 8 章：記憶體管理
+- Vibe coding - 附錄 B
+- 視覺感知 - 附錄 B
 
-### W
+### 瓦
 
-- Webhooks - Chapter 15: Inter-Agent Communication (A2A)
+- Webhooks - 第 15 章：代理間通訊（A2A）
 
 ### Z
 
-- Zero-Shot Learning - Chapter 9: Learning and Adaptation  
-- Zero-Shot Prompting - Appendix A
+- 零樣本學習 - 第 9 章：學習與適應
+- 零樣本提示 - 附錄 A
 
-## Prompt
+## 迅速的
 
-Below is the prompt that was utilized to create this index of terms.
+以下是用於建立此術語索引的提示。
 
-> *Do you read <https://docs.google.com/document/d/1rsaK53T3Lg5KoGwvf8ukOUvbELRtH-V0LnOIFDxBryE/edit?tab=t.0> and all the related documents in the first page Please extract all the titles for each chapter. and print them. Then process the content of all the individual chapters, and create a detailed index used for publishing, a list of words or phrases ('headings') and associated pointers ('locators') to where useful material relating to that heading can be found in a document or collection of documents. I don't want a sample index. I want the full index, with 100 index terms*
+> *您是否閱讀過 <https://docs.google.com/document/d/1rsaK53T3Lg5KoGwvf8ukOUvbELRtH-V0LnOIFDxBryE/edit?tab=t.0> 以及首頁中的所有相關文件 請提取每章的所有標題。並列印它們。然後處理所有單獨章節的內容，並建立用於發布的詳細索引、單字或短語清單（「標題」）以及關聯的指標（「定位器」），指向在文件或文件集合中可以找到與該標題相關的有用資料的位置。我不需要樣本索引。我想要完整索引，包含 100 個索引字*
 
-## Gemini 2.5: Reasoning Steps
+## Gemini 2.5：推理步驟
 
-### Beginning Index Creation
+### 開始建立索引
 
-I've initiated the process by reading the Google Doc provided. Currently, I'm focusing on understanding the user's request: extracting chapter titles to build a detailed index. I'm carefully reviewing the document, looking for clear structural elements that would indicate chapter breaks. I'm hoping to identify consistent formatting or keywords that will guide the indexing process.
+我透過閱讀提供的 Google 文件啟動了這個過程。目前，我的重點是了解使用者的請求：提取章節標題以建立詳細索引。我正在仔細審查該文件，尋找可以表明章節中斷的清晰結構元素。我希望找到一致的格式或關鍵字來指導索引過程。
 
-### Defining Index Extraction Process
+### 定義索引提取過程
 
-I'm now fully immersed in the task. I've broken down the user's request into actionable steps. My initial focus is using Workspaces to access the main Google Doc. Following this, I'll parse the document to locate and retrieve related documents, which will also be accessed using the same tool. Finally, I will extract all chapter titles from all the documents, and create a comprehensive index. I've planned the detailed process.
+我現在完全沉浸在任務中。我已將用戶的請求分解為可操作的步驟。我最初的重點是使用 Workspaces 來存取主要的 Google 文件。接下來，我將解析文件以查找和檢索相關文件，這些文件也將使用相同的工具進行存取。最後，我將從所有文件中提取所有章節標題，並建立一個綜合索引。我已經計劃好了詳細的流程。
 
-### Refining the Extraction Strategy
+### 完善提取策略
 
-The user's instructions are clear: read a Google Doc, its related documents, and build a detailed index of chapter titles. I've devised a multi-step plan. First, Workspaces will access the main Google Doc. Then, I'll parse it to find and read related documents, also using Workspaces. I'm now focusing on extracting titles and forming the detailed index with the required terms. I'm prioritizing accuracy to meet the user's specific demands for a comprehensive index.
+使用者的指示很明確：閱讀 Google 文件及其相關文件，並建立章節標題的詳細索引。我制定了一個多步驟計劃。首先，Workspaces 將存取主 Google 文件。然後，我將解析它以查找和閱讀相關文件，也使用工作區。我現在專注於提取標題並使用所需術語來形成詳細索引。我優先考慮準確性，以滿足使用者對綜合指標的特定需求。
 
-#### 1 . Establish user intent:
+#### 1.建立使用者意圖：
 
-I've determined the user wants a chapter title list and comprehensive index from the Google Doc and related documents. Now I need to figure out the most effective method for this extraction and indexing process. I'm exploring potential API functionalities to streamline this task, and will need to assess the best strategy for handling different document structures.
+我已經確定使用者想要來自 Google 文件和相關文件的章節標題清單和綜合索引。現在我需要找出該提取和索引過程的最有效方法。我正在探索潛在的 API 功能來簡化此任務，並且需要評估處理不同文件結構的最佳策略。
 
-#### 2. Considering Tool Use
+#### 2. 考慮工具的使用
 
-I've extracted the chapter URLs from the main document using a regular expression. Now, I'm ready to utilize Workspaces to retrieve the actual content of each chapter. Once I have the text for each chapter, I'll proceed with indexing.
+我使用正規表示式從主文件中提取了章節 URL。現在，我準備利用工作區來檢索每章的實際內容。獲得每一章的文字後，我將繼續建立索引。
 
-### Accessing chapter content:
+### 造訪章節內容：
 
-I've successfully identified the URLs for each chapter from the main document, which I can now use with Workspaces. My next step is to retrieve the content from these URLs, which will then allow me to generate the index. I'm focusing on efficiency, aiming to process this information quickly.
+我已成功識別主文件中每一章的 URL，現在可以將其與工作區一起使用。我的下一步是從這些 URL 檢索內容，然後我可以產生索引。我注重效率，旨在快速處理這些資訊。
 
-### Fetching Chapter Content
+### 取得章節內容
 
-I've successfully identified the chapter URLs from the main document and am ready to utilize Workspaces. My plan involves extracting these URLs, batching the calls for efficiency, and then processing the retrieved content to create the desired index. This ensures all relevant information is captured, paving the way for a comprehensive and accurate result.
+我已成功識別主文件中的章節 URL，並準備好使用工作區。我的計劃包括提取這些 URL、對呼叫進行批次處理以提高效率，然後處理檢索到的內容以建立所需的索引。這可確保捕獲所有相關信息，為全面、準確的結果鋪平道路。
 
-### Initiating URL Retrieval
+### 啟動 URL 檢索
 
-I've now successfully extracted the chapter URLs from the main document. Currently, I'm setting up calls to the Workspaces tool, preparing to fetch the content of each chapter. The goal is to obtain the necessary text for indexing. This information will then facilitate the creation of the index with at least 100 terms as requested.
+我現在已經成功從主文件中提取了章節 URL。目前，我正在設定對工作區工具的調用，準備獲取每章的內容。目標是獲取索引所需的文字。然後，此資訊將有助於根據要求建立至少包含 100 個術語的索引。
 
-### Initiating Chapter Extraction
+### 啟動章節擷取
 
-I've successfully identified and extracted the chapter URLs from the main document, which I've included above. I am now proceeding to use Workspaces for each URL to obtain the chapter content. The goal is to obtain the necessary text for indexing. This information will then facilitate the creation of the index with at least 100 terms as requested. I've begun to retrieve this information.
+我已經成功地從主文件中識別並提取了章節 URL，我已在上方包含了該內容。我現在開始對每個 URL 使用工作區來取得章節內容。目標是獲取索引所需的文字。然後，此資訊將有助於根據要求建立至少包含 100 個術語的索引。我已經開始檢索這些資訊。
 
-### Orchestrating Chapter Retrieval
+### 編排章節檢索
 
-I've extracted the chapter URLs and initiated a call to Workspaces. I'm currently retrieving the content for each chapter. To ensure a smooth process, I'm batching the calls to prevent any rate-limiting issues. This should enable me to efficiently compile the text needed for the index.
+我已提取章節 URL 並發起對工作區的呼叫。我目前正在檢索每章的內容。為了確保流程順利進行，我對通話進行了批次處理，以防止任何速率限制問題。這應該使我能夠有效地編譯索引所需的文本。
 
-### Decoding User Request
+### 解碼用戶請求
 
-I've determined the user's need. They require two primary deliverables: first, a comprehensive list of chapter titles extracted from Google Docs, and second, a detailed index containing a minimum of one hundred key terms. The process of extracting titles seems straightforward, while curating the index will involve more nuanced analysis.
+我已經確定了使用者的需求。它們需要兩個主要交付成果：第一，從 Google 文件中提取的章節標題的全面列表；第二，包含至少一百個關鍵術語的詳細索引。提取標題的過程似乎很簡單，而編制索引將涉及更細緻的分析。
 
-### Extracting Titles and Indexing
+### 提取標題和索引
 
-I've successfully identified the user's need: extracting chapter titles from the provided documents and compiling a comprehensive index. I've fetched the content of 31 Google Docs, including the main document and its chapters. I've confirmed that no additional tools are needed. My plan involves two steps: first, extracting chapter titles from the document filenames, and second, meticulously processing the text to build the index with key terms and chapter locators.
+我已經成功地確定了使用者的需求：從提供的文件中提取章節標題並編制綜合索引。我已經取得了 31 個 Google 文件的內容，包括主要文件及其章節。我已經確認不需要額外的工具。我的計劃包括兩個步驟：首先，從文件檔案名稱中提取章節標題，其次，仔細處理文字以使用關鍵術語和章節定位器建立索引。
 
-### Developing an Extraction Plan
+### 制定提取計劃
 
-I've refined my approach to tackle the user's request. I've now formulated a precise plan. Firstly, I will compile the chapter titles from the filenames of the 31 fetched documents. Secondly, and more complexly, I will meticulously analyze the content to create a comprehensive, alphabetically ordered index exceeding 100 entries. I have finalized my extraction and indexing strategy and can now commence execution.
+我改進了處理用戶請求的方法。我現在已經制定了一個精確的計劃。首先，我將從 31 個取得的文件的檔案名稱中編譯章節標題。其次，更複雜的是，我將仔細分析內容，創建一個超過 100 個條目的綜合、按字母順序排列的索引。我已經完成了提取和索引策略，現在可以開始執行。
 
-### Crafting the Extraction Strategy
+### 制定提取策略
 
-My approach is well-defined. I will compile chapter titles from the filenames of the 31 fetched documents. Subsequently, I'll analyze the content meticulously to construct an alphabetically organized index exceeding 100 entries. I've finalized the extraction and indexing strategy and can now commence implementation. The user's goal of a detailed index, covering content from diverse chapters and appendices within the Agentic Design Patterns series, is now within reach. I'll focus on delivering a thorough response, going beyond a mere sample index.
+我的方法是明確的。我將從 31 個取得的文件的檔案名稱中編譯章節標題。隨後，我將仔細分析內容，建立一個按字母順序組織的超過 100 個條目的索引。我已經完成了提取和索引策略，現在可以開始實施了。使用者的詳細索引目標現在已經可以實現，該索引涵蓋代理設計模式系列中不同章節和附錄的內容。我將專注於提供全面的答复，而不僅僅是樣本索引。
 
-### Defining the Approach
+### 定義方法
 
-I've clarified the user's need. I will extract chapter titles from the document filenames. Following that, I will carefully create an index exceeding 100 entries, arranging them alphabetically and noting their chapter locations. I am prepared to begin the indexing and extraction process.
+我已經明確了用戶的需求。我將從文件文件名中提取章節標題。接下來，我將仔細建立一個超過 100 個條目的索引，按字母順序排列它們並記下它們的章節位置。我準備開始索引和提取過程。

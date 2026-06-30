@@ -1,98 +1,98 @@
-# Agentic Design Patterns
+# 代理設計模式
 
-This repository contains the full text of the book "Agentic Design Patterns" by Antonio Gulli and Mauro Sauco. The content has been compiled and organized by Tom Mathews  for easy access and reference for the community.
+該儲存庫包含 Antonio Gulli 和 Mauro Sauco 所著的《代理設計模式》一書的全文。該內容由 Tom Mathews 編譯和組織，以便社群輕鬆存取和參考。
 
-![Agentic Design Patterns - Book Cover](assets/Agentic_Design_Patterns_Book_Cover.png)
+![代理設計模式 - 書籍封面](assets/Agentic_Design_Patterns_Book_Cover.png)
 
-## Authorship and Credit
+## 作者與致謝
 
-- **Authors:** [Antonio Gulli](https://www.linkedin.com/in/searchguy/) and [Mauro Sauco](https://www.linkedin.com/in/maurosauco/)
-- **Compiled by:** [Tom Mathews](https://www.linkedin.com/in/mathews-tom/)
+- **作者：** [安東尼奧古利](https://www.linkedin.com/in/searchguy/) 和 [莫羅·紹科](https://www.linkedin.com/in/maurosauco/)
+- **編譯者：** [湯姆馬修斯](https://www.linkedin.com/in/mathews-tom/)
 
-### What makes this book stand out?
+### 這本書的獨特之處是什麼？
 
-This 424-page guide tackles the real challenges we face when building intelligent, autonomous AI systems. It bridges the gap between theory and implementation—exactly what our field needs right now. This is the best resource for anyone serious about building real AI systems. If you're an engineer, researcher, or product manager ready to move beyond basic LLM applications and build truly robust AI agents, this is for you.
+這本 424 頁的指南解決了我們在建立智慧、自主 AI 系統時面臨的真正挑戰。它彌合了理論與實施之間的差距——這正是我們的領域目前所需要的。對於任何認真建立真正的人工智慧系統的人來說，這是最好的資源。如果您是工程師、研究員或產品經理，準備超越基本的大型語言模型（LLM）應用程式並建立真正強大的人工智慧代理，那麼這就是為您準備的。
 
-The book covers essential agentic patterns including Prompt Chaining, Routing, Planning, and Multi-Agent Systems, all with practical, code-based examples. You'll find comprehensive coverage of Tool Use, Memory Management, and RAG implementation, plus advanced topics like Reasoning Techniques and Inter-Agent Communication.
+本書涵蓋了基本的代理模式，包括提示鏈、路由、規劃和多代理系統，所有這些都帶有基於程式碼的實用範例。您將找到有關工具使用、記憶體管理和 檢索增強生成（RAG） 實現的全面介紹，以及推理技術和代理間通訊等高級主題。
 
-Inside you will find:
+在裡面你會發現：
 
-- **Real code examples:** Not just theory, but working implementations.
-- **Proven patterns:** Memory handling, exception logic, resource control, safety guardrails.
-- **Advanced techniques:** Multi-agent orchestration, inter-agent messaging, human-in-the-loop.
-- **Full chapter on MCP (Model Context Protocol):** A key framework for integrating tools with agents.
+- **真實程式碼範例：** 不只是理論，還有有效的實作。
+- **經過驗證的模式：** 記憶體處理、例外處理、資源控制、安全護欄。
+- **先進技術：** 多代理編排、代理間訊息傳遞、人機互動。
+- **有關 MCP（模型上下文協定）的完整章節：** 將工具與代理整合的關鍵框架。
 
-It covers 21 core patterns across 4 sections:
+它涵蓋 4 個部分的 21 個核心模式：
 
-1. Foundational patterns (prompt chaining, routing, tool use)
-2. Advanced systems (memory, learning, monitoring)
-3. Production concerns (error handling, safety, evaluation)
-4. Multi-agent architectures
+1. 基礎模式（提示鏈、路由、工具使用）
+2. 先進系統（記憶、學習、監控）
+3. 生產問題（錯誤處理、安全、評估）
+4. 多代理架構
 
-Most AI content stops at “how to call an API.” But in real-world systems you need to ask:
+大多數人工智慧內容都停留在「如何呼叫 API」。但在現實世界的系統中你需要問：
 
-- What if the agent gets stuck mid-task?
-- How do you preserve memory across long sessions?
-- How do you prevent chaos when you run 10+ agents?
+- 如果代理在任務中陷入困境怎麼辦？
+- 如何在長時間的會話中保持記憶？
+- 當您執行 10 多個代理時，如何防止混亂？
 
-This book answers all that with patterns you can actually apply. The 70+ page appendix alone is worth the investment, featuring Advanced Prompting techniques and an overview of Agentic Frameworks.
+本書透過您可以實際應用的模式回答了所有這些問題。僅 70 多頁的附錄就值得投資，其中包含高級提示技術和代理框架概述。
 
-## Table of Contents
+## 目錄
 
-### Introduction
+### 簡介
 
-- [Dedication](00-Introduction/01-Dedication-1cQ61mNpiWn6eSORmWjEjF44vN2Lpba8kyKmNwIC60ig.md)
-- [Acknowledgment](00-Introduction/02-Acknowledgment-1u2y6tY48bw8nriDUuwWEf9s8g66vyIqBKSKZDOS-n0s.md)
-- [Foreword](00-Introduction/03-Foreword-18Q9kfZuCTL37ztrSjLxwf8Elr5UfAiAavmnj0IqSpbU.md)
-- [A Thought Leader's Perspective: Power and Responsibility](00-Introduction/04-A_Thought_Leaders_Perspective_Power_and_Responsibility-1PWhaXD_UNKgJaxYe3JBxRFRt3_B8Wm67CFxtSBQ4LkU.md)
-- [Introduction](00-Introduction/05-Introduction-1K5jwqB6jh20uHL0TTWxqWOxFk-dzFxRvHzrRRV79hrg.md)
-- [What makes an AI system an Agent?](00-Introduction/06-What_makes_an_AI_system_an_Agent-1Nw6hRa7ItdLr_Tj5hF2q-OH8B_uPKb--RLn8SXZKA94.md)
+- [致敬](00-Introduction/01-Dedication-1cQ61mNpiWn6eSORmWjEjF44vN2Lpba8kyKmNwIC60ig.md)
+- [致謝](00-Introduction/02-Acknowledgment-1u2y6tY48bw8nriDUuwWEf9s8g66vyIqBKSKZDOS-n0s.md)
+- [序言](00-Introduction/03-Foreword-18Q9kfZuCTL37ztrSjLxwf8Elr5UfAiAavmnj0IqSpbU.md)
+- [思想領袖的觀點：權力與責任](00-Introduction/04-A_Thought_Leaders_Perspective_Power_and_Responsibility-1PWhaXD_UNKgJaxYe3JBxRFRt3_B8Wm67CFxtSBQ4LkU.md)
+- [簡介](00-Introduction/05-Introduction-1K5jwqB6jh20uHL0TTWxqWOxFk-dzFxRvHzrRRV79hrg.md)
+- [什麼讓 AI 系統成為代理？](00-Introduction/06-What_makes_an_AI_system_an_Agent-1Nw6hRa7ItdLr_Tj5hF2q-OH8B_uPKb--RLn8SXZKA94.md)
 
-### Part One: Foundational Patterns
+### 第一部分：基礎模式
 
-- [Chapter 1: Prompt Chaining](01-Part_One/Chapter_1-Prompt_Chaining-1flxKGrbnF2g8yh3F-oVD5Xx7ZumId56HbFpIiPdkqLI.md)
-- [Chapter 2: Routing](01-Part_One/Chapter_2-Routing-1ux_n8n3T4bYndOjs1DKW5ccpC802KISdy2IWnlvYbas.md)
-- [Chapter 3: Parallelization](01-Part_One/Chapter_3-Parallelization-1XVMp4RcRkoUJTVbrP2foWZX703CUJpWkrhyFU2cfUOA.md)
-- [Chapter 4: Reflection](01-Part_One/Chapter_4-Reflection-1HXXJOQIMWowtLw4WMiSR360caDAlZPtl5dPPgvq9IT4.md)
-- [Chapter 5: Tool Use (Function Calling)](01-Part_One/Chapter_5-Tool_Use_(Function_Calling)-1bE4iMljhppqGY1p48gQWtZvk6MfRuJRCiba1yRykGNE.md)
-- [Chapter 6: Planning](01-Part_One/Chapter_6-Planning-18vvNESEwHnVUREzIipuaDNCnNAREGqEfy9MQYC9wb4o.md)
-- [Chapter 7: Multi-Agent Collaboration](01-Part_One/Chapter_7-Multi-Agent_Collaboration-1RZ5-2fykDQKOBx01pwfKkDe0GCs5ydca7xW9Q4wqS_M.md)
+- [第 1 章：提示鏈](01-Part_One/Chapter_1-Prompt_Chaining-1flxKGrbnF2g8yh3F-oVD5Xx7ZumId56HbFpIiPdkqLI.md)
+- [第 2 章：路由](01-Part_One/Chapter_2-Routing-1ux_n8n3T4bYndOjs1DKW5ccpC802KISdy2IWnlvYbas.md)
+- [第 3 章：平行化](01-Part_One/Chapter_3-Parallelization-1XVMp4RcRkoUJTVbrP2foWZX703CUJpWkrhyFU2cfUOA.md)
+- [第 4 章：反思](01-Part_One/Chapter_4-Reflection-1HXXJOQIMWowtLw4WMiSR360caDAlZPtl5dPPgvq9IT4.md)
+- [第五章：工具使用（函數呼叫）](01-Part_One/Chapter_5-Tool_Use_(Function_Calling)-1bE4iMljhppqGY1p48gQWtZvk6MfRuJRCiba1yRykGNE.md)
+- [第 6 章：規劃](01-Part_One/Chapter_6-Planning-18vvNESEwHnVUREzIipuaDNCnNAREGqEfy9MQYC9wb4o.md)
+- [第 7 章：多代理協作](01-Part_One/Chapter_7-Multi-Agent_Collaboration-1RZ5-2fykDQKOBx01pwfKkDe0GCs5ydca7xW9Q4wqS_M.md)
 
-### Part Two: Advanced Systems
+### 第二部分：進階系統
 
-- [Chapter 8: Memory Management](02-Part_Two/Chapter_8-Memory_Management-1asVTObtzIye0I9ypAztaeeI_sr_Hx2TORE02uUuqH_c.md)
-- [Chapter 9: Learning and Adaptation](02-Part_Two/Chapter_9-Learning_and_Adaptation-1UHTEDCmSM1nwB-iyMoHuYzVcu_B_4KkJ2ITGGUKqo8s.md)
-- [Chapter 10: Model Context Protocol (MCP)](02-Part_Two/Chapter_10-Model_Context_Protocol_(MCP)-1e6XimYczKmhX9zpqEyxLFWPQgGuG0brp7Hic2sFl_qw.md)
-- [Chapter 11: Goal Setting and Monitoring](02-Part_Two/Chapter_11-Goal_Setting_and_Monitoring-10ndlCB39BWjyFRWKpcoKib4vuPD1ojD-x0-ynMaf5uw.md)
+- [第 8 章：記憶體管理](02-Part_Two/Chapter_8-Memory_Management-1asVTObtzIye0I9ypAztaeeI_sr_Hx2TORE02uUuqH_c.md)
+- [第9章：學習與適應](02-Part_Two/Chapter_9-Learning_and_Adaptation-1UHTEDCmSM1nwB-iyMoHuYzVcu_B_4KkJ2ITGGUKqo8s.md)
+- [第 10 章：模型上下文協定（MCP）](02-Part_Two/Chapter_10-Model_Context_Protocol_(MCP)-1e6XimYczKmhX9zpqEyxLFWPQgGuG0brp7Hic2sFl_qw.md)
+- [第 11 章：目標設定與監控](02-Part_Two/Chapter_11-Goal_Setting_and_Monitoring-10ndlCB39BWjyFRWKpcoKib4vuPD1ojD-x0-ynMaf5uw.md)
 
-### Part Three: Production Concerns
+### 第三部分：生產環境考量
 
-- [Chapter 12: Exception Handling and Recovery](03-Part_Three/Chapter_12-Exception_Handling_and_Recovery-1C07AuMur6-infwE0viCp4QtAy_wWI-uceFm6MaYHQGk.md)
-- [Chapter 13: Human in the Loop](03-Part_Three/Chapter_13-Human_in_the_Loop-1ImOZcw6yeb7a-uRBMNP1VdovYfyip4IdsAcLu9yue-0.md)
-- [Chapter 14: Knowledge Retrieval (RAG)](03-Part_Three/Chapter_14-Knowledge_Retrieval_(RAG)-1v96Oobio6xDOqbK8ejsXjmOc4Dp2uoLMo5_gfJgi-NE.md)
+- [第12章：例外處理和恢復](03-Part_Three/Chapter_12-Exception_Handling_and_Recovery-1C07AuMur6-infwE0viCp4QtAy_wWI-uceFm6MaYHQGk.md)
+- [第13章：人類在回圈中](03-Part_Three/Chapter_13-Human_in_the_Loop-1ImOZcw6yeb7a-uRBMNP1VdovYfyip4IdsAcLu9yue-0.md)
+- [第14章：知識檢索（RAG）](03-Part_Three/Chapter_14-Knowledge_Retrieval_(RAG)-1v96Oobio6xDOqbK8ejsXjmOc4Dp2uoLMo5_gfJgi-NE.md)
 
-### Part Four: Multi-Agent Architectures
+### 第四部分：多代理架構
 
-- [Chapter 15: Inter-Agent Communication (A2A)](04-Part_Four/Chapter_15-Inter_Agent_Communication_(A2A)-1H6HmUYcy5kugt5gt7Kh2Zzb8C62d5pu36RsgMNDCX24.md)
-- [Chapter 16: Resource-Aware Optimization](04-Part_Four/Chapter_16-Resource_Aware_Optimization-1nAN58l6JjqEJHk43126uh7xgdEblCpcbsNUHXgtBmJQ.md)
-- [Chapter 17: Reasoning Techniques](04-Part_Four/Chapter_17-Reasoning_Techniques-1Yt1W_hLaC6ZNgJXfT4W6NrCL4TzNVdKOX50kgpHiIq4.md)
-- [Chapter 18: Guardrails and Safety Patterns](04-Part_Four/Chapter_18-Guardrails_Safety_Patterns-1Gpc5af_okze1kprRLohP6-81e1KwL6HggjeLvxQyIuk.md)
-- [Chapter 19: Evaluation and Monitoring](04-Part_Four/Chapter_19-Evaluation_and_Monitoring-1G3zOZM2ZOd0gUp5dy66FUjKMOcALh9l-JpvPxgGMm8w.md)
-- [Chapter 20: Prioritization](04-Part_Four/Chapter_20-Prioritization-1qyXxGM2hNqW_qjXuBFxrEUeoYVO79BoW1ogKu1bfdCY.md)
-- [Chapter 21: Exploration and Discovery](04-Part_Four/Chapter_21-Exploration_and_Discovery-1zeeMVTqjqRIli6G9MMWThhoQhvKqLOjJF2EHHUXLhdk.md)
+- [第 15 章：代理間通訊（A2A）](04-Part_Four/Chapter_15-Inter_Agent_Communication_(A2A)-1H6HmUYcy5kugt5gt7Kh2Zzb8C62d5pu36RsgMNDCX24.md)
+- [第 16 章：資源感知優化](04-Part_Four/Chapter_16-Resource_Aware_Optimization-1nAN58l6JjqEJHk43126uh7xgdEblCpcbsNUHXgtBmJQ.md)
+- [第17章：推理技巧](04-Part_Four/Chapter_17-Reasoning_Techniques-1Yt1W_hLaC6ZNgJXfT4W6NrCL4TzNVdKOX50kgpHiIq4.md)
+- [第18章：護欄與安全模式](04-Part_Four/Chapter_18-Guardrails_Safety_Patterns-1Gpc5af_okze1kprRLohP6-81e1KwL6HggjeLvxQyIuk.md)
+- [第十九章：評估與監測](04-Part_Four/Chapter_19-Evaluation_and_Monitoring-1G3zOZM2ZOd0gUp5dy66FUjKMOcALh9l-JpvPxgGMm8w.md)
+- [第20章：優先順序](04-Part_Four/Chapter_20-Prioritization-1qyXxGM2hNqW_qjXuBFxrEUeoYVO79BoW1ogKu1bfdCY.md)
+- [第21章：探索與發現](04-Part_Four/Chapter_21-Exploration_and_Discovery-1zeeMVTqjqRIli6G9MMWThhoQhvKqLOjJF2EHHUXLhdk.md)
 
-### Appendix
+### 附錄
 
-- [Appendix A: Advanced Prompting Techniques](05-Appendix/Appendix_A-Advanced_Prompting_Techniques-1V7EKEWibOH6IhHD_PtbFZiml492-2191jDQCcTkhtTI.md)
-- [Appendix B: AI Agentic Interactions: From GUI to Real-World Environment](05-Appendix/Appendix_B-AI_Agentic_Interactions_From_GUI_to_Real_World_Environment-11pma_tCoC7uZ2SFKjcR5KyIq0_ooMGSoadI6f9mxG2I.md)
-- [Appendix C: Quick Overview of Agentic Frameworks](05-Appendix/Appendix_C-Quick_Overview_of_Agentic_Frameworks-151rGsiEYOkXUcNDRus_N8TxxuvjoyTDViBhzt9z0Mfw.md)
-- [Appendix D: Building an Agent with AgentSpace (online only)](05-Appendix/Appendix_D-Building_an_Agent_with_AgentSpace_(on_line_only)-1bDRJ8mKtLTeWNC-cGD0Cr8pEJQgJHNcjqz5ekloAjaE.md)
-- [Appendix E - AI Agents on the CLI](05-Appendix/Appendix_E-AI_Agents_on_the_CLI-1W4znto0a8Ikajw5a4tEyRAaB2nJPJw_iFc4w4qNnjho.md)
-- [Appendix F: Under the Hood: An Inside Look at the Agent's Reasoning Engines](05-Appendix/Appendix_F-Under_the_Hood_An_Inside_Look_at_the_Agents_Reasoning_Engines-14q3fQ-FZmDgiughno_WLSILMWkURvUgR7mlGiFtvwd4.md)
-- [Appendix G: Coding Agents](05-Appendix/Appendix_G-Coding_Agents-1tVyhgwrD4fu_D_pHUrwhNxoguRG3tLc1KObXFxrxE_s.md)
+- [附錄 A：進階提示技巧](05-Appendix/Appendix_A-Advanced_Prompting_Techniques-1V7EKEWibOH6IhHD_PtbFZiml492-2191jDQCcTkhtTI.md)
+- [附錄 B：AI 代理互動：從 GUI 到現實世界環境](05-Appendix/Appendix_B-AI_Agentic_Interactions_From_GUI_to_Real_World_Environment-11pma_tCoC7uZ2SFKjcR5KyIq0_ooMGSoadI6f9mxG2I.md)
+- [附錄 C：代理框架快速概述](05-Appendix/Appendix_C-Quick_Overview_of_Agentic_Frameworks-151rGsiEYOkXUcNDRus_N8TxxuvjoyTDViBhzt9z0Mfw.md)
+- [附錄 D：使用 AgentSpace 建立代理（僅限線上）](05-Appendix/Appendix_D-Building_an_Agent_with_AgentSpace_(on_line_only)-1bDRJ8mKtLTeWNC-cGD0Cr8pEJQgJHNcjqz5ekloAjaE.md)
+- [附錄 E - CLI 上的 AI 代理](05-Appendix/Appendix_E-AI_Agents_on_the_CLI-1W4znto0a8Ikajw5a4tEyRAaB2nJPJw_iFc4w4qNnjho.md)
+- [附錄 F：底層：代理推理引擎的內部觀察](05-Appendix/Appendix_F-Under_the_Hood_An_Inside_Look_at_the_Agents_Reasoning_Engines-14q3fQ-FZmDgiughno_WLSILMWkURvUgR7mlGiFtvwd4.md)
+- [附錄 G：Coding Agent](05-Appendix/Appendix_G-Coding_Agents-1tVyhgwrD4fu_D_pHUrwhNxoguRG3tLc1KObXFxrxE_s.md)
 
-## License
+## 執照
 
-This repository is licensed under the [MIT License](LICENSE).
+該儲存庫已依據 [MIT 授權條款](LICENSE) 公開授權。
 
-![Agentic Design Patterns](assets/Agentic_Design_Patterns.png)
+![代理設計模式](assets/Agentic_Design_Patterns.png)

@@ -1,90 +1,90 @@
-# Chapter 10: Model Context Protocol
+# 第 10 章：模型上下文協定
 
-To enable LLMs to function effectively as agents, their capabilities must extend beyond multimodal generation. Interaction with the external environment is necessary, including access to current data, utilization of external software, and execution of specific operational tasks. The Model Context Protocol (MCP) addresses this need by providing a standardized interface for LLMs to interface with external resources. This protocol serves as a key mechanism to facilitate consistent and predictable integration.
+為了使LLM能夠有效地發揮代理的作用，他們的能力必須超越多模式生成。與外部環境的互動是必要的，包括存取當前資料、使用外部軟體以及執行特定的操作任務。模型上下文協定 (MCP) 透過為 LLM 提供與外部資源互動的標準化介面來滿足這一需求。該協議是促進一致和可預測整合的關鍵機制。
 
-## MCP Pattern Overview
+## MCP 模式概述
 
-Imagine a universal adapter that allows any LLM to plug into any external system, database, or tool without a custom integration for each one. That's essentially what the Model Context Protocol (MCP) is. It's an open standard designed to standardize how LLMs like Gemini, OpenAI's GPT models, Mixtral, and Claude communicate with external applications, data sources, and tools. Think of it as a universal connection mechanism that simplifies how LLMs obtain context, execute actions, and interact with various systems.
+想像一下通用適配器，它允許任何LLM插入任何外部系統、資料庫或工具，而無需為每個系統、資料庫或工具進行自訂整合。這本質上就是模型上下文協定 (MCP)。它是一個開放標準，旨在標準化 Gemini、OpenAI 的 GPT 模型、Mixtral 和 Claude 等LLM與外部應用、資料來源和工具的通訊方式。將其視為一種通用連接機制，可簡化LLM獲取上下文、執行操作以及與各種系統互動的方式。
 
-MCP operates on a client-server architecture. It defines how different elements—data (referred to as resources), interactive templates (which are essentially prompts), and actionable functions (known as tools)—are exposed by an MCP server. These are then consumed by an MCP client, which could be an LLM host application or an AI agent itself. This standardized approach dramatically reduces the complexity of integrating LLMs into diverse operational environments.
+MCP 在客戶端-伺服器架構上運作。它定義了 MCP 伺服器如何公開不同的元素——資料（稱為資源）、互動式範本（本質上是提示）和可操作功能（稱為工具）。然後，這些由 MCP 用戶端使用，該用戶端可以是 LLM 主機應用程式或 AI 代理本身。這種標準化方法大大降低了將LLM整合到不同營運環境中的複雜性。
 
-However, MCP is a contract for an "agentic interface," and its effectiveness depends heavily on the design of the underlying APIs it exposes. There is a risk that developers simply wrap pre-existing, legacy APIs without modification, which can be suboptimal for an agent. For example, if a ticketing system's API only allows retrieving full ticket details one by one, an agent asked to summarize high-priority tickets will be slow and inaccurate at high volumes. To be truly effective, the underlying API should be improved with deterministic features like filtering and sorting to help the non-deterministic agent work efficiently. This highlights that agents do not magically replace deterministic workflows; they often require stronger deterministic support to succeed.
+然而，MCP 是一個「代理介面」的契約，其有效性在很大程度上取決於它所公開的底層 API 的設計。有這樣的風險：開發人員只是簡單地包裝預先存在的遺留 API 而不進行修改，這對代理來說可能不是最理想的。例如，如果票務系統的 API 只允許逐一檢索完整的票證詳細信息，則要求匯總高優先級票證的客服人員在處理量較大時會很慢且不准確。為了真正有效，應該使用過濾和排序等確定性功能來改進底層 API，以幫助非確定性代理高效工作。這凸顯了代理不會神奇地取​​代確定性工作流程；他們往往需要更強大的確定性支援才能成功。
 
-Furthermore, MCP can wrap an API whose input or output is still not inherently understandable by the agent. An API is only useful if its data format is agent-friendly, a guarantee that MCP itself does not enforce. For instance, creating an MCP server for a document store that returns files as PDFs is mostly useless if the consuming agent cannot parse PDF content. The better approach would be to first create an API that returns a textual version of the document, such as Markdown, which the agent can actually read and process. This demonstrates that developers must consider not just the connection, but the nature of the data being exchanged to ensure true compatibility.
+此外，MCP 可以包裝其輸入或輸出仍然不能被代理本質上理解的 API。只有當 API 的資料格式對代理友好時，API 才有用，而 MCP 本身並不會強制執行此保證。例如，如果使用代理無法解析 PDF 內容，則為以 PDF 形式傳回文件的文件儲存體建立 MCP 伺服器幾乎毫無用處。更好的方法是先建立一個傳回文件文字版本的 API，例如 Markdown，代理可以實際讀取和處理它。這表明開發人員不僅必須考慮連接，還必須考慮所交換資料的性質，以確保真正的相容性。
 
-## MCP vs. Tool Function Calling
+## MCP 與工具函數調用
 
-The Model Context Protocol (MCP) and tool function calling are distinct mechanisms that enable LLMs to interact with external capabilities (including tools) and execute actions. While both serve to extend LLM capabilities beyond text generation, they differ in their approach and level of abstraction.
+模型上下文協定 (MCP) 和工具函數呼叫是不同的機制，使 LLM 能夠與外部功能（包括工具）互動並執行操作。雖然兩者都將LLM的功能擴展到文本生成之外，但它們的方法和抽象層次有所不同。
 
-Tool function calling can be thought of as a direct request from an LLM to a specific, pre-defined tool or function. Note that in this context we use the words "tool" and "function” interchangeably. This interaction is characterized by a one-to-one communication model, where the LLM formats a request based on its understanding of a user's intent requiring external action. The application code then executes this request and returns the result to the LLM. This process is often proprietary and varies across different LLM providers.
+工具函數呼叫可以被認為是LLM對特定的、預先定義的工具或函數的直接請求。請注意，在這種情況下，我們可以互換使用「工具」和「功能」這兩個詞。這種互動的特點是一對一的通訊模型，其中LLM根據其對需要外部操作的使用者意圖的理解來格式化請求。然後應用程式程式碼執行該請求並將結果傳回給 LLM。這個過程通常是專有的，並且因不同的LLM提供者而異。
 
-In contrast, the Model Context Protocol (MCP) operates as a standardized interface for LLMs to discover, communicate with, and utilize external capabilities. It functions as an open protocol that facilitates interaction with a wide range of tools and systems, aiming to establish an ecosystem where any compliant tool can be accessed by any compliant LLM. This fosters interoperability, composability and reusability across different systems and implementations. By adopting a federated model, we significantly improve interoperability and unlock the value of existing assets. This strategy allows us to bring disparate and legacy services into a modern ecosystem simply by wrapping them in an MCP-compliant interface. These services continue to operate independently, but can now be composed into new applications and workflows, with their collaboration orchestrated by LLMs. This fosters agility and reusability without requiring costly rewrites of foundational systems.
+相比之下，模型上下文協定 (MCP) 作為 LLM 發現、通訊和利用外部功能的標準化介面運作。它作為一種開放協議，促進與各種工具和系統的交互，旨在建立一個生態系統，任何合規的LLM都可以訪問任何合規的工具。這促進了不同系統和實作之間的互通性、可組合性和可重複使用性。透過採用聯合模型，我們顯著提高了互通性並釋放了現有資產的價值。這項策略使我們能夠將不同的遺留服務引入現代生態系統，只需將它們包裝在符合 MCP 的介面中即可。這些服務繼續獨立運行，但現在可以組合成新的應用程式和工作流程，並由LLM精心安排協作。這可以提高敏捷性和可重複使用性，而無需對基礎系統進行昂貴的重寫。
 
-Here's a breakdown of the fundamental distinctions between MCP and tool function calling:
+以下是 MCP 和工具函數呼叫之間基本差異的細分：
 
-| Feature | Tool Function Calling | Model Context Protocol (MCP) |
-| ----- | ----- | ----- |
-| **Standardization** | Proprietary and vendor-specific. The format and implementation differ across LLM providers. | An open, standardized protocol, promoting interoperability between different LLMs and tools. |
-| **Scope** | A direct mechanism for an LLM to request the execution of a specific, predefined function. | A broader framework for how LLMs and external tools discover and communicate with each other. |
-| **Architecture** | A one-to-one interaction between the LLM and the application's tool-handling logic. | A client-server architecture where LLM-powered applications (clients) can connect to and utilize various MCP servers (tools). |
-| **Discovery** | The LLM is explicitly told which tools are available within the context of a specific conversation. | Enables dynamic discovery of available tools. An MCP client can query a server to see what capabilities it offers. |
-| **Reusability** | Tool integrations are often tightly coupled with the specific application and LLM being used. | Promotes the development of reusable, standalone "MCP servers" that can be accessed by any compliant application. |
+|特色 |工具函數呼叫 |模型上下文協定（MCP）|
+| -----| -----| -----|
+| **標準化** |專有且特定於供應商。不同的 LLM 提供者的格式和實施方式有所不同。 |開放、標準化的協議，促進不同LLM和工具之間的互通性。 |
+| **範圍** | LLM 請求執行特定的預定義函數的直接機制。 |一個更廣泛的框架，用於指導LLM和外部工具如何相互發現和通信。 |
+| **架構** | LLM 和應用程式的工具處理邏輯之間的一對一互動。 |客戶端-伺服器架構，LLM 支援的應用程式（客戶端）可以連接並利用各種 MCP 伺服器（工具）。 |
+| **發現** |LLM被明確告知在特定對話的脈絡中哪些工具可用。 |啟用可用工具的動態發現。 MCP 用戶端可以查詢伺服器以查看它提供的功能。 |
+| **可重複使用性** |工具整合通常與所使用的特定應用程式和LLM緊密結合。 |促進可重複使用、獨立的「MCP 伺服器」的開發，任何相容的應用程式都可以存取這些伺服器。 |
 
-Think of tool function calling as giving an AI a specific set of custom-built tools, like a particular wrench and screwdriver. This is efficient for a workshop with a fixed set of tasks. MCP (Model Context Protocol), on the other hand, is like creating a universal, standardized power outlet system. It doesn't provide the tools itself, but it allows any compliant tool from any manufacturer to plug in and work, enabling a dynamic and ever-expanding workshop.
+將工具函數呼叫視為為人工智慧提供一組特定的客製化工具，例如特定的扳手和螺絲起子。這對於具有一組固定任務的車間來說非常有效。另一方面，MCP（模型上下文協定）就像創建一個通用的標準化電源插座系統。它本身不提供工具，但它允許任何製造商提供的任何相容工具插入並工作，從而實現動態且不斷擴展的車間。
 
-In short, function calling provides direct access to a few specific functions, while MCP is the standardized communication framework that lets LLMs discover and use a vast range of external resources. For simple applications, specific tools are enough; for complex, interconnected AI systems that need to adapt, a universal standard like MCP is essential.
+簡而言之，函數呼叫提供了對一些特定函數的直接訪問，而 MCP 是標準化的通訊框架，可讓 LLM 發現和使用大量外部資源。對於簡單的應用，特定的工具就足夠了；對於需要適應的複雜、互連的人工智慧系統，像 MCP 這樣的通用標準至關重要。
 
-## Additional considerations for MCP
+## MCP 的其他注意事項
 
-While MCP presents a powerful framework, a thorough evaluation requires considering several crucial aspects that influence its suitability for a given use case. Let's see some aspects in more details:
+雖然 MCP 提供了一個強大的框架，但全面的評估需要考慮影響其對給定用例的適用性的幾個關鍵方面。讓我們更詳細地看看一些方面：
 
-* **Tool vs. Resource vs. Prompt**: It's important to understand the specific roles of these components. A resource is static data (e.g., a PDF file, a database record). A tool is an executable function that performs an action (e.g., sending an email, querying an API). A prompt is a template that guides the LLM in how to interact with a resource or tool, ensuring the interaction is structured and effective.  
-* **Discoverability**: A key advantage of MCP is that an MCP client can dynamically query a server to learn what tools and resources it offers. This "just-in-time" discovery mechanism is powerful for agents that need to adapt to new capabilities without being redeployed.  
-* **Security**: Exposing tools and data via any protocol requires robust security measures. An MCP implementation must include authentication and authorization to control which clients can access which servers and what specific actions they are permitted to perform.  
-* **Implementation**: While MCP is an open standard, its implementation can be complex. However, providers are beginning to simplify this process. For example, some model providers like Anthropic or FastMCP offer SDKs that abstract away much of the boilerplate code, making it easier for developers to create and connect MCP clients and servers.  
-* **Error Handling**: A comprehensive error-handling strategy is critical. The protocol must define how errors (e.g., tool execution failure, unavailable server, invalid request) are communicated back to the LLM so it can understand the failure and potentially try an alternative approach.  
-* **Local vs. Remote Server**: MCP servers can be deployed locally on the same machine as the agent or remotely on a different server. A local server might be chosen for speed and security with sensitive data, while a remote server architecture allows for shared, scalable access to common tools across an organization.  
-* **On-demand vs. Batch**: MCP can support both on-demand, interactive sessions and larger-scale batch processing. The choice depends on the application, from a real-time conversational agent needing immediate tool access to a data analysis pipeline that processes records in batches.  
-* **Transportation Mechanism**: The protocol also defines the underlying transport layers for communication. For local interactions, it uses JSON-RPC over STDIO (standard input/output) for efficient inter-process communication. For remote connections, it leverages web-friendly protocols like Streamable HTTP and Server-Sent Events (SSE) to enable persistent and efficient client-server communication.
+* **工具與資源與提示**：了解這些元件的具體角色非常重要。資源是靜態資料（例如 PDF 檔案、資料庫記錄）。工具是執行操作（例如發送電子郵件、查詢 API）的可執行函數。提示是一個模板，指導LLM如何與資源或工具交互，確保交互結構化且有效。  
+* **可發現性**：MCP 的一個關鍵優勢是 MCP 用戶端可以動態查詢伺服器以了解其提供的工具和資源。這種「及時」發現機制對於需要適應新功能而無需重新部署的代理來說非常強大。  
+* **安全性**：透過任何協定公開工具和資料都需要強大的安全措施。 MCP 實作必須包括身份驗證和授權，以控制哪些用戶端可以存取哪些伺服器以及允許它們執行哪些特定操作。  
+* **實現**：雖然 MCP 是一個開放標準，但其實現可能很複雜。然而，提供者開始簡化此過程。例如，一些模型提供者（例如 Anthropic 或 FastMCP）提供的 SDK 可以抽像出大部分樣板程式碼，使開發人員可以更輕鬆地建立和連接 MCP 用戶端和伺服器。  
+* **錯誤處理**：全面的錯誤處理策略至關重要。該協定必須定義如何將錯誤（例如，工具執行失敗、伺服器不可用、無效請求）傳達回 LLM，以便 LLM 能夠理解失敗並可能嘗試替代方法。  
+* **本機與遠端伺服器**：MCP 伺服器可以本地部署在與代理相同的電腦上，也可以遠端部署在不同的伺服器上。可以選擇本地伺服器來提高敏感資料的速度和安全性，而遠端伺服器架構則允許對整個組織內的常用工具進行共享、可擴展的存取。  
+* **按需與批次**：MCP 可以支援按需、互動式會話和更大規模的批次。選擇取決於應用程序，從需要立即工具存取的即時對話代理到批量處理記錄的資料分析管道。  
+* **傳輸機制**：此協定也定義了通訊的底層傳輸層。對於本地交互，它使用基於 STDIO（標準輸入/輸出）的 JSON-RPC 來實現高效的進程間通訊。對於遠端連接，它利用 Streamable HTTP 和伺服器發送事件 (SSE) 等 Web 友好協定來實現持久且高效的客戶端-伺服器通訊。
 
-The Model Context Protocol uses a client-server model to standardize information flow. Understanding component interaction is key to MCP's advanced agentic behavior:
+模型上下文協定使用客戶端-伺服器模型來標準化資訊流。了解元件互動是 MCP 高階代理行為的關鍵：
 
-1. **Large Language Model (LLM)**: The core intelligence. It processes user requests, formulates plans, and decides when it needs to access external information or perform an action.  
-2. **MCP Client**: This is an application or wrapper around the LLM. It acts as the intermediary, translating the LLM's intent into a formal request that conforms to the MCP standard. It is responsible for discovering, connecting to, and communicating with MCP Servers.  
-3. **MCP Server**: This is the gateway to the external world. It exposes a set of tools, resources, and prompts to any authorized MCP Client. Each server is typically responsible for a specific domain, such as a connection to a company's internal database, an email service, or a public API.  
-4. ​​**Optional Third-Party (3P) Service:** This represents the actual external tool, application, or data source that the MCP Server manages and exposes. It is the ultimate endpoint that performs the requested action, such as querying a proprietary database, interacting with a SaaS platform, or calling a public weather API.
+1. **大型語言模型（LLM）**：核心智能。它處理使用者請求、制定計劃並決定何時需要存取外部資訊或執行操作。  
+2. **MCP 客戶端**：這是 LLM 的應用程式或包裝器。它充當中介，將 LLM 的意圖轉化為符合 MCP 標準的正式請求。它負責發現、連接 MCP 伺服器並與之通訊。  
+3. **MCP伺服器**：這是通往外部世界的網關。它向任何授權的 MCP 用戶端公開一組工具、資源和提示。每台伺服器通常負責特定網域，例如與公司內部資料庫、電子郵件服務或公共 API 的連接。  
+4.**可選第三方 (3P) 服務：** 這代表 MCP 伺服器管理和公開的實際外部工具、應用程式或資料來源。它是執行請求操作的最終端點，例如查詢專有資料庫、與 SaaS 平台互動或呼叫公共天氣 API。
 
-The interaction flows as follows:
+互動流程如下：
 
-1. **Discovery**: The MCP Client, on behalf of the LLM, queries an MCP Server to ask what capabilities it offers. The server responds with a manifest listing its available tools (e.g., send_email), resources (e.g., customer_database), and prompts.  
-2. **Request Formulation**: The LLM determines that it needs to use one of the discovered tools. For instance, it decides to send an email. It formulates a request, specifying the tool to use (send_email) and the necessary parameters (recipient, subject, body).  
-3. **Client Communication**: The MCP Client takes the LLM's formulated request and sends it as a standardized call to the appropriate MCP Server.  
-4. **Server Execution**: The MCP Server receives the request. It authenticates the client, validates the request, and then executes the specified action by interfacing with the underlying software (e.g., calling the send() function of an email API).  
-5. **Response and Context Update**: After execution, the MCP Server sends a standardized response back to the MCP Client. This response indicates whether the action was successful and includes any relevant output (e.g., a confirmation ID for the sent email). The client then passes this result back to the LLM, updating its context and enabling it to proceed with the next step of its task.
+1. **發現**：MCP 用戶端代表 LLM 查詢 MCP 伺服器以詢問其提供的功能。伺服器使用清單回應，列出其可用工具（例如，send_email）、資源（例如，customer_database）和提示。  
+2. **請求制定**：LLM確定需要使用已發現的工具之一。例如，它決定發送一封電子郵件。它制定一個請求，指定要使用的工具（send_email）和必要的參數（收件者、主題、正文）。  
+3. **客戶端通訊**：MCP 用戶端接受 LLM 制定的請求並將其作為標準化呼叫傳送到相應的 MCP 伺服器。  
+4. **伺服器執行**：MCP 伺服器接收請求。它對客戶端進行身份驗證，驗證請求，然後透過與底層軟體互動（例如，呼叫電子郵件 API 的 send() 函數）來執行指定的操作。  
+5. **回應和上下文更新**：執行後，MCP 伺服器將標準化回應傳回 MCP 用戶端。此回應指示操作是否成功並包含任何相關輸出（例如，已傳送電子郵件的確認 ID）。然後，客戶將此結果傳回 LLM，更新其上下文並使其能夠繼續執行下一步任務。
 
-## Practical Applications & Use Cases
+## 實際應用和用例
 
-MCP significantly broadens AI/LLM capabilities, making them more versatile and powerful. Here are nine key use cases:
+MCP 顯著拓寬了 AI/LLM 的能力，使它們更加通用和強大。以下是九個關鍵用例：
 
-* **Database Integration:** MCP allows LLMs and agents to seamlessly access and interact with structured data in databases. For instance, using the MCP Toolbox for Databases, an agent can query Google BigQuery datasets to retrieve real-time information, generate reports, or update records, all driven by natural language commands.  
-* **Generative Media Orchestration:** MCP enables agents to integrate with advanced generative media services. Through MCP Tools for Genmedia Services, an agent can orchestrate workflows involving Google's Imagen for image generation, Google's Veo for video creation, Google's Chirp 3 HD for realistic voices, or Google's Lyria for music composition, allowing for dynamic content creation within AI applications.  
-* **External API Interaction:** MCP provides a standardized way for LLMs to call and receive responses from any external API. This means an agent can fetch live weather data, pull stock prices, send emails, or interact with CRM systems, extending its capabilities far beyond its core language model.  
-* **Reasoning-Based Information Extraction:** Leveraging an LLM's strong reasoning skills, MCP facilitates effective, query-dependent information extraction that surpasses conventional search and retrieval systems. Instead of a traditional search tool returning an entire document, an agent can analyze the text and extract the precise clause, figure, or statement that directly answers a user's complex question.  
-* **Custom Tool Development:** Developers can build custom tools and expose them via an MCP server (e.g., using FastMCP). This allows specialized internal functions or proprietary systems to be made available to LLMs and other agents in a standardized, easily consumable format, without needing to modify the LLM directly.  
-* **Standardized LLM-to-Application Communication:** MCP ensures a consistent communication layer between LLMs and the applications they interact with. This reduces integration overhead, promotes interoperability between different LLM providers and host applications, and simplifies the development of complex agentic systems.  
-* **Complex Workflow Orchestration:** By combining various MCP-exposed tools and data sources, agents can orchestrate highly complex, multi-step workflows. An agent could, for example, retrieve customer data from a database, generate a personalized marketing image, draft a tailored email, and then send it, all by interacting with different MCP services.  
-* **IoT Device Control:** MCP can facilitate LLM interaction with Internet of Things (IoT) devices. An agent could use MCP to send commands to smart home appliances, industrial sensors, or robotics, enabling natural language control and automation of physical systems.  
-* **Financial Services Automation:** In financial services, MCP could enable LLMs to interact with various financial data sources, trading platforms, or compliance systems. An agent might analyze market data, execute trades, generate personalized financial advice, or automate regulatory reporting, all while maintaining secure and standardized communication.
+* **資料庫整合：** MCP 允許LLM和代理無縫存取資料庫中的結構化資料並與之互動。例如，使用 MCP Toolbox for Databases，代理可以查詢 Google BigQuery 資料集以檢索即時資訊、產生報告或更新記錄，所有這些都由自然語言命令驅動。  
+* **產生媒體編排：** MCP 使代理能夠與高級生成媒體服務整合。透過 Genmedia Services 的 MCP 工具，代理可以編排涉及用於圖像生成的 Google Imagen、用於視訊創建的 Google Veo、用於真實聲音的 Google Chirp 3 HD 或用於音樂創作的 Google Lyria 的工作流程，從而允許在 AI 應用程式中創建動態內容。  
+* **外部 API 互動：** MCP 為 LLM 提供了一種標準化的方式來呼叫和接收來自任何外部 API 的回應。這意味著代理可以獲取即時天氣資料、拉動股票價格、發送電子郵件或與 CRM 系統交互，從而將其功能擴展到其核心語言模型之外。  
+* **基於推理的資訊提取：** 利用LLM強大的推理技能，MCP 促進了有效的、依賴於查詢的資訊提取，超越了傳統的搜尋和檢索系統。代理可以分析文字並提取直接回答使用者複雜問題的精確子句、圖形或語句，而不是傳回整個文件的傳統搜尋工具。  
+* **自訂工具開發：** 開發人員可以建立自訂工具並透過 MCP 伺服器公開它們（例如，使用 FastMCP）。這允許以標準化、易於使用的格式向LLM和其他代理提供專門的內部功能或專有系統，而無需直接修改LLM。  
+* **標準化的 LLM 到應用程式通訊：** MCP 確保 LLM 與其互動的應用程式之間的通訊層一致。這減少了整合開銷，促進了不同 LLM 提供者和主機應用程式之間的互通性，並簡化了複雜代理系統的開發。  
+* **複雜的工作流程編排：** 透過組合各種 MCP 公開的工具和資料來源，代理可以編排高度複雜的多步驟工作流程。例如，代理可以從資料庫中檢索客戶數據，產生個人化行銷圖像，起草客製化電子郵件，然後發送，所有這一切都是透過與不同的 MCP 服務互動來實現的。  
+* **物聯網設備控制：** MCP 可以促進 LLM 與物聯網 (IoT) 設備的互動。代理可以使用 MCP 向智慧家電、工業感測器或機器人發送命令，從而實現物理系統的自然語言控制和自動化。  
+* **金融服務自動化：** 在金融服務中，MCP 可以使LLM能夠與各種金融資料來源、交易平台或合規系統互動。代理可以分析市場數據、執行交易、產生個人化的財務建議或自動化監管報告，同時保持安全和標準化的通訊。
 
-In short, the Model Context Protocol (MCP) enables agents to access real-time information from databases, APIs, and web resources. It also allows agents to perform actions like sending emails, updating records, controlling devices, and executing complex tasks by integrating and processing data from various sources. Additionally, MCP supports media generation tools for AI applications.
+簡而言之，模型上下文協定 (MCP) 可讓代理從資料庫、API 和 Web 資源存取即時資訊。它還允許代理透過整合和處理來自各種來源的資料來執行發送電子郵件、更新記錄、控制設備以及執行複雜任務等操作。此外，MCP 支援人工智慧應用的媒體生成工具。
 
-## Hands-On Code Example with ADK
+## ADK 的實作程式碼範例
 
-This section outlines how to connect to a local MCP server that provides file system operations, enabling an ADK  agent to interact with the local file system.
+本節概述如何連接到提供檔案系統操作的本機 MCP 伺服器，使 ADK 代理能夠與本機檔案系統互動。
 
-### Agent Setup with MCPToolset
+### 使用 MCPToolset 設定代理
 
-To configure an agent for file system interaction, an `agent.py` file must be created (e.g., at `./adk_agent_samples/mcp_agent/agent.py`). The `MCPToolset` is instantiated within the `tools` list of the `LlmAgent` object. It is crucial to replace `"/path/to/your/folder"` in the `args` list with the absolute path to a directory on the local system that the MCP server can access. This directory will be the root for the file system operations performed by the agent.
+要設定檔系統互動的代理，必須建立 `agent.py` 檔案（例如，在 `./adk_agent_samples/mcp_agent/agent.py` 處）。 `MCPToolset` 在 `LlmAgent` 物件的 `tools` 清單中實例化。將 `args` 清單中的 `"/path/to/your/folder"` 替換為 MCP 伺服器可以存取的本機系統上目錄的絕對路徑至關重要。該目錄將是代理執行的檔案系統操作的根目錄。
 
 ```python
 import os
@@ -131,16 +131,16 @@ root_agent = LlmAgent(
 )
 ```
 
-`npx` (Node Package Execute), bundled with npm (Node Package Manager) versions 5.2.0 and later, is a utility that enables direct execution of Node.js packages from the npm registry. This eliminates the need for global installation. In essence, `npx` serves as an npm package runner, and it is commonly used to run many community MCP servers, which are distributed as Node.js packages.
+`npx`（節點包執行）與 npm（節點包管理器）版本 5.2.0 及更高版本捆綁在一起，是一個實用程序，可以從 npm 註冊表直接執行 Node.js 包。這消除了全域安裝的需要。本質上，`npx` 充當 npm 套件運行程序，通常用於運行許多社區 MCP 伺服器，這些伺服器作為 Node.js 套件分發。
 
-Creating an `__init__.py` file is necessary to ensure the agent.py file is recognized as part of a discoverable Python package for the Agent Development Kit (ADK). This file should reside in the same directory as [agent.py](http://agent.py).
+必須建立 `__init__.py` 檔案才能確保 agent.py 檔案被識別為代理開發工具包 (ADK) 可發現的 Python 套件的一部分。該檔案應與 [agent.py](http://agent.py) 位於同一目錄中。
 
 ```python
 # ./adk_agent_samples/mcp_agent/__init__.py 
 from . import agent
 ```
 
-Certainly, other supported commands are available for use. For example, connecting to python3 can be achieved as follows:
+當然，其他支援的指令也可以使用。例如連接python3可以透過以下方式實現：
 
 ```python
 connection_params = StdioConnectionParams(
@@ -155,7 +155,7 @@ connection_params = StdioConnectionParams(
 )
 ```
 
-UVX, in the context of Python, refers to a command-line tool that utilizes uv to execute commands in a temporary, isolated Python environment. Essentially, it allows you to run Python tools and packages without needing to install them globally or within your project's environment. You can run it via the MCP server.
+UVX，在Python的上下文中，指的是一種命令列工具，它利用uv在臨時的、隔離的Python環境中執行命令。本質上，它允許您運行 Python 工具和套件，而無需在全域或專案環境中安裝它們。您可以透過 MCP 伺服器運行它。
 
 ```python
 connection_params = StdioConnectionParams(
@@ -170,34 +170,34 @@ connection_params = StdioConnectionParams(
 )
 ```
 
-Once the MCP Server is created, the next step is to connect to it.
+創建 MCP 伺服器後，下一步是連接到它。
 
-## Connecting the MCP Server with ADK Web
+## 將 MCP 伺服器與 ADK Web 連接
 
-To begin, execute 'adk web'. Navigate to the parent directory of mcp_agent (e.g., adk_agent_samples) in your terminal and run:
+首先，執行“adk web”。在終端機中導航至 mcp_agent 的父目錄（例如 adk_agent_samples）並執行：
 
 ```python
 cd ./adk_agent_samples # Or your equivalent parent directory 
 adk web
 ```
 
-Once the ADK Web UI has loaded in your browser, select the `filesystem_assistant_agent` from the agent menu. Next, experiment with prompts such as:
+ADK Web UI 在瀏覽器中載入後，從代理選單中選擇 `filesystem_assistant_agent`。接下來，請嘗試使用以下提示：
 
-* "Show me the contents of this folder."  
-* "Read the `sample.txt` file." (This assumes `sample.txt` is located at `TARGET_FOLDER_PATH`.)  
-* "What's in `another_file.md`?"
+*“顯示該資料夾的內容。”
+* “讀取`sample.txt`文件。”（這假設 `sample.txt` 位於 `TARGET_FOLDER_PATH`。）
+*“`another_file.md` 中有什麼？”
 
-## Creating an MCP Server with FastMCP
+## 使用 FastMCP 建立 MCP 伺服器
 
-FastMCP is a high-level Python framework designed to streamline the development of MCP servers. It provides an abstraction layer that simplifies protocol complexities, allowing developers to focus on core logic.
+FastMCP 是一個高階 Python 框架，旨在簡化 MCP 伺服器的開發。它提供了一個抽象層，簡化了協定的複雜性，使開發人員能夠專注於核心邏輯。
 
-The library enables rapid definition of tools, resources, and prompts using simple Python decorators. A significant advantage is its automatic schema generation, which intelligently interprets Python function signatures, type hints, and documentation strings to construct necessary AI model interface specifications. This automation minimizes manual configuration and reduces human error.
+該程式庫可以使用簡單的 Python 裝飾器快速定義工具、資源和提示。一個顯著的優點是它的自動模式生成，它可以智慧地解釋 Python 函數簽名、類型提示和文件字串，以建立必要的 AI 模型介面規格。這種自動化最大限度地減少了手動配置並減少了人為錯誤。
 
-Beyond basic tool creation, FastMCP facilitates advanced architectural patterns like server composition and proxying. This enables modular development of complex, multi-component systems and seamless integration of existing services into an AI-accessible framework. Additionally, FastMCP includes optimizations for efficient, distributed, and scalable AI-driven applications.
+除了基本工具創建之外，FastMCP 還促進了伺服器組合和代理等高級架構模式。這使得能夠對複雜的多組件系統進行模組化開發，並將現有服務無縫整合到人工智慧可存取的框架中。此外，FastMCP 還包括針對高效能、分散式和可擴展的人工智慧驅動應用程式的最佳化。
 
-## Server setup with FastMCP
+## 使用 FastMCP 設定伺服器
 
-## To illustrate, consider a basic "greet" tool provided by the server. ADK agents and other MCP clients can interact with this tool using HTTP once it is active
+## 為了說明這一點，請考慮伺服器提供的基本「問候」工具。一旦工具處於活動狀態，ADK 代理和其他 MCP 用戶端就可以使用 HTTP 與該工具進行交互
 
 ```python
 # fastmcp_server.py
@@ -239,17 +239,17 @@ if __name__ == "__main__":
     )
 ```
 
-This Python script defines a single function called greet, which takes a person's name and returns a personalized greeting. The @tool() decorator above this function automatically registers it as a tool that an AI or another program can use. The function's documentation string and type hints are used by FastMCP to tell the Agent how the tool works, what inputs it needs, and what it will return.
+這個Python 腳本定義了一個名為greet 的函數，它接受一個人的名字並傳回個人化的問候語。該函數上方的 @tool() 裝飾器會自動將其註冊為 AI 或其他程式可以使用的工具。 FastMCP 使用函數的文件字串和類型提示來告訴代理該工具如何運作、需要什麼輸入以及將傳回什麼。
 
-When the script is executed, it starts the FastMCP server, which listens for requests on localhost:8000. This makes the greet function available as a network service. An  agent could then be configured to connect to this server and use the greet tool to generate greetings as part of a larger task. The server runs continuously until it is manually stopped.
+執行腳本時，它會啟動 FastMCP 伺服器，該伺服器會偵聽 localhost:8000 上的請求。這使得問候功能可以作為網路服務。然後可以將代理配置為連接到該伺服器並使用問候工具產生問候語，作為更大任務的一部分。伺服器持續運行，直到被手動停止。
 
-## Consuming the FastMCP Server with an ADK Agent
+## 透過 ADK 代理使用 FastMCP 伺服器
 
-An ADK agent can be set up as an MCP client to use a running FastMCP server. This requires configuring HttpServerParameters with the FastMCP server's network address, which is usually <http://localhost:8000>.
+ADK 代理可以設定為 MCP 用戶端以使用正在執行的 FastMCP 伺服器。這需要使用 FastMCP 伺服器的網路位址來設定 HttpServerParameters，通常為 <http://localhost:8000>.
 
-A `tool_filter` parameter can be included to restrict the agent's tool usage to specific tools offered by the server, such as 'greet'. When prompted with a request like "Greet John Doe," the agent's embedded LLM identifies the 'greet' tool available via MCP, invokes it with the argument "John Doe," and returns the server's response. This process demonstrates the integration of user-defined tools exposed through MCP with an ADK agent.
+可以包含 `tool_filter` 參數來將代理的工具使用限制為伺服器提供的特定工具，例如「greet」。當提示「Greet John Doe」之類的請求時，代理的嵌入式 LLM 會識別透過 MCP 可用的「greet」工具，使用參數「John Doe」呼叫它，並傳回伺服器的回應。此流程示範了透過 MCP 公開的使用者定義工具與 ADK 代理的整合。
 
-To establish this configuration, an agent file (e.g., agent.py located in ./adk_agent_samples/fastmcp_client_agent/) is required. This file will instantiate an ADK agent and use HttpServerParameters to establish a connection with the operational FastMCP server.
+要建立此配置，需要一個代理檔案（例如，位於 ./adk_agent_samples/fastmcp_client_agent/ 中的agent.py）。該檔案將實例化 ADK 代理並使用 HttpServerParameters 與執行的 FastMCP 伺服器建立連線。
 
 ```python
 # ./adk_agent_samples/fastmcp_client_agent/agent.py
@@ -280,44 +280,44 @@ root_agent = LlmAgent(
 )
 ```
 
-The script defines an Agent named `fastmcp_greeter_agent` that uses a Gemini language model. It's given a specific instruction to act as a friendly assistant whose purpose is to greet people. Crucially, the code equips this agent with a tool to perform its task. It configures an MCPToolset to connect to a separate server running on localhost:8000, which is expected to be the FastMCP server from the previous example. The agent is specifically granted access to the greet tool hosted on that server. In essence, this code sets up the client side of the system, creating an intelligent agent that understands its goal is to greet people and knows exactly which external tool to use to accomplish it.
+該腳本定義了一個名為 `fastmcp_greeter_agent` 的代理，它使用 Gemini 語言模型。它被賦予了充當友好助手的具體指令，其目的是向人們打招呼。至關重要的是，程式碼為該代理配備了執行其任務的工具。它將 MCPToolset 配置為連接到在 localhost:8000 上運行的單獨伺服器，該伺服器預計是上一個範例中的 FastMCP 伺服器。該代理被專門授予對該伺服器上託管的問候工具的存取權限。本質上，這段程式碼設定了系統的客戶端，創建了一個智慧代理，它了解其目標是迎接人們，並確切地知道要使用哪個外部工具來完成它。
 
-Creating an `__init__.py` file within the `fastmcp_client_agent` directory is necessary. This ensures the agent is recognized as a discoverable Python package for the ADK.
+需要在 `fastmcp_client_agent` 目錄中建立 `__init__.py` 檔案。這可確保代理被識別為 ADK 的可發現 Python 套件。
 
-To begin, open a new terminal and run `python fastmcp_server.py` to start the FastMCP server. Next, go to the parent directory of `fastmcp_client_agent` (for example, `adk_agent_samples`) in your terminal and execute `adk web`. Once the ADK Web UI loads in your browser, select the `fastmcp_greeter_agent` from the agent menu. You can then test it by entering a prompt like "Greet John Doe." The agent will use the `greet` tool on your FastMCP server to create a response.
+首先，開啟一個新終端並執行 `python fastmcp_server.py` 以啟動 FastMCP 伺服器。接下來，前往終端中 `fastmcp_client_agent` 的父目錄（例如 `adk_agent_samples`）並執行 `adk web`。 ADK Web UI 在瀏覽器中載入後，從代理選單中選擇 `fastmcp_greeter_agent`。然後，您可以輸入“Greet John Doe”等提示來測試它。代理將使用 FastMCP 伺服器上的 `greet` 工具來建立回應。
 
-## At a Glance
+## 概覽
 
-**What:** To function as effective agents, LLMs must move beyond simple text generation. They require the ability to interact with the external environment to access current data and utilize external software. Without a standardized communication method, each integration between an LLM and an external tool or data source becomes a custom, complex, and non-reusable effort. This ad-hoc approach hinders scalability and makes building complex, interconnected AI systems difficult and inefficient.
+**內容：** 為了發揮有效代理的作用，LLM必須超越簡單的文本生成。它們需要能夠與外部環境互動以存取當前數據並利用外部軟體。如果沒有標準化的通訊方法，LLM與外部工具或資料來源之間的每次整合都會成為客製化的、複雜的且不可重複使用的工作。這種臨時方法阻礙了可擴展性，並使建構複雜、互連的人工智慧系統變得困難且低效。
 
-**Why:** The Model Context Protocol (MCP) offers a standardized solution by acting as a universal interface between LLMs and external systems. It establishes an open, standardized protocol that defines how external capabilities are discovered and used. Operating on a client-server model, MCP allows servers to expose tools, data resources, and interactive prompts to any compliant client. LLM-powered applications act as these clients, dynamically discovering and interacting with available resources in a predictable manner. This standardized approach fosters an ecosystem of interoperable and reusable components, dramatically simplifying the development of complex agentic workflows.
+**原因：** 模型情境協定 (MCP) 透過充當LLM和外部系統之間的通用介面來提供標準化解決方案。它建立了一個開放的標準化協議，定義瞭如何發現和使用外部功能。 MCP 在客戶端-伺服器模型上運行，允許伺服器向任何相容的客戶端公開工具、資料資源和互動式提示。 LLM 支援的應用程式可作為這些客戶端，以可預測的方式動態發現可用資源並與之互動。這種標準化方法培育了一個由可互通和可重複使用組件組成的生態系統，大大簡化了複雜代理工作流程的開發。
 
-**Rule of thumb:** Use the Model Context Protocol (MCP) when building complex, scalable, or enterprise-grade agentic systems that need to interact with a diverse and evolving set of external tools, data sources, and APIs. It is ideal when interoperability between different LLMs and tools is a priority, and when agents require the ability to dynamically discover new capabilities without being redeployed. For simpler applications with a fixed and limited number of predefined functions, direct tool function calling may be sufficient.
+**經驗法則：** 在建立需要與多樣化且不斷發展的外部工具、資料來源和 API 集進行互動的複雜、可擴展或企業級代理系統時，請使用模型上下文協定 (MCP)。當優先考慮不同LLM和工具之間的互通性，以及代理需要能夠動態發現新功能而無需重新部署時，它是理想的選擇。對於具有固定且有限數量的預定義函數的簡單應用程序，直接工具函數呼叫可能就足夠了。
 
-**Visual summary:**
+**視覺總結：**
 
 ![Model Context Protocol](../assets/Model_Context_Protocol.png)
 
-Fig.1: Model Context protocol
+圖1：模型上下文協定
 
-## Key Takeaways
+## 要點
 
-These are the key takeaways:
+以下是關鍵要點：
 
-* The Model Context Protocol (MCP) is an open standard facilitating standardized communication between LLMs and external applications, data sources, and tools.  
-* It employs a client-server architecture, defining the methods for exposing and consuming resources, prompts, and tools.  
-* The Agent Development Kit (ADK) supports both utilizing existing MCP servers and exposing ADK tools via an MCP server.  
-* FastMCP simplifies the development and management of MCP servers, particularly for exposing tools implemented in Python.  
-* MCP Tools for Genmedia Services allows agents to integrate with Google Cloud's generative media capabilities (Imagen, Veo, Chirp 3 HD, Lyria).  
-* MCP enables LLMs and agents to interact with real-world systems, access dynamic information, and perform actions beyond text generation.
+* 模型上下文協定 (MCP) 是一種開放標準，促進LLM與外部應用程式、資料來源和工具之間的標準化通訊。  
+* 它採用客戶端-伺服器架構，定義公開和使用資源、提示和工具的方法。  
+* 代理開發工具包 (ADK) 支援利用現有的 MCP 伺服器和透過 MCP 伺服器公開 ADK 工具。  
+* FastMCP 簡化了 MCP 伺服器的開發和管理，特別是對於公開 Python 實作的工具。  
+* Genmedia Services 的 MCP 工具允許代理與 Google Cloud 的生成媒體功能（Imagen、Veo、Chirp 3 HD、Lyria）整合。  
+* MCP 使LLM和代理能夠與現實世界的系統互動、存取動態資訊並執行文字生成之外的操作。
 
-## Conclusion
+## 結論
 
-The Model Context Protocol (MCP) is an open standard that facilitates communication between Large Language Models (LLMs) and external systems. It employs a client-server architecture, enabling LLMs to access resources, utilize prompts, and execute actions through standardized tools. MCP allows LLMs to interact with databases, manage generative media workflows, control IoT devices, and automate financial services. Practical examples demonstrate setting up agents to communicate with MCP servers, including filesystem servers and servers built with FastMCP, illustrating its integration with the Agent Development Kit (ADK). MCP is a key component for developing interactive AI agents that extend beyond basic language capabilities.
+模型上下文協定 (MCP) 是一種開放標準，可促進大型語言模型 (LLM) 與外部系統之間的通訊。它採用客戶端伺服器架構，使LLM能夠透過標準化工具存取資源、利用提示並執行操作。 MCP 允許LLM與資料庫互動、管理生成媒體工作流程、控制物聯網設備以及自動化金融服務。實際範例示範如何設定代理以與 MCP 伺服器通信，包括檔案系統伺服器和使用 FastMCP 建置的伺服器，說明其與代理開發套件 (ADK) 的整合。 MCP 是開發超出基本語言功能的互動式 AI 代理的關鍵元件。
 
-## References
+## 參考
 
-1. Model Context Protocol (MCP) Documentation. (Latest). *Model Context Protocol (MCP)*. [https://google.github.io/adk-docs/mcp/](https://google.github.io/adk-docs/mcp/)  
-2. FastMCP Documentation. FastMCP. [https://github.com/jlowin/fastmcp](https://github.com/jlowin/fastmcp)  
-3. MCP Tools for Genmedia Services. *MCP Tools for Genmedia Services*. [https://google.github.io/adk-docs/mcp/\#mcp-servers-for-google-cloud-genmedia](https://google.github.io/adk-docs/mcp/#mcp-servers-for-google-cloud-genmedia)  
-4. MCP Toolbox for Databases Documentation. (Latest). *MCP Toolbox for Databases*. [https://google.github.io/adk-docs/mcp/databases/](https://google.github.io/adk-docs/mcp/databases/)
+1. 模型上下文協定 (MCP) 文件。 （最新的）。 *模型上下文協定（MCP）*。 [https://google.github.io/adk-docs/mcp/](https://google.github.io/adk-docs/mcp/)
+2.FastMCP 文件。快速MCP。 [https://github.com/jlowin/fastmcp](https://github.com/jlowin/fastmcp)
+3. Genmedia 服務的 MCP 工具。 *用於 Genmedia 服務的 MCP 工具*。 [https://google.github.io/adk-docs/mcp/\#mcp-servers-for-google-cloud-genmedia](https://google.github.io/adk-docs/mcp/#mcp-servers-for-google-cloud-genmedia)
+4. MCP Toolbox 資料庫文件。 （最新的）。 *MCP 資料庫工具箱*。 [https://google.github.io/adk-docs/mcp/databases/](https://google.github.io/adk-docs/mcp/databases/)

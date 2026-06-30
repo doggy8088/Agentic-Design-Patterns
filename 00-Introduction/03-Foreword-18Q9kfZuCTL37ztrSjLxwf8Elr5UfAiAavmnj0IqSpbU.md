@@ -1,14 +1,13 @@
-# Foreword
+# 序言
 
-The field of artificial intelligence is at a fascinating inflection point. We are moving beyond building models that can simply process information to creating intelligent systems that can reason, plan, and act to achieve complex goals with ambiguous tasks. These "agentic" systems, as this book so aptly describes them, represent the next frontier in AI, and their development is a challenge that excites and inspires us at Google.
+人工智慧領域正處於一個令人著迷的轉折點。我們正在超越建立可以簡單處理資訊的模型，轉而創建可以推理、計劃和行動的智慧系統，以實現具有模糊任務的複雜目標。正如本書所恰當描述的那樣，這些「代理」系統代表了人工智慧的下一個前沿，它們的開發是一個讓谷歌興奮和鼓舞的挑戰。
 
-"Agentic Design Patterns: A Hands-On Guide to Building Intelligent Systems" arrives at the perfect moment to guide us on this journey. The book rightly points out that the power of large language models, the cognitive engines of these agents, must be harnessed with structure and thoughtful design. Just as design patterns revolutionized software engineering by providing a common language and reusable solutions to common problems, the agentic patterns in this book will be foundational for building robust, scalable, and reliable intelligent systems.
+《代理設計模式：建構智慧系統的實踐指南》恰逢引導我們踏上這趟旅程的最佳時機。這本書正確地指出，大型語言模型的力量，這些代理的認知引擎，必須透過結構和深思熟慮的設計來利用。正如設計模式透過為常見問題提供通用語言和可重用解決方案而徹底改變了軟體工程一樣，本書中的代理模式也將成為構建健壯、可擴展且可靠的智能係統的基礎。
 
-The metaphor of a "canvas" for building agentic systems is one that resonates deeply with our work on Google's Vertex AI platform. We strive to provide developers with the most powerful and flexible canvas on which to build the next generation of AI applications. This book provides the practical, hands-on guidance that will empower developers to use that canvas to its full potential. By exploring patterns from prompt chaining and tool use to agent-to-agent collaboration, self-correction, safety and guardrails, this book offers a comprehensive toolkit for any developer looking to build sophisticated AI agents.
+用於建立代理系統的「畫布」的比喻與我們在 Google Vertex AI 平台上的工作產生了深刻的共鳴。我們致力於為開發人員提供最強大、最靈活的畫布來建立下一代人工智慧應用程式。本書提供了實用的實踐指導，使開發人員能夠充分利用該畫布的潛力。透過探索從提示鍊和工具使用到代理間協作、自我糾正、安全性和護欄的模式，本書為任何想要建立複雜人工智慧代理的開發人員提供了一個全面的工具包。
 
-The future of AI will be defined by the creativity and ingenuity of developers who can build these intelligent systems. "Agentic Design Patterns" is an indispensable resource that will help to unlock that creativity. It provides the essential knowledge and practical examples to not only understand the "what" and "why" of agentic systems, but also the "how."
+人工智慧的未來將由能夠建構這些智慧系統的開發人員的創造力和獨創性來定義。 「代理設計模式」是一種不可或缺的資源，有助於釋放創造力。它提供了必要的知識和實踐範例，不僅可以幫助您理解代理系統的“什麼”和“為什麼”，還可以幫助您了解“如何”。
 
-I am thrilled to see this book in the hands of the developer community. The patterns and principles within these pages will undoubtedly accelerate the development of innovative and impactful AI applications that will shape our world for years to come.
+我很高興看到開發者社群手中有這本書。這些頁面中的模式和原則無疑將加速創新和有影響力的人工智慧應用程式的開發，這些應用程式將在未來幾年塑造我們的世界。
 
-Saurabh Tiwary
-VP & General Manager, CloudAI @ Google
+Saurabh Tiwary 副總裁兼總經理，CloudAI @ Google

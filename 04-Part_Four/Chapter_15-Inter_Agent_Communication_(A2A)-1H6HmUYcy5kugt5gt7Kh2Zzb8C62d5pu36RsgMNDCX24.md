@@ -1,28 +1,30 @@
-# Chapter 15: Inter-Agent Communication (A2A)
+# 第 15 章：代理間通訊 (A2A)
 
-Individual AI agents often face limitations when tackling complex, multifaceted problems, even with advanced capabilities. To overcome this, Inter-Agent Communication (A2A) enables diverse AI agents, potentially built with different frameworks, to collaborate effectively. This collaboration involves seamless coordination, task delegation, and information exchange.
+即使具有先進的功能，單一人工智慧代理在處理複雜、多方面的問題時也常常面臨限制。為了克服這個問題，代理間通訊（A2A）使不同的人工智慧代理（可能使用不同的框架建構）能夠有效地協作。這種協作涉及無縫協調、任務委派和資訊交換。
 
-Google's A2A protocol is an open  standard designed to facilitate this universal communication. This chapter will explore A2A, its practical applications, and its implementation within the Google ADK.
+Google 的 A2A 協定是一個開放標準，旨在促進這種通用通訊。本章將探討 A2A、其實際應用及其在 Google ADK 中的實作。
 
-## Inter-Agent Communication Pattern Overview
+## 代理間通訊模式概述
 
-The Agent2Agent (A2A) protocol is an open standard designed to enable communication and collaboration between different AI agent frameworks. It ensures interoperability, allowing AI agents developed with technologies like LangGraph, CrewAI, or Google ADK to work together regardless of their origin or framework differences.
+Agent2Agent (A2A) 協定是一種開放標準，旨在實現不同 人工智慧 代理框架之間的通訊和協作。它確保了互通性，允許使用 LangGraph、CrewAI 或 Google ADK 等技術開發的 人工智慧 代理能夠協同工作，無論其起源或框架差異如何。
 
-A2A is supported by a range of technology companies and service providers, including Atlassian, Box, LangChain, MongoDB, Salesforce, SAP, and ServiceNow. Microsoft plans to integrate A2A into Azure AI Foundry and Copilot Studio, demonstrating its commitment to open protocols. Additionally, Auth0 and SAP are integrating A2A support into their platforms and agents.
+A2A 得到了一系列技術公司和服務提供者的支持，包括 Atlassian、Box、LangChain、MongoDB、Salesforce、SAP 和 ServiceNow。微軟計劃將 A2A 整合到 Azure 人工智慧 Foundry 和 Copilot Studio 中，以展示其對開放協議的承諾。此外，Auth0 和 SAP 正在將 A2A 支援整合到他們的平台和代理中。
 
-As an open-source protocol, A2A welcomes community contributions to facilitate its evolution and widespread adoption.
+作為一個開源協議，A2A 歡迎社群做出貢獻，以促進其發展和廣泛採用。
 
-## Core Concepts of A2A
+## A2A的核心概念
 
-The A2A protocol provides a structured approach for agent interactions, built upon several core concepts. A thorough grasp of these concepts is crucial for anyone developing or integrating with A2A-compliant systems. The foundational pillars of A2A include Core Actors, Agent Card, Agent Discovery, Communication and Tasks,  Interaction mechanisms, and Security, all of which will be reviewed in detail.
+A2A 協定為代理互動提供了一種基於幾個核心概念的結構化方法。對於開發或整合 A2A 相容系統的任何人來說，徹底掌握這些概念至關重要。 A2A 的基本支柱包括核心參與者、代理卡、代理發現、通訊和任務、互動機制和安全性，所有這些都將被詳細審查。
 
-**Core Actors:** A2A involves three main entities:
+**核心參與者：** A2A 涉及三個主要實體：
 
-* User: Initiates requests for agent assistance.  
-* A2A Client (Client Agent): An application or AI agent that acts on the user's behalf to request actions or information.  
-* A2A Server (Remote Agent): An AI agent or system that provides an HTTP endpoint to process client requests and return results. The remote agent operates as an "opaque" system, meaning the client does not need to understand its internal operational details.
+* 使用者：發起請求代理協助。
 
-**Agent Card:** An agent's digital identity is defined by its Agent Card, usually a JSON file. This file contains key information for client interaction and automatic discovery, including the agent's identity, endpoint URL, and version. It also details supported capabilities like streaming or push notifications, specific skills, default input/output modes, and authentication requirements. Below is an example of an Agent Card for a WeatherBot.
+* A2A 用戶端（客戶端代理）：代表使用者要求操作或資訊的應用程式或 人工智慧 代理。
+
+* A2A 伺服器（遠端代理）：提供 HTTP 端點來處理客戶端請求並傳回結果的 人工智慧 代理或系統。遠端代理作為「不透明」系統運行，這意味著客戶端不需要了解其內部操作細節。
+
+**代理卡：** 代理的數位身分由其代理卡定義，通常是 JSON 檔案。該文件包含客戶端互動和自動發現的關鍵訊息，包括代理的身份、端點 URL 和版本。它還詳細介紹了支援的功能，例如串流或推播通知、特定技能、預設輸入/輸出模式和身份驗證要求。以下是 WeatherBot 的代理卡範例。
 
 ```json
 {
@@ -91,26 +93,31 @@ The A2A protocol provides a structured approach for agent interactions, built up
 }
 ```
 
-**Agent discovery:** it allows clients to find Agent Cards, which describe the capabilities of available A2A Servers. Several strategies exist for this process:
+**代理發現：**它允許客戶端查找代理卡，該卡描述了可用 A2A 伺服器的功能。此過程存在多種策略：
 
-* Well-Known URI: Agents host their Agent Card at a standardized path (e.g., /.well-known/agent.json). This approach offers broad, often automated, accessibility for public or domain-specific use.  
-* Curated Registries**:** These provide a centralized catalog where Agent Cards are published and can be queried based on specific criteria. This is well-suited for enterprise environments needing centralized management and access control.  
-* Direct Configuration**:** Agent Card information is embedded or privately shared. This method is appropriate for closely coupled or private systems where dynamic discovery isn't crucial.
+* 眾所周知的 URI：代理將其代理卡託管在標準化路徑（例如 /.well-known/代理.json）。這種方法為公共或特定領域的使用提供了廣泛的、通常是自動化的可訪問性。
 
-Regardless of the chosen method, it is important to secure Agent Card endpoints. This can be achieved through access control, mutual TLS (mTLS), or network restrictions, especially if the card contains sensitive (though non-secret) information.
+* 精選註冊表**：** 這些提供了一個集中目錄，代理卡在其中發布，並且可以根據特定標準進行查詢。這非常適合需要集中管理和存取控制的企業環境。
 
-**Communications and Tasks:** In the A2A framework, communication is structured around asynchronous tasks, which represent the fundamental units of work for long-running processes. Each task is assigned a unique identifier and moves through a series of states—such as submitted, working, or completed—a design that supports parallel processing in complex operations. Communication between agents occurs through a Message.
+* 直接設定**：** 座席卡資訊嵌入或私密分享。此方法適用於動態發現並不重要的緊密耦合或私有系統。
 
-This communication  contains attributes, which are key-value metadata describing the message (like its priority or creation time), and one or more parts, which carry the actual content being delivered, such as plain text, files, or structured JSON data. The tangible outputs generated by an agent during a task are called artifacts. Like messages, artifacts are also composed of one or more parts and can be streamed incrementally as results become available. All communication within the A2A framework is conducted over HTTP(S) using the JSON-RPC 2.0 protocol for payloads. To maintain continuity across multiple interactions, a server-generated contextId is used to group related tasks and preserve context.
+無論選擇哪一種方法，保護代理卡端點的安全性都很重要。這可以透過存取控制、雙向 TLS (mTLS) 或網路限制來實現，特別是當卡片包含敏感（儘管非秘密）資訊時。
 
-**Interaction Mechanisms**: Request/Response (Polling) Server-Sent Events (SSE). A2A provides multiple interaction methods to suit a variety of AI application needs, each with a distinct mechanism:
+**通訊與任務：** 在 A2A 框架中，通訊是圍繞非同步任務建構的，非同步任務代表長期運作流程的基本工作單元。每個任務都分配有一個唯一的標識符，並經歷一系列狀態（例如已提交、正在工作或已完成），這種設計支援複雜操作中的並行處理。代理之間的通信透過訊息進行。
 
-* Synchronous Request/Response: For quick, immediate operations. In this model, the client sends a request and actively waits for the server to process it and return a complete response in a single, synchronous exchange.  
-* Asynchronous Polling: Suited for tasks that take longer to process. The client sends a request, and the server immediately acknowledges it with a "working" status and a task ID. The client is then free to perform other actions and can periodically poll the server by sending new requests to check the status of the task until it is marked as "completed" or "failed."  
-* Streaming Updates (Server-Sent Events \- SSE): Ideal for receiving real-time, incremental results. This method establishes a persistent, one-way connection from the server to the client. It allows the remote agent to continuously push updates, such as status changes or partial results, without the client needing to make multiple requests.  
-* Push Notifications (Webhooks): Designed for very long-running or resource-intensive tasks where maintaining a constant connection or frequent polling is inefficient. The client can register a webhook URL, and the server will send an asynchronous notification (a "push") to that URL when the task's status changes significantly (e.g., upon completion).
+此通訊包含屬性，這些屬性是描述訊息的鍵值元資料（例如其優先權或建立時間），以及一個或多個部分，這些部分承載正在傳遞的實際內容，例如純文字、檔案或結構化 JSON 資料。代理在任務期間產生的有形輸出稱為工件。與訊息一樣，工件也由一個或多個部分組成，並且可以在結果可用時增量串流。 A2A 框架內的所有通訊均透過 HTTP(S) 進行，使用 JSON-RPC 2.0 協定作為有效負載。為了保持多個互動的連續性，伺服器產生的 contextId 用於對相關任務進行分組並保留上下文。
 
-The Agent Card specifies whether an agent supports streaming or push notification capabilities. Furthermore, A2A is modality-agnostic, meaning it can facilitate these interaction patterns not just for text, but also for other data types like audio and video, enabling rich, multimodal AI applications. Both streaming and push notification capabilities are specified within the Agent Card.
+**互動機制**：請求/回應（輪詢）伺服器發送事件 (SSE)。 A2A提供多種互動方式來滿足各種AI應用需求，每種互動方式都有獨特的機制：
+
+* 同步請求/回應：用於快速、立即操作。在此模型中，客戶端發送請求並主動等待伺服器處理該請求並在單一同步交換中傳回完整的回應。
+
+* 非同步輪詢：適合需要較長時間處理的任務。客戶端發送請求，伺服器立即以「工作」狀態和任務 ID 確認該請求。然後，客戶端可以自由地執行其他操作，並且可以透過發送新請求來定期輪詢伺服器以檢查任務的狀態，直到將其標記為「已完成」或「失敗」。
+
+* 串流更新（伺服器發送的事件 \- SSE）：非常適合接收即時增量結果。此方法建立從伺服器到客戶端的持久性單向連線。它允許遠端代理持續推送更新，例如狀態變更或部分結果，而客戶端無需發出多個請求。
+
+* 推播通知（Webhooks）：專為長時間運作或資源密集任務而設計，在這些任務中維持持續連線或頻繁輪詢效率低下。用戶端可以註冊一個 webhook URL，當任務的狀態發生顯著變化（例如完成時）時，伺服器將向該 URL 發送非同步通知（「推送」）。
+
+代理卡指定代理是否支援串流或推播通知功能。此外，A2A 與模態無關，這意味著它不僅可以促進文字的互動模式，還可以促進音訊和視訊等其他資料類型的互動模式，從而實現豐富的多模態 人工智慧 應用。串流媒體和推播通知功能均在代理卡中指定。
 
 ```json
 # Synchronous Request Example 
@@ -138,7 +145,7 @@ The Agent Card specifies whether an agent supports streaming or push notificatio
 }
 ```
 
-The synchronous request uses the sendTask method, where the client asks for and expects a single, complete answer to its query. In contrast, the streaming request uses the sendTaskSubscribe method to establish a persistent connection, allowing the agent to send back multiple, incremental updates or partial results over time.
+同步請求使用 sendTask 方法，客戶端請求並期望對其查詢得到一個完整的答案。相反，流請求使用 sendTaskSubscribe 方法建立持久連接，允許代理隨著時間的推移發回多個增量更新或部分結果。
 
 ```json
 # Streaming Request Example 
@@ -166,37 +173,39 @@ The synchronous request uses the sendTask method, where the client asks for and 
 }
 ```
 
-**Security:**  Inter-Agent Communication (A2A): Inter-Agent Communication (A2A) is a vital component of system architecture, enabling secure and seamless data exchange among agents. It ensures robustness and integrity through several built-in mechanisms.
+**安全性：** 代理間通訊 (A2A)：代理間通訊 (A2A) 是系統架構的重要組成部分，可實現代理之間安全、無縫的資料交換。它透過多種內建機制確保穩健性和完整性。
 
-Mutual Transport Layer Security (TLS): Encrypted and authenticated connections are established to prevent unauthorized access and data interception, ensuring secure communication.
+相互傳輸層安全性（TLS）：建立加密和經過驗證的連接，以防止未經授權的存取和資料攔截，確保安全通訊。
 
-Comprehensive Audit Logs: All inter-agent communications are meticulously recorded, detailing information flow, involved agents, and actions. This audit trail is crucial for accountability, troubleshooting, and security analysis.
+全面的審核日誌：所有代理間的通訊都被仔細記錄，詳細記錄資訊流、涉及的代理和操作。此審計追蹤對於問責制、故障排除和安全分析至關重要。
 
-Agent Card Declaration: Authentication requirements are explicitly declared in the Agent Card, a configuration artifact outlining the agent's identity, capabilities, and security policies. This centralizes and simplifies authentication management.
+代理卡聲明：身份驗證要求在代理卡中明確聲明，代理卡是概述代理身份、功能和安全性策略的配置工件。這集中並簡化了身份驗證管理。
 
-Credential Handling: Agents typically authenticate using secure credentials like OAuth 2.0 tokens or API keys, passed via HTTP headers. This method prevents credential exposure in URLs or message bodies, enhancing overall security.
+憑證處理：代理通常使用透過 HTTP 標頭傳遞的安全性憑證（例如 OAuth 2.0 令牌或 API 金鑰）進行驗證。此方法可防止 URL 或訊息正文中的憑證暴露，從而增強整體安全性。
 
-## A2A vs. MCP
+## A2A 與 MCP
 
-A2A is a protocol that complements Anthropic's Model Context Protocol (MCP) (see Fig. 1). While MCP focuses on structuring context for agents and their interaction with external data and tools, A2A facilitates coordination and communication among agents, enabling task delegation and collaboration.
+A2A 是一個補充 Anthropic 模型上下文協定 (MCP) 的協議（見圖 1）。 MCP 專注於為代理建立上下文及其與外部資料和工具的交互，而 A2A 則促進代理之間的協調和通信，從而實現任務委派和協作。
 
-![Comparison A2A and MCP Protocols](../assets/Comparison_A2A_and_MCP_Protocols.png)
+![比較 A2A 和 MCP 協定](../assets/Comparison_A2A_and_MCP_Protocols.png)
 
-Fig.1: Comparison A2A and MCP Protocols
+圖 1：A2A 和 MCP 協定比較
 
-The goal of A2A is to enhance efficiency, reduce integration costs, and foster innovation and interoperability in the development of complex, multi-agent AI systems. Therefore, a thorough understanding of A2A's core components and operational methods is essential for its effective design, implementation, and application in building collaborative and interoperable AI agent systems..
+A2A 的目標是在複雜的多代理工智慧系統的開發中提高效率、降低整合成本並促進創新和互通性。因此，深入了解 A2A 的核心組件和操作方法對於其有效設計、實現和應用構建協作和可互通的人工智慧代理系統至關重要。
 
-## Practical Applications & Use Cases
+## 實際應用程式和用例
 
-Inter-Agent Communication is indispensable for building sophisticated AI solutions across diverse domains, enabling modularity, scalability, and enhanced intelligence.
+代理間通訊對於跨不同領域建構複雜的人工智慧解決方案、實現模組化、可擴展性和增強智慧是不可或缺的。
 
-* **Multi-Framework Collaboration:** A2A's primary use case is enabling independent AI agents, regardless of their underlying frameworks (e.g., ADK, LangChain, CrewAI), to communicate and collaborate. This is fundamental for building complex multi-agent systems where different agents specialize in different aspects of a problem.  
-* **Automated Workflow Orchestration:** In enterprise settings, A2A can facilitate complex workflows by enabling agents to delegate and coordinate tasks. For instance, an agent might handle initial data collection, then delegate to another agent for analysis, and finally to a third for report generation, all communicating via the A2A protocol.  
-* **Dynamic Information Retrieval:** Agents can communicate to retrieve and exchange real-time information. A primary agent might request live market data from a specialized "data fetching agent," which then uses external APIs to gather the information and send it back.
+* **多框架協作：** A2A 的主要用例是使獨立的 人工智慧 代理能夠進行通訊和協作，無論其底層框架如何（例如 ADK、LangChain、CrewAI）。這是建構複雜的多代理系統的基礎，其中不同的代理專門解決問題的不同面向。
 
-## Hands-On Code Example
+* **自動化工作流程編排：** 在企業設定中，A2A 可以透過使代理能夠委派和協調任務來促進複雜的工作流程。例如，一個代理可能會處理初始資料收集，然後委託給另一個代理進行分析，最後委託給第三個代理來產生報告，所有這些都透過 A2A 協定進行通訊。
 
-Let's examine the practical applications of the A2A protocol. The repository at [https://github.com/google-a2a/a2a-samples/tree/main/samples](https://github.com/google-a2a/a2a-samples/tree/main/samples) provides examples in Java, Go, and Python that illustrate how various agent frameworks, such as LangGraph, CrewAI, Azure AI Foundry, and AG2, can communicate using A2A. All code in this repository is released under the Apache 2.0 license. To further illustrate A2A's core concepts, we will review code excerpts focusing on setting up an A2A Server using an ADK-based agent with Google-authenticated tools. Looking at [https://github.com/google-a2a/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/adk_agent.py](https://github.com/google-a2a/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/adk_agent.py)
+* **動態資訊檢索：** 代理可以進行通訊以檢索和交換即時資訊。主要代理可能會從專門的「數據獲取代理」請求即時市場數據，然後使用外部 API 收集資訊並將其發回。
+
+## 實踐程式碼範例
+
+讓我們來看看 A2A 協定的實際應用。 [https://github.com/google-a2a/a2a-samples/tree/main/samples](https://github.com/google-a2a/a2a-samples/tree/main/samples) 上的儲存庫提供了 Java、Go 和 Python 範例，說明了各種代理框架（例如 LangGraph、CrewAI、Azure 人工智慧 Foundry 和 AG2）如何使用 A2A 進行通訊。此儲存庫中的所有程式碼均在 Apache 2.0 許可證下發布。為了進一步說明 A2A 的核心概念，我們將回顧程式碼摘錄，並專注於使用基於 ADK 的代理和 Google 驗證的工具來設定 A2A 伺服器。查看 [https://github.com/google-a2a/a2a-samples/blob/main/samples/python/代理/birthday_planner_adk/calendar_agent/adk_agent.py](https://github.com/google-a2a/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/adk_agent.py)
 
 ```python
 import datetime
@@ -222,9 +231,9 @@ async def create_agent(client_id: str, client_secret: str) -> LlmAgent:
     )
 ```
 
-This Python code defines an asynchronous function `create_agent` that constructs an ADK LlmAgent. It begins by initializing a `CalendarToolset` using the provided client credentials to access the Google Calendar API. Subsequently, an `LlmAgent` instance is created, configured with a specified Gemini model, a descriptive name, and instructions for managing a user's calendar. The agent is furnished with calendar tools from the `CalendarToolset`, enabling it to interact with the Calendar API and respond to user queries regarding calendar states or modifications. The agent's instructions dynamically incorporate the current date for temporal context. To illustrate how an agent is constructed, let's examine a key section from the `calendar_agent` found in the A2A samples on GitHub.
+此 Python 程式碼定義了一個建構 ADK LlmAgent 的非同步函數 `create_agent`。首先使用提供的客戶端憑證初始化 `CalendarToolset` 來存取 Google Calendar API。隨後，建立一個 `LlmAgent` 實例，並配置指定的 Gemini 模型、描述性名稱以及管理使用者行事曆的說明。該代理配備了 `CalendarToolset` 中的日曆工具，使其能夠與日曆 API 互動並回應有關日曆狀態或修改的使用者查詢。代理的指令動態地結合了時間上下文的當前日期。為了說明如何建立代理，讓我們檢查 GitHub 上 A2A 範例中的 `calendar_agent` 中的關鍵部分。
 
-The code below shows how the agent is defined with its specific instructions and tools. Please note that only the code required to explain this functionality is shown; you can access the complete file here: [https://github.com/a2aproject/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/__main__.py](https://github.com/a2aproject/a2a-samples/blob/main/samples/python/agents/birthday_planner_adk/calendar_agent/__main__.py)
+下面的程式碼顯示如何使用其特定指令和工具來定義代理。請注意，僅顯示了解釋此功能所需的程式碼；您可以在此處存取完整文件：[https://github.com/a2aproject/a2a-samples/blob/main/samples/python/代理/birthday_planner_adk/calendar_agent/__main__.py](__3LINK_URL__
 
 ```python
 def main(host: str = "0.0.0.0", port: int = 8000):
@@ -304,50 +313,62 @@ if __name__ == "__main__":
     main()
 ```
 
-This Python code demonstrates setting up an A2A-compliant "Calendar Agent" for checking user availability using Google Calendar. It involves verifying API keys or Vertex AI configurations for authentication purposes. The agent's capabilities, including the "check_availability" skill, are defined within an AgentCard, which also specifies the agent's network address. Subsequently, an ADK agent is created, configured with in-memory services for managing artifacts, sessions, and memory. The code then initializes a Starlette web application, incorporates an authentication callback and the A2A protocol handler, and executes it using Uvicorn to expose the agent via HTTP.
+此 Python 程式碼示範如何設定符合 A2A 標準的“日曆代理”，以使用 Google 日曆檢查使用者的可用性。它涉及驗證 API 金鑰或 Vertex 人工智慧 配置以進行身份驗證。代理的功能（包括「check_availability」技能）在 AgentCard 中定義，該代理卡還指定代理的網路位址。隨後，建立一個 ADK 代理，並配置記憶體中服務來管理工件、會話和記憶體。然後，程式碼初始化 Starlette Web 應用程序，合併身份驗證回調和 A2A 協定處理程序，並使用 Uvicorn 執行它以透過 HTTP 公開代理。
 
-These examples illustrate the process of building an A2A-compliant agent, from defining its capabilities to running it as a web service. By utilizing Agent Cards and ADK, developers can create interoperable AI agents capable of integrating with tools like Google Calendar. This practical approach demonstrates the application of A2A in establishing a multi-agent ecosystem.
+這些範例說明了建置符合 A2A 標準的代理的過程，從定義其功能到將其作為 Web 服務運行。透過利用代理卡和 ADK，開發人員可以創建能夠與 Google 日曆等工具整合的可互通的 人工智慧 代理。這種實用方法展示了 A2A 在建立多代理生態系的應用。
 
-Further exploration of A2A is recommended through the code demonstration at [https://www.trickle.so/blog/how-to-build-google-a2a-project](https://www.trickle.so/blog/how-to-build-google-a2a-project). Resources available at this link include sample A2A clients and servers in Python and JavaScript, multi-agent web applications, command-line interfaces, and example implementations for various agent frameworks.
+建議透過 [https://www.trickle.so/blog/how-to-build-google-a2a-project](https://www.trickle.so/blog/how-to-build-google-a2a-project) 上的程式碼示範進一步探索 A2A。此連結提供的資源包括 Python 和 JavaScript 中的範例 A2A 用戶端和伺服器、多代理 Web 應用程式、命令列介面以及各種代理框架的範例實作。
 
-## At a Glance
+## 概覽
 
-**What:** Individual AI agents, especially those built on different frameworks, often struggle with complex, multi-faceted problems on their own. The primary challenge is the lack of a common language or protocol that allows them to communicate and collaborate effectively. This isolation prevents the creation of sophisticated systems where multiple specialized agents can combine their unique skills to solve larger tasks. Without a standardized approach, integrating these disparate agents is costly, time-consuming, and hinders the development of more powerful, cohesive AI solutions.
+**內容：** 單一人工智慧代理，尤其是那些建構在不同框架上的人工智慧代理，經常獨自努力解決複雜、多方面的問題。主要挑戰是缺乏允許他們有效溝通和協作的通用語言或協議。這種隔離阻止了創建複雜的系統，在該系統中，多個專業代理可以結合其獨特的技能來解決更大的任務。如果沒有標準化的方法，整合這些不同的代理成本高昂、耗時，並且阻礙了更強大、更有凝聚力的人工智慧解決方案的開發。
 
-**Why:** The Inter-Agent Communication (A2A) protocol provides an open, standardized solution for this problem. It is an HTTP-based protocol that enables interoperability, allowing distinct AI agents to coordinate, delegate tasks, and share information seamlessly, regardless of their underlying technology. A core component is the Agent Card, a digital identity file that describes an agent's capabilities, skills, and communication endpoints, facilitating discovery and interaction. A2A defines various interaction mechanisms, including synchronous and asynchronous communication, to support diverse use cases. By creating a universal standard for agent collaboration, A2A fosters a modular and scalable ecosystem for building complex, multi-agent Agentic systems.
+**原因：** 代理間通訊 (A2A) 協定為此問題提供了開放、標準化的解決方案。它是一種基於 HTTP 的協議，可實現互通性，允許不同的 人工智慧 代理無縫協調、委派任務和共享訊息，無論其底層技術如何。核心元件是座席卡，這是一個數位身分文件，描述座席的能力、技能和溝通端點，促進發現和互動。 A2A定義了各種互動機制，包括同步和非同步通信，以支援不同的用例。透過創建代理協作的通用標準，A2A 培育了一個模組化且可擴展的生態系統，用於建立複雜的多代理 代理式 系統。
 
-**Rule of Thumb:** Use this pattern when you need to orchestrate collaboration between two or more AI agents, especially if they are built using different frameworks (e.g., Google ADK, LangGraph, CrewAI). It is ideal for building complex, modular applications where specialized agents handle specific parts of a workflow, such as delegating data analysis to one agent and report generation to another. This pattern is also essential when an agent needs to dynamically discover and consume the capabilities of other agents to complete a task.
+**經驗法則：** 當您需要協調兩個或多個 人工智慧 代理之間的協作時，特別是如果它們是使用不同的框架（例如 Google ADK、LangGraph、CrewAI）構建的，請使用此模式。它非常適合建立複雜的模組化應用程序，其中專門的代理處理工作流程的特定部分，例如將資料分析委託給一個代理並將報告產生委託給另一個代理。當代理需要動態發現和使用其他代理的功能來完成任務時，這種模式也很重要。
 
-**Visual Summary:**
+**視覺摘要：**
 
-![A2A Inter-Agent Communication Pattern](../assets/A2A_Inter-Agent_Communication_Pattern.png)
+![A2A 代理間通訊模式](../assets/A2A_Inter-Agent_Communication_Pattern.png)
 
-Fig.2: A2A inter-agent communication pattern
+圖2：A2A代理間通訊模式
 
-## Key Takeaways
+## 要點
 
-Key Takeaways:
+要點：
 
-* The Google A2A protocol is an open, HTTP-based standard that facilitates communication and collaboration between AI agents built with different frameworks.  
-* An AgentCard serves as a digital identifier for an agent, allowing for automatic discovery and understanding of its capabilities by other agents.  
-* A2A offers both synchronous request-response interactions (using `tasks/send`) and streaming updates (using `tasks/sendSubscribe`) to accommodate varying communication needs.  
-* The protocol supports multi-turn conversations, including an `input-required` state, which allows agents to request additional information and maintain context during interactions.  
-* A2A encourages a modular architecture where specialized agents can operate independently on different ports, enabling system scalability and distribution.  
-* Tools such as Trickle AI aid in visualizing and tracking A2A communications, which helps developers monitor, debug, and optimize multi-agent systems.  
-* While A2A is a high-level protocol for managing tasks and workflows between different agents, the Model Context Protocol (MCP) provides a standardized interface for LLMs to interface with external resources
+* Google A2A 協定是一種開放的、基於 HTTP 的標準，可促進使用不同框架建構的 人工智慧 代理之間的通訊和協作。
 
-## Conclusions
+* 代理卡充當代理的數字標識符，允許其他代理自動發現和了解其功能。
 
-The Inter-Agent Communication (A2A) protocol establishes a vital, open standard to overcome the inherent isolation of individual AI agents. By providing a common HTTP-based framework, it ensures seamless collaboration and interoperability between agents built on different platforms, such as Google ADK, LangGraph, or CrewAI. A core component is the Agent Card, which serves as a digital identity, clearly defining an agent's capabilities and enabling dynamic discovery by other agents. The protocol's flexibility supports various interaction patterns, including synchronous requests, asynchronous polling, and real-time streaming, catering to a wide range of application needs.
+* A2A 提供同步請求-回應互動（使用 `tasks/send`）和串流更新（使用 `tasks/sendSubscribe`），以滿足不同的通訊需求。
 
-This enables the creation of modular and scalable architectures where specialized agents can be combined to orchestrate complex automated workflows. Security is a fundamental aspect, with built-in mechanisms like mTLS and explicit authentication requirements to protect communications. While complementing other standards like MCP, A2A's unique focus is on the high-level coordination and task delegation between agents. The strong backing from major technology companies and the availability of practical implementations highlight its growing importance. This protocol paves the way for developers to build more sophisticated, distributed, and intelligent multi-agent systems. Ultimately, A2A is a foundational pillar for fostering an innovative and interoperable ecosystem of collaborative AI.
+* 此協定支援多輪對話，包括 `input-required` 狀態，該狀態允許代理在互動期間請求附加資訊並維護上下文。
 
-## References
+* A2A 鼓勵模組化架構，其中專用代理可以在不同連接埠上獨立運行，從而實現系統可擴展性和分佈。
 
-1. Chen, B. (2025, April 22). *How to Build Your First Google A2A Project: A Step-by-Step Tutorial*. Trickle.so Blog. [https://www.trickle.so/blog/how-to-build-google-a2a-project](https://www.trickle.so/blog/how-to-build-google-a2a-project)
-2. Google A2A GitHub Repository. [https://github.com/google-a2a/A2A](https://github.com/google-a2a/A2A)
-3. Google Agent Development Kit (ADK) [https://google.github.io/adk-docs/](https://google.github.io/adk-docs/)
-4. Getting Started with Agent-to-Agent (A2A) Protocol: [https://codelabs.developers.google.com/intro-a2a-purchasing-concierge\#0](https://codelabs.developers.google.com/intro-a2a-purchasing-concierge#0)
+* Trickle 人工智慧 等工具有助於視覺化和追蹤 A2A 通信，從而幫助開發人員監控、調試和優化多代理系統。
+
+* 雖然 A2A 是用於管理不同代理之間的任務和工作流程的高級協議，但模型上下文協定 (MCP) 為 大型語言模型 提供了一個標準化介面來與外部資源進行交互
+
+## 結論
+
+代理間通訊 (A2A) 協定建立了一個至關重要的開放標準，以克服各個人工智慧代理固有的隔離性。透過提供基於 HTTP 的通用框架，它確保在不同平台（例如 Google ADK、LangGraph 或 CrewAI）上建立的代理之間的無縫協作和互通性。核心元件是代理卡，它充當數位身份，明確定義代理的功能並允許其他代理動態發現。該協定的靈活性支援各種互動模式，包括同步請求、非同步輪詢和即時串流，滿足廣泛的應用需求。
+
+這使得能夠創建模組化和可擴展的架構，其中可以組合專用代理來編排複雜的自動化工作流程。安全性是一個基本方面，具有 mTLS 等內建機制和明確身份驗證要求來保護通訊。在補充 MCP 等其他標準的同時，A2A 的獨特重點是代理之間的高級協調和任務委派。主要科技公司的大力支持和實際實施的可用性凸顯了其日益增長的重要性。該協議為開發人員建構更複雜、分散式和智慧的多代理系統鋪平了道路。最終，A2A 是培育創新和可互通的協作人工智慧生態系統的基礎支柱。
+
+## 參考
+
+1. Chen, B.（2025 年，4 月 22 日）。 *如何建立您的第一個 Google A2A 專案：逐步教學*。 Trickle.so 博客。 [https://www.trickle.so/blog/how-to-build-google-a2a-project](https://www.trickle.so/blog/how-to-build-google-a2a-project)
+
+2.GoogleA2A GitHub儲存庫。 [https://github.com/google-a2a/A2A](https://github.com/google-a2a/A2A)
+
+3. Google 代理開發套件 (ADK) [https://google.github.io/adk-docs/](https://google.github.io/adk-docs/)
+
+4. 代理到代理 (A2A) 協定入門：[https://codelabs.developers.google.com/intro-a2a-purchasing-concierge\#0](https://codelabs.developers.google.com/intro-a2a-purchasing-concierge#0)
+
 5. Google AgentDiscovery \- [https://a2a-protocol.org/latest/](https://a2a-protocol.org/latest/)
-6. Communication between different AI frameworks such as LangGraph, CrewAI, and Google ADK [https://www.trickle.so/blog/how-to-build-google-a2a-project](https://www.trickle.so/blog/how-to-build-google-a2a-project#setting-up-your-a2a-development-environment)
-7. Designing Collaborative Multi-Agent Systems with the A2A Protocol [https://www.oreilly.com/radar/designing-collaborative-multi-agent-systems-with-the-a2a-protocol/](https://www.oreilly.com/radar/designing-collaborative-multi-agent-systems-with-the-a2a-protocol/)
+
+6. LangGraph、CrewAI、Google ADK等不同AI框架之間的通訊 [https://www.trickle.so/blog/how-to-build-google-a2a-project](https://www.trickle.so/blog/how-to-build-google-a2a-project#setting-up-your-a2a-development-environment)
+
+7. 使用 A2A 協定設計協作多代理系統 [https://www.oreilly.com/radar/designing-collaborative-multi-代理-systems-with-the-a2a-protocol/](https://www.oreilly.com/radar/designing-collaborative-multi-agent-systems-with-the-a2a-protocol/)

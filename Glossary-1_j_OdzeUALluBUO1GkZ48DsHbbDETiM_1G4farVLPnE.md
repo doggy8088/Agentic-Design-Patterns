@@ -1,53 +1,53 @@
-# Glossary
+# 詞彙表
 
-## Fundamental Concepts
+## 基本概念
 
-**Prompt:** A prompt is the input, typically in the form of a question, instruction, or statement, that a user provides to an AI model to elicit a response. The quality and structure of the prompt heavily influence the model's output, making prompt engineering a key skill for effectively using AI.
+**提示：** 提示是使用者提供給 AI 模型以引發回應的輸入，通常採用問題、指示或陳述的形式。提示的品質和結構在很大程度上影響模型的輸出，使得提示工程成為有效使用人工智慧的關鍵技能。
 
-**Context Window:** The context window is the maximum number of tokens an AI model can process at once, including both the input and its generated output. This fixed size is a critical limitation, as information outside the window is ignored, while larger windows enable more complex conversations and document analysis.
+**上下文視窗：** 上下文視窗是人工智慧模型可以一次處理的最大標記數，包括輸入及其產生的輸出。這種固定大小是一個關鍵限制，因為視窗外部的資訊將被忽略，而較大的視窗可以實現更複雜的對話和文件分析。
 
-**In-Context Learning:** In-context learning is an AI's ability to learn a new task from examples provided directly in the prompt, without requiring any retraining. This powerful feature allows a single, general-purpose model to be adapted to countless specific tasks on the fly.
+**情境學習：** 情境學習是人工智慧從提示中直接提供的範例中學習新任務的能力，無需任何重新訓練。這項強大的功能使單一通用模型能夠適應無數的動態特定任務。
 
-**Zero-Shot, One-Shot, & Few-Shot Prompting:** These are prompting techniques where a model is given zero, one, or a few examples of a task to guide its response. Providing more examples generally helps the model better understand the user's intent and improves its accuracy for the specific task.
+**零樣本、單樣本和少樣本提示：** 這些提示技術為模型提供零個、一個或幾個任務範例來引導其回應。提供更多範例通常有助於模型更好地理解使用者的意圖並提高其特定任務的準確性。
 
-**Multimodality:** Multimodality is an AI's ability to understand and process information across multiple data types like text, images, and audio. This allows for more versatile and human-like interactions, such as describing an image or answering a spoken question.
+**多模態：**多模態是人工智慧理解和處理多種資料類型（如文字、圖像和音訊）資訊的能力。這允許更通用和類人的交互，例如描述圖像或回答口頭問題。
 
-**Grounding:** Grounding is the process of connecting a model's outputs to verifiable, real-world information sources to ensure factual accuracy and reduce hallucinations. This is often achieved with techniques like RAG to make AI systems more trustworthy.
+**接地：** 接地是將模型的輸出連接到可驗證的現實世界資訊來源的過程，以確保事實準確性並減少幻覺。這通常是透過 檢索增強生成（RAG） 等技術來實現的，以使人工智慧系統更值得信賴。
 
-## Core AI Model Architectures
+## 核心AI模型架構
 
-**Transformers:** The Transformer is the foundational neural network architecture for most modern LLMs. Its key innovation is the self-attention mechanism, which efficiently processes long sequences of text and captures complex relationships between words.
+**Transformers：** Transformer 是大多數現代大型語言模型（LLM）的基礎神經網路架構。其關鍵創新在於自註意力機制，可有效處理長文本序列並捕捉單字之間的複雜關係。
 
-**Recurrent Neural Network (RNN):** The Recurrent Neural Network is a foundational architecture that preceded the Transformer. RNNs process information sequentially, using loops to maintain a "memory" of previous inputs, which made them suitable for tasks like text and speech processing.
+**循環神經網路 (RNN)：** 循環神經網路是 Transformer 之前的基礎架構。 RNN 按順序處理訊息，使用循環來維護先前輸入的“記憶”，這使得它們適合文字和語音處理等任務。
 
-**Mixture of Experts (MoE):** Mixture of Experts is an efficient model architecture where a "router" network dynamically selects a small subset of "expert" networks to handle any given input. This allows models to have a massive number of parameters while keeping computational costs manageable.
+**專家混合 (MoE)：** 專家混合是一種高效的模型架構，其中「路由器」網路動態選擇一小部分「專家」網路來處理任何給定的輸入。這使得模型能夠擁有大量參數，同時保持運算成本可控。
 
-**Diffusion Models:** Diffusion models are generative models that excel at creating high-quality images. They work by adding random noise to data and then training a model to meticulously reverse the process, allowing them to generate novel data from a random starting point.
+**擴散模型：**擴散模型是擅長創建高品質影像的生成模型。他們的工作方式是向資料中添加隨機噪聲，然後訓練模型來精心反轉該過程，使他們能夠從隨機起點生成新資料。
 
-**Mamba:** Mamba is a recent AI architecture using a Selective State Space Model (SSM) to process sequences with high efficiency, especially for very long contexts. Its selective mechanism allows it to focus on relevant information while filtering out noise, making it a potential alternative to the Transformer.
+**Mamba：** Mamba 是一種最新的人工智慧架構，使用選擇性狀態空間模型（SSM）來高效處理序列，特別是對於很長的上下文。其選擇機制使其能夠專注於相關訊息，同時濾除噪音，使其成為 Transformer 的潛在替代品。
 
-## The LLM Development Lifecycle
+## 大型語言模型（LLM）發展生命週期
 
-The development of a powerful language model follows a distinct sequence. It begins with Pre-training, where a massive base model is built by training it on a vast dataset of general internet text to learn language, reasoning, and world knowledge. Next is Fine-tuning, a specialization phase where the general model is further trained on smaller, task-specific datasets to adapt its capabilities for a particular purpose. The final stage is Alignment, where the specialized model's behavior is adjusted to ensure its outputs are helpful, harmless, and aligned with human values.
+強大的語言模型的發展遵循獨特的順序。它從預訓練開始，透過在龐大的一般網路文字資料集上進行訓練來建立一個龐大的基礎模型，以學習語言、推理和世界知識。接下來是微調，這是一個專業化階段，在較小的、特定任務的資料集上進一步訓練通用模型，以適應特定目的的功能。最後階段是對齊，調整專門模型的行為以確保其輸出是有用的、無害的並且符合人類價值。
 
-**Pre-training Techniques:** Pre-training is the initial phase where a model learns general knowledge from vast amounts of data. The top techniques for this involve different objectives for the model to learn from. The most common is Causal Language Modeling (CLM), where the model predicts the next word in a sentence. Another is Masked Language Modeling (MLM), where the model fills in intentionally hidden words in a text. Other important methods include Denoising Objectives, where the model learns to restore a corrupted input to its original state, Contrastive Learning, where it learns to distinguish between similar and dissimilar pieces of data, and Next Sentence Prediction (NSP), where it determines if two sentences logically follow each other.
+**預訓練技術：** 預訓練是模型從大量資料中學習一般知識的初始階段。最重要的技術涉及模型學習的不同目標。最常見的是因果語言模型 (CLM)，其中模型預測句子中的下一個單字。另一個是掩碼語言建模（MLM），其中模型會填充文本中有意隱藏的單字。其他重要方法包括去雜訊目標（模型學習將損壞的輸入恢復到原始狀態）、對比學習（學習區分相似和不相似的資料）以及下一句預測 (NSP)（確定兩個句子在邏輯上是否相互遵循）。
 
-**Fine-tuning Techniques:** Fine-tuning is the process of adapting a general pre-trained model to a specific task using a smaller, specialized dataset. The most common approach is Supervised Fine-Tuning (SFT), where the model is trained on labeled examples of correct input-output pairs. A popular variant is Instruction Tuning, which focuses on training the model to better follow user commands. To make this process more efficient, Parameter-Efficient Fine-Tuning (PEFT) methods are used, with top techniques including LoRA (Low-Rank Adaptation), which only updates a small number of parameters, and its memory-optimized version, QLoRA. Another technique, Retrieval-Augmented Generation (RAG), enhances the model by connecting it to an external knowledge source during the fine-tuning or inference stage.
+**微調技術：** 微調是使用較小的專用資料集使通用預訓練模型適應特定任務的過程。最常見的方法是監督微調（SFT），其中模型根據正確輸入輸出對的標記範例進行訓練。一個流行的變體是指令調優，它專注於訓練模型以更好地遵循使用者命令。為了使這個過程更加高效，使用了參數高效微調（PEFT）方法，其中包括僅更新少量參數的 LoRA（低秩適應）及其記憶體最佳化版本 QLoRA 等頂級技術。另一種技術是檢索增強生成（檢索增強生成（RAG）），透過在微調或推理階段將模型連接到外部知識來源來增強模型。
 
-**Alignment & Safety Techniques:** Alignment is the process of ensuring an AI model's behavior aligns with human values and expectations, making it helpful and harmless. The most prominent technique is Reinforcement Learning from Human Feedback (RLHF), where a "reward model" trained on human preferences guides the AI's learning process, often using an algorithm like Proximal Policy Optimization (PPO) for stability. Simpler alternatives have emerged, such as Direct Preference Optimization (DPO), which bypasses the need for a separate reward model, and Kahneman-Tversky Optimization (KTO), which simplifies data collection further. To ensure safe deployment, Guardrails are implemented as a final safety layer to filter outputs and block harmful actions in real-time.
+**對齊和安全技術：** 對齊是確保人工智慧模型的行為符合人類價值觀和期望，使其有益且無害的過程。最突出的技術是人類回饋強化學習（RLHF），其中根據人類偏好訓練的「獎勵模型」指導人工智慧的學習過程，通常使用近端策略優化（PPO）等演算法來保持穩定性。更簡單的替代方案已經出現，例如直接偏好優化（DPO），它繞過了對單獨獎勵模型的需要，以及卡尼曼-特沃斯基優化（KTO），它進一步簡化了數據收集。為了確保安全部署，Guardrails 被當作最終安全層來過濾輸出並即時阻止有害行為。
 
-## Enhancing AI Agent Capabilities
+## 增強AI代理能力
 
-AI agents are systems that can perceive their environment and take autonomous actions to achieve goals. Their effectiveness is enhanced by robust reasoning frameworks.
+人工智慧代理是能夠感知環境並採取自主行動來實現目標的系統。強大的推理框架增強了它們的有效性。
 
-**Chain of Thought (CoT):** This prompting technique encourages a model to explain its reasoning step-by-step before giving a final answer. This process of "thinking out loud" often leads to more accurate results on complex reasoning tasks.
+**思想鏈（CoT）：**這種提示技術鼓勵模型在給出最終答案之前逐步解釋其推理。這種「大聲思考」的過程通常會在複雜的推理任務上帶來更準確的結果。
 
-**Tree of Thoughts (ToT):** Tree of Thoughts is an advanced reasoning framework where an agent explores multiple reasoning paths simultaneously, like branches on a tree. It allows the agent to self-evaluate different lines of thought and choose the most promising one to pursue, making it more effective at complex problem-solving.
+**思想樹 (ToT)：** 思想樹是一種高階推理框架，代理人可以同時探索多個推理路徑，就像樹上的分支一樣。它允許智能體自我評估不同的思路，並選擇最有希望的思路，從而更有效地解決複雜的問題。
 
-**ReAct (Reason and Act):** ReAct is an agent framework that combines reasoning and acting in a loop. The agent first "thinks" about what to do, then takes an "action" using a tool, and uses the resulting observation to inform its next thought, making it highly effective at solving complex tasks.
+**ReAct（推理和行動）：** ReAct 是一個將推理和行動結合在一個循環中的代理框架。智能體首先“思考”要做什麼，然後使用工具採取“行動”，並使用所得的觀察結果來告知其下一步的想法，從而使其能夠非常有效地解決複雜的任務。
 
-**Planning:** This is an agent's ability to break down a high-level goal into a sequence of smaller, manageable sub-tasks. The agent then creates a plan to execute these steps in order, allowing it to handle complex, multi-step assignments.
+**規劃：** 這是代理人將高階目標分解為一系列較小的、可管理的子任務的能力。然後，代理建立一個計劃來按順序執行這些步驟，使其能夠處理複雜的多步驟任務。
 
-**Deep Research:** Deep research refers to an agent's capability to autonomously explore a topic in-depth by iteratively searching for information, synthesizing findings, and identifying new questions. This allows the agent to build a comprehensive understanding of a subject far beyond a single search query.
+**深度研究：**深度研究是指智能體透過迭代搜尋資訊、綜合發現和識別新問題自主深入探索主題的能力。這使得代理能夠對主題建立全面的理解，遠遠超出單一搜尋查詢的範圍。
 
-**Critique Model:** A critique model is a specialized AI model trained to review, evaluate, and provide feedback on the output of another AI model. It acts as an automated critic, helping to identify errors, improve reasoning, and ensure the final output meets a desired quality standard.
+**批判模型：** 批判模型是一種經過訓練的專門人工智慧模型，用於審查、評估另一個人工智慧模型的輸出並提供回饋。它充當自動批評者，幫助識別錯誤、改進推理並確保最終輸出符合所需的品質標準。

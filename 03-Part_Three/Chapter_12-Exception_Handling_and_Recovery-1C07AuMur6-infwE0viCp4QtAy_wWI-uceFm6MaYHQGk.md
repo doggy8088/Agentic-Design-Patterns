@@ -1,45 +1,50 @@
-# Chapter 12: Exception Handling and Recovery
+# 第 12 章：例外處理與恢復
 
-For AI agents to operate reliably in diverse real-world environments, they must be able to manage unforeseen situations, errors, and malfunctions. Just as humans adapt to unexpected obstacles, intelligent agents need robust systems to detect problems, initiate recovery procedures, or at least ensure controlled failure. This essential requirement forms the basis of the Exception Handling and Recovery pattern.
+為了讓人工智慧代理在不同的現實環境中可靠運行，它們必須能夠管理不可預見的情況、錯誤和故障。就像人類適應意外障礙一樣，智慧代理也需要強大的系統來偵測問題、啟動復原程序或至少確保故障受控。這項基本要求構成了例外處理和復原模式的基礎。
 
-This pattern focuses on developing exceptionally durable and resilient agents that can maintain uninterrupted functionality and operational integrity despite various difficulties and anomalies. It emphasizes the importance of both proactive preparation and reactive strategies to ensure continuous operation, even when facing challenges. This adaptability is critical for agents to function successfully in complex and unpredictable settings, ultimately boosting their overall effectiveness and trustworthiness.
+此模式著重於開發異常耐用和有彈性的代理，儘管存在各種困難和異常，但仍可以保持不間斷的功能和操作完整性。它強調主動準備和反應策略的重要性，以確保即使面臨挑戰也能持續運作。這種適應性對於代理在複雜且不可預測的環境中成功運作至關重要，最終提高其整體效率和可信度。
 
-The capacity to handle unexpected events ensures these AI systems are not only intelligent but also stable and reliable, which fosters greater confidence in their deployment and performance. Integrating comprehensive monitoring and diagnostic tools further strengthens an agent's ability to quickly identify and address issues, preventing potential disruptions and ensuring smoother operation in evolving conditions. These advanced systems are crucial for maintaining the integrity and efficiency of AI operations, reinforcing their ability to manage complexity and unpredictability.
+處理突發事件的能力確保這些人工智慧系統不僅智能，而且穩定可靠，這增強了對其部署和效能的信心。整合全面的監控和診斷工具進一步增強了代理快速識別和解決問題的能力，防止潛在的中斷並確保在不斷變化的條件下更順利地運作。這些先進的系統對於維持人工智慧營運的完整性和效率、增強其管理複雜性和不可預測性的能力至關重要。
 
-This pattern may sometimes be used with reflection. For example, if an initial attempt fails and raises an exception, a reflective process can analyze the failure and reattempt the task with a refined approach, such as an improved prompt, to resolve the error.
+這種模式有時可以與反思一起使用。例如，如果初始嘗試失敗並引發異常，反思過程可以分析失敗並使用改進的方法（例如改進的提示）重新嘗試任務以解決錯誤。
 
-## Exception Handling and Recovery Pattern Overview
+## 例外處理與恢復模式概述
 
-The Exception Handling and Recovery pattern addresses the need for AI agents to manage operational failures. This pattern involves anticipating potential issues, such as tool errors or service unavailability, and developing strategies to mitigate them. These strategies may include error logging, retries, fallbacks, graceful degradation, and notifications. Additionally, the pattern emphasizes recovery mechanisms like state rollback, diagnosis, self-correction, and escalation, to restore agents to stable operation. Implementing this pattern enhances the reliability and robustness of AI agents, allowing them to function in unpredictable environments. Examples of practical applications include chatbots managing database errors, trading bots handling financial errors, and smart home agents addressing device malfunctions. The pattern ensures that agents can continue to operate effectively despite encountering complexities and failures.
+例外處理和復原模式解決了人工智慧代理管理作業故障的需求。此模式涉及預測潛在問題（例如工具錯誤或服務不可用），並制定緩解這些問題的策略。這些策略可能包括錯誤記錄、重試、回退、優雅降級和通知。此外，該模式強調狀態回滾、診斷、自我糾正和升級等恢復機制，以將代理恢復到穩定運行。實現這種模式可以增強人工智慧代理的可靠性和穩健性，使它們能夠在不可預測的環境中發揮作用。實際應用的範例包括管理資料庫錯誤的聊天機器人、處理財務錯誤的交易機器人以及解決設備故障的智慧家庭代理。此模式確保代理在遇到複雜性和故障時仍能繼續有效運作。
 
-![Key Components of Exception Handling and Recovery for AI agents](../assets/Key_Components_of_Exception_Handling_and_Recovery_for_AI_agents.png)
+![人工智慧 代理例外處理和復原的關鍵元件](../assets/Key_Components_of_Exception_Handling_and_Recovery_for_AI_agents.png)
 
-Fig.1: Key components of exception handling and recovery for AI agents
+圖 1：人工智慧 代理例外處理和復原的關鍵元件
 
-**Error Detection:** This involves meticulously identifying operational issues as they arise. This could manifest as invalid or malformed tool outputs, specific API errors such as 404 (Not Found) or 500 (Internal Server Error) codes, unusually long response times from services or APIs, or incoherent and nonsensical responses that deviate from expected formats. Additionally, monitoring by other agents or specialized monitoring systems might be implemented for more proactive anomaly detection, enabling the system to catch potential issues before they escalate.
+**錯誤檢測：** 這涉及在出現操作問題時仔細識別它們。這可能表現為無效或格式錯誤的工具輸出、特定 API 錯誤（例如 404（未找到）或 500（內部伺服器錯誤）代碼）、服務或 API 的回應時間異常長，或偏離預期格式的不連貫且無意義的回應。此外，可以實施其他代理或專門監控系統的監控，以實現更主動的異常檢測，使系統能夠在潛在問題升級之前捕獲它們。
 
-**Error Handling**: Once an error is detected, a carefully thought-out response plan is essential. This includes recording error details meticulously in logs for later debugging and analysis (logging). Retrying the action or request, sometimes with slightly adjusted parameters, may be a viable strategy, especially for transient errors (retries). Utilizing alternative strategies or methods (fallbacks) can ensure that some functionality is maintained. Where complete recovery is not immediately possible, the agent can maintain partial functionality to provide at least some value (graceful degradation). Finally, alerting human operators or other agents might be crucial for situations that require human intervention or collaboration (notification).
+**錯誤處理**：一旦偵測到錯誤，就必須制定經過深思熟慮的回應計畫。這包括在日誌中仔細記錄錯誤詳細信息，以便以後調試和分析（日誌記錄）。重試操作或請求（有時稍微調整參數）可能是一種可行的策略，特別是對於暫時性錯誤（重試）。使用替代策略或方法（後備）可以確保維護某些功能。如果無法立即完全恢復，代理可以維持部分功能以提供至少一些價值（優雅降級）。最後，對於需要人工幹預或協作（通知）的情況，向人類操作員或其他代理發出警報可能至關重要。
 
-**Recovery:** This stage is about restoring the agent or system to a stable and operational state after an error. It could involve reversing recent changes or transactions to undo the effects of the error (state rollback). A thorough investigation into the cause of the error is vital for preventing recurrence. Adjusting the agent's plan, logic, or parameters through a self-correction mechanism or replanning process may be needed to avoid the same error in the future. In complex or severe cases, delegating the issue to a human operator or a higher-level system (escalation) might be the best course of action.
+**恢復：** 此階段是將代理或系統在發生錯誤後恢復到穩定且可運作的狀態。它可能涉及逆轉最近的更改或事務以消除錯誤的影響（狀態回滾）。徹底調查錯誤原因對於防止錯誤再次發生至關重要。可能需要透過自我修正機製或重新規劃流程來調整代理的計畫、邏輯或參數，以避免將來出現相同的錯誤。在複雜或嚴重的情況下，將問題委託給操作員或更高層級的系統（升級）可能是最好的行動方案。
 
-Implementation of this robust exception handling and recovery pattern can transform AI agents from fragile and unreliable systems into robust, dependable components capable of operating effectively and resiliently in challenging and highly unpredictable environments. This ensures that the agents maintain functionality, minimize downtime, and provide a seamless and reliable experience even when faced with unexpected issues.
+實施這種強大的例外處理和恢復模式可以將人工智慧代理從脆弱且不可靠的系統轉變為強大、可靠的組件，能夠在充滿挑戰和高度不可預測的環境中有效和彈性地運作。這可以確保代理保持功能，最大限度地減少停機時間，並提供無縫且可靠的體驗，即使在遇到意外問題時也是如此。
 
-## Practical Applications & Use Cases
+## 實際應用程式和用例
 
-Exception Handling and Recovery is critical for any agent deployed in a real-world scenario where perfect conditions cannot be guaranteed.
+對於在無法保證完美條件的現實場景中部署的任何代理來說，例外處理和復原至關重要。
 
-* **Customer Service Chatbots:** If a chatbot tries to access a customer database and the database is temporarily down, it shouldn't crash. Instead, it should detect the API error, inform the user about the temporary issue, perhaps suggest trying again later, or escalate the query to a human agent.  
-* **Automated Financial Trading:** A trading bot attempting to execute a trade might encounter an "insufficient funds" error or a "market closed" error. It needs to handle these exceptions by logging the error, not repeatedly trying the same invalid trade, and potentially notifying the user or adjusting its strategy.  
-* **Smart Home Automation:** An agent controlling smart lights might fail to turn on a light due to a network issue or a device malfunction. It should detect this failure, perhaps retry, and if still unsuccessful, notify the user that the light could not be turned on and suggest manual intervention.  
-* **Data Processing Agents:** An agent tasked with processing a batch of documents might encounter a corrupted file. It should skip the corrupted file, log the error, continue processing other files, and report the skipped files at the end rather than halting the entire process.  
-* **Web Scraping Agents:** When a web scraping agent encounters a CAPTCHA, a changed website structure, or a server error (e.g., 404 Not Found, 503 Service Unavailable), it needs to handle these gracefully. This could involve pausing, using a proxy, or reporting the specific URL that failed.  
-* **Robotics and Manufacturing:** A robotic arm performing an assembly task might fail to pick up a component due to misalignment. It needs to detect this failure (e.g., via sensor feedback), attempt to readjust, retry the pickup, and if persistent, alert a human operator or switch to a different component.
+* **客戶服務聊天機器人：** 如果聊天機器人嘗試存取客戶資料庫並且資料庫暫時關閉，它不應該崩潰。相反，它應該檢測 API 錯誤，通知用戶臨時問題，也許建議稍後重試，或將查詢升級給人工代理。
 
-In short, this pattern is fundamental for building agents that are not only intelligent but also reliable, resilient, and user-friendly in the face of real-world complexities.
+* **自動金融交易：** 嘗試執行交易的交易機器人可能會遇到「資金不足」錯誤或「市場關閉」錯誤。它需要透過記錄錯誤來處理這些異常，而不是重複嘗試相同的無效交易，並可能通知使用者或調整其策略。
 
-## Hands-On Code Example (ADK)
+* **智慧家庭自動化：** 控制智慧燈的代理可能因網路問題或裝置故障而無法開啟燈。它應該檢測到此故障，也許重試，如果仍然不成功，則通知用戶燈無法打開並建議手動幹預。
 
-Exception handling and recovery are vital for system robustness and reliability. Consider, for instance, an agent's response to a failed tool call. Such failures can stem from incorrect tool input or issues with an external service that the tool depends on.
+* **資料處理代理：** 負責處理一批文件的代理可能會遇到損壞的文件。它應該跳過損壞的文件，記錄錯誤，繼續處理其他文件，並在最後報告跳過的文件，而不是停止整個過程。
+
+* **網頁抓取代理：** 當網頁抓取代理遇到驗證碼、變更的網站結構或伺服器錯誤（例如，404 未找到、503 服務不可用）時，它需要妥善處理這些問題。這可能涉及暫停、使用代理或報告失敗的特定 URL。
+
+* **機器人和製造：** 執行組裝任務的機械手臂可能會因未對準而無法拾取組件。它需要檢測這種故障（例如，透過感測器回饋），嘗試重新調整，重試拾取，如果持續存在，則提醒操作人員或切換到不同的元件。
+
+簡而言之，這種模式對於建立智能代理至關重要，這些代理在面對現實世界的複雜性時不僅具有智能，而且可靠、有彈性且用戶友好。
+
+## 實作程式碼範例 (ADK)
+
+例外處理和恢復對於系統的穩健性和可靠性至關重要。例如，考慮代理對失敗的工具呼叫的回應。此類故障可能源自於不正確的工具輸入或該工具所依賴的外部服務的問題。
 
 ```python
 from google.adk.agents import Agent, SequentialAgent
@@ -87,39 +92,46 @@ robust_location_agent = SequentialAgent(
 )
 ```
 
-This code defines a robust location retrieval system using a ADK's SequentialAgent with three sub-agents. The `primary_handler` is the first agent, attempting to get precise location information using the `get_precise_location_info` tool. The `fallback_handler` acts as a backup, checking if the primary lookup failed by inspecting a state variable. If the primary lookup failed, the fallback agent extracts the city from the user's query and uses the `get_general_area_info` tool. The `response_agent` is the final agent in the sequence. It reviews the location information stored in the state. This agent is designed to present the final result to the user. If no location information was found, it apologizes. The SequentialAgent ensures that these three agents execute in a predefined order. This structure allows for a layered approach to location information retrieval.
+此程式碼使用 ADK 的 SequentialAgent 和三個子代理定義了一個強大的位置擷取系統。 `primary_handler` 是第一個代理，嘗試使用 `get_precise_location_info` 工具來取得精確的位置資訊。 `fallback_handler` 作為備份，透過檢查狀態變數來檢查主查找是否失敗。如果主要查找失敗，後備代理會從使用者的查詢中提取城市並使用 `get_general_area_info` 工具。 `response_agent` 是序列中的最後一個代理。它審查儲存在狀態中的位置資訊。該代理旨在向用戶呈現最終結果。如果沒有找到位置資訊，我們深表歉意。 SequentialAgent 確保這三個代理以預先定義的順序執行。這種結構允許採用分層方法進行位置資訊檢索。
 
-## At a Glance
+## 概覽
 
-**What:** AI agents operating in real-world environments inevitably encounter unforeseen situations, errors, and system malfunctions. These disruptions can range from tool failures and network issues to invalid data, threatening the agent's ability to complete its tasks. Without a structured way to manage these problems, agents can be fragile, unreliable, and prone to complete failure when faced with unexpected hurdles. This unreliability makes it difficult to deploy them in critical or complex applications where consistent performance is essential.
+**內容：** 在現實環境中運行的人工智慧代理不可避免地會遇到不可預見的情況、錯誤和系統故障。這些中斷的範圍可能包括工具故障、網路問題和無效數據，威脅代理完成任務的能力。如果沒有結構化的方法來管理這些問題，代理可能會變得脆弱、不可靠，並且在遇到意外障礙時容易徹底失敗。這種不可靠性使得很難將它們部署在關鍵或複雜的應用程式中，而在這些應用程式中，一致的效能至關重要。
 
-**Why**: The Exception Handling and Recovery pattern provides a standardized solution for building robust and resilient AI agents. It equips them with the agentic capability to anticipate, manage, and recover from operational failures. The pattern involves proactive error detection, such as monitoring tool outputs and API responses, and reactive handling strategies like logging for diagnostics, retrying transient failures, or using fallback mechanisms. For more severe issues, it defines recovery protocols, including reverting to a stable state, self-correction by adjusting its plan, or escalating the problem to a human operator. This systematic approach ensures agents can maintain operational integrity, learn from failures, and function dependably in unpredictable settings.
+**為什麼**：例外處理和恢復模式為建立強大且有彈性的 人工智慧 代理提供了標準化的解決方案。它為他們提供了預測、管理和從操作故障中恢復的代理能力。此模式涉及主動錯誤偵測（例如監控工具輸出和 API 回應）以及被動處理策略（例如診斷日誌記錄、重試瞬態故障或使用回退機制）。對於更嚴重的問題，它定義了恢復協議，包括恢復到穩定狀態、透過調整計劃進行自我糾正或將問題升級給手動操作員。這種系統化方法可確保代理能夠保持操作完整性、從故障中學習並在不可預測的環境中可靠地運作。
 
-**Rule of Thumb:** Use this pattern for any AI agent deployed in a dynamic, real-world environment where system failures, tool errors, network issues, or unpredictable inputs are possible and operational reliability is a key requirement.
+**經驗法則：** 將此模式用於部署在動態現實環境中的任何 人工智慧 代理，在這種環境中，系統故障、工具錯誤、網路問題或不可預測的輸入都可能發生，並且操作可靠性是關鍵要求。
 
-**Visual Summary:**
+**視覺摘要：**
 
-![Exception Handling Pattern](../assets/Exception_Handling_Pattern.png)
+![例外處理模式](../assets/Exception_Handling_Pattern.png)
 
-Fig.2: Exception handling pattern
+圖2：例外處理模式
 
-## Key Takeaways
+## 要點
 
-Essential points to remember:
+要記住的重點：
 
-* Exception Handling and Recovery is essential for building robust and reliable Agents.  
-* This pattern involves detecting errors, handling them gracefully, and implementing strategies to recover.  
-* Error detection can involve validating tool outputs, checking API error codes, and using timeouts.  
-* Handling strategies include logging, retries, fallbacks, graceful degradation, and notifications.  
-* Recovery focuses on restoring stable operation through diagnosis, self-correction, or escalation.  
-* This pattern ensures agents can operate effectively even in unpredictable real-world environments.
+* 例外處理和復原對於建立健壯且可靠的代理至關重要。
 
-## Conclusion
+* 此模式涉及偵測錯誤、妥善處理錯誤以及實施復原策略。
 
-This chapter explores the Exception Handling and Recovery pattern, which is essential for developing robust and dependable AI agents. This pattern addresses how AI agents can identify and manage unexpected issues, implement appropriate responses, and recover to a stable operational state. The chapter discusses various aspects of this pattern, including the detection of errors, the handling of these errors through mechanisms such as logging, retries, and fallbacks, and the strategies used to restore the agent or system to proper function. Practical applications of the Exception Handling and Recovery pattern are illustrated across several domains to demonstrate its relevance in handling real-world complexities and potential failures. These applications show how equipping AI agents with exception handling capabilities contributes to their reliability and adaptability in dynamic environments.
+* 錯誤偵測可能涉及驗證工具輸出、檢查 API 錯誤代碼和使用逾時。
 
-## References
+* 處理策略包括日誌記錄、重試、回退、優雅降級和通知。
 
-1. McConnell, S. (2004). *Code Complete (2nd ed.)*. Microsoft Press.
-2. Shi, Y., Pei, H., Feng, L., Zhang, Y., & Yao, D. (2024). *Towards Fault Tolerance in Multi-Agent Reinforcement Learning*. arXiv preprint arXiv:2412.00534.
-3. O'Neill, V. (2022). *Improving Fault Tolerance and Reliability of Heterogeneous Multi-Agent IoT Systems Using Intelligence Transfer*. Electronics, 11(17), 2724.
+* 恢復的重點是透過診斷、自我修正或升級來恢復穩定運作。
+
+* 這種模式確保代理即使在不可預測的現實環境中也能有效運作。
+
+## 結論
+
+本章探討例外處理和恢復模式，這對於開發強大且可靠的人工智慧代理至關重要。該模式解決了人工智慧代理如何識別和管理意外問題、實施適當的回應並恢復到穩定的運作狀態。本章討論了該模式的各個方面，包括錯誤檢測、透過日誌記錄、重試和回退等機制處理這些錯誤，以及用於將代理或系統恢復到正常功能的策略。例外處理和復原模式的實際應用在多個領域進行了說明，以證明其在處理現實世界的複雜性和潛在故障方面的相關性。這些應用程式展示了為人工智慧代理配備例外處理功能如何有助於其在動態環境中的可靠性和適應性。
+
+## 參考
+
+1. 麥康奈爾，S. (2004)。 *程式碼完整（第二版）*。微軟出版社。
+
+2. 施勇、裴浩、馮立、張勇、姚丹 (2024)。 *邁向多代理強化學習中的容錯*。 arXiv 預印本 arXiv：2412.00534。
+
+3. 奧尼爾，V.（2022）。 *使用情報傳輸提高異質多代理物聯網系統的容錯性和可靠性*。電子學，11(17), 2724。

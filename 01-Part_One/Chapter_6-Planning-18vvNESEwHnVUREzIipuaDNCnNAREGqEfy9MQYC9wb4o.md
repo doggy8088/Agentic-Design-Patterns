@@ -1,30 +1,30 @@
-# Chapter 6: Planning
+# 第 6 章：規劃
 
-Intelligent behavior often involves more than just reacting to the immediate input. It requires foresight, breaking down complex tasks into smaller, manageable steps, and strategizing how to achieve a desired outcome. This is where the Planning pattern comes into play. At its core, planning is the ability for an agent or a system of agents to formulate a sequence of actions to move from an initial state towards a goal state.
+智能行為通常不僅涉及對即時輸入的反應。它需要遠見，將複雜的任務分解為更小的、可管理的步驟，並制定如何實現預期結果的策略。這就是規劃模式發揮作用的地方。從本質上講，規劃是智能體或智能體系統制定一系列行動以從初始狀態轉向目標狀態的能力。
 
-## Planning Pattern Overview
+## 規劃模式概述
 
-In the context of AI, it's helpful to think of a planning agent as a specialist to whom you delegate a complex goal. When you ask it to "organize a team offsite," you are defining the what—the objective and its constraints—but not the how. The agent's core task is to autonomously chart a course to that goal. It must first understand the initial state (e.g., budget, number of participants, desired dates) and the goal state (a successfully booked offsite), and then discover the optimal sequence of actions to connect them. The plan is not known in advance; it is created in response to the request.
+在人工智慧的背景下，將規劃代理視為您向其委託複雜目標的專家是有幫助的。當你要求它「在異地組織一個團隊」時，你是在定義什麼——目標及其限制——而不是如何定義。代理的核心任務是自主制定實現該目標的路線。它必須先了解初始狀態（例如預算、參與者數量、期望日期）和目標狀態（成功異地預訂），然後發現連接它們的最佳操作順序。該計劃事先未知；它是為了響應請求而創建的。
 
-A hallmark of this process is adaptability. An initial plan is merely a starting point, not a rigid script. The agent's real power is its ability to incorporate new information and steer the project around obstacles. For instance, if the preferred venue becomes unavailable or a chosen caterer is fully booked, a capable agent doesn't simply fail. It adapts. It registers the new constraint, re-evaluates its options, and formulates a new plan, perhaps by suggesting alternative venues or dates.
+這個過程的一個特徵是適應性。最初的計劃只是一個起點，而不是嚴格的腳本。代理的真正威力在於其整合新資訊並引導專案繞過障礙的能力。例如，如果首選場地不可用或所選餐飲服務商已被預訂滿，有能力的代理不會簡單地失敗。它會適應。它記錄新的限制，重新評估其選擇，並製定新的計劃，也許是透過建議替代地點或日期。
 
-However, it is crucial to recognize the trade-off between flexibility and predictability. Dynamic planning is a specific tool, not a universal solution. When a problem's solution is already well-understood and repeatable, constraining the agent to a predetermined, fixed workflow is more effective. This approach limits the agent's autonomy to reduce uncertainty and the risk of unpredictable behavior, guaranteeing a reliable and consistent outcome. Therefore, the decision to use a planning agent versus a simple task-execution agent hinges on a single question: does the "how" need to be discovered, or is it already known?
+然而，認識到靈活性和可預測性之間的權衡至關重要。動態規劃是一種特定的工具，而不是通用的解決方案。當問題的解決方案已被充分理解且可重複時，將代理限制在預定的固定工作流程中會更有效。這種方法限制了代理的自主權，以減少不確定性和不可預測行為的風險，確保可靠且一致的結果。因此，使用規劃代理還是簡單的任務執行代理的決定取決於一個問題：是否需要發現“如何”，或者是否已經知道？
 
-## Practical Applications & Use Cases
+## 實際應用和用例
 
-The Planning pattern is a core computational process in autonomous systems, enabling an agent to synthesize a sequence of actions to achieve a specified goal, particularly within dynamic or complex environments. This process transforms a high-level objective into a structured plan composed of discrete, executable steps.
+規劃模式是自治系統中的核心計算過程，使代理能夠綜合一系列操作以實現指定目標，特別是在動態或複雜的環境中。此流程將高階目標轉換為由離散的可執行步驟組成的結構化計劃。
 
-In domains such as procedural task automation, planning is used to orchestrate complex workflows. For example, a business process like onboarding a new employee can be decomposed into a directed sequence of sub-tasks, such as creating system accounts, assigning training modules, and coordinating with different departments. The agent generates a plan to execute these steps in a logical order, invoking necessary tools or interacting with various systems to manage dependencies.
+在程式任務自動化等領域，規劃用於編排複雜的工作流程。例如，像新員工入職這樣的業務流程可以分解為一系列有向的子任務，例如建立系統帳戶、分配培訓模組以及與不同部門進行協調。代理產生一個計劃，以邏輯順序執行這些步驟，呼叫必要的工具或與各種系統互動以管理依賴性。
 
-Within robotics and autonomous navigation, planning is fundamental for state-space traversal. A system, whether a physical robot or a virtual entity, must generate a path or sequence of actions to transition from an initial state to a goal state. This involves optimizing for metrics such as time or energy consumption while adhering to environmental constraints, like avoiding obstacles or following traffic regulations.
+在機器人技術和自主導航中，規劃是狀態空間遍歷的基礎。一個系統，無論是實體機器人還是虛擬實體，都必須產生一條路徑或一系列動作，以從初始狀態過渡到目標狀態。這涉及優化時間或能源消耗等指標，同時遵守環境限制，例如避開障礙物或遵守交通法規。
 
-This pattern is also critical for structured information synthesis. When tasked with generating a complex output like a research report, an agent can formulate a plan that includes distinct phases for information gathering, data summarization, content structuring, and iterative refinement. Similarly, in customer support scenarios involving multi-step problem resolution, an agent can create and follow a systematic plan for diagnosis, solution implementation, and escalation.
+這種模式對於結構化資訊合成也至關重要。當負責產生研究報告等複雜輸出時，代理可以製定一個計劃，其中包括資訊收集、資料匯總、內容結構和迭代細化的不同階段。同樣，在涉及多步驟問題解決的客戶支援場景中，客服人員可以創建並遵循系統的診斷、解決方案實施和升級計劃。
 
-In essence, the Planning pattern allows an agent to move beyond simple, reactive actions to goal-oriented behavior. It provides the logical framework necessary to solve problems that require a coherent sequence of interdependent operations.
+從本質上講，規劃模式允許代理超越簡單的反應性操作，轉向以目標為導向的行為。它提供了解決需要連貫的相互依賴操作序列的問題所必需的邏輯框架。
 
-## Hands-on code (Crew AI)
+## 動手程式碼（Crew AI）
 
-The following section will demonstrate an implementation of the Planner pattern using the Crew AI framework. This pattern involves an agent that first formulates a multi-step plan to address a complex query and then executes that plan sequentially.
+以下部分將示範使用 Crew AI 框架實作 Planner 模式。此模式涉及一個代理，該代理首先制定一個多步驟計劃來解決複雜的查詢，然後按順序執行該計劃。
 
 ```python
 import os
@@ -91,47 +91,47 @@ print("\n\n---\n## Task Result ##\n---")
 print(result)
 ```
 
-This code uses the CrewAI library to create an AI agent that plans and writes a summary on a given topic. It starts by importing necessary libraries, including Crew.ai and `langchain_openai`, and loading environment variables from a .env file. A ChatOpenAI language model is explicitly defined for use with the agent. An Agent named `planner_writer_agent` is created with a specific role and goal: to plan and then write a concise summary. The agent's backstory emphasizes its expertise in planning and technical writing. A Task is defined with a clear description to first create a plan and then write a summary on the topic "The importance of Reinforcement Learning in AI", with a specific format for the expected output. A Crew is assembled with the agent and task, set to process them sequentially. Finally, the crew.kickoff() method is called to execute the defined task and the result is printed.
+此程式碼使用 CrewAI 庫建立一個 AI 代理，該代理可以規劃並編寫給定主題的摘要。首先匯入必要的庫，包括 Crew.ai 和 `langchain_openai`，並從 .env 檔案載入環境變數。 ChatOpenAI 語言模型被明確定義為與代理一起使用。建立名為 `planner_writer_agent` 的代理具有特定的角色和目標：計劃然後編寫簡潔的摘要。該代理的背景故事強調了其在規劃和技術寫作方面的專業知識。任務的定義有清晰的描述，首先創建一個計劃，然後編寫關於「人工智慧中強化學習的重要性」主題的摘要，並使用預期輸出的特定格式。 Crew 與代理和任務組合在一起，設定為按順序處理它們。最後呼叫crew.kickoff()方法執行定義的任務並列印結果。
 
-## Google DeepResearch
+## 谷歌深度研究
 
-Google Gemini DeepResearch (see Fig.1)  is an agent-based system designed for autonomous information retrieval and synthesis. It functions through a multi-step agentic pipeline that dynamically and iteratively queries Google Search to systematically explore complex topics. The system is engineered to process a large corpus of web-based sources, evaluate the collected data for relevance and knowledge gaps, and perform subsequent searches to address them. The final output consolidates the vetted information into a structured, multi-page summary with citations to the original sources.
+Google Gemini DeepResearch（見圖 1）是一個基於代理的系統，專為自主資訊擷取和合成而設計。它透過多步驟代理管道運行，動態地、迭代地查詢 Google 搜索，以系統地探索複雜的主題。該系統旨在處理大量基於網路的資源，評估收集的數據的相關性和知識差距，並執行後續搜尋來解決這些問題。最終輸出將經過審查的資訊合併為結構化的多頁摘要，並引用原始來源。
 
-Expanding on this, the system's operation is not a single query-response event but a managed, long-running process. It begins by deconstructing a user's prompt into a multi-point research plan (see Fig. 1), which is then presented to the user for review and modification. This allows for a collaborative shaping of the research trajectory before execution. Once the plan is approved, the agentic pipeline initiates its iterative search-and-analysis loop. This involves more than just executing a series of predefined searches; the agent dynamically formulates and refines its queries based on the information it gathers, actively identifying knowledge gaps, corroborating data points, and resolving discrepancies.
+在此基礎上擴展，系統的操作不是單一查詢回應事件，而是託管的、長期運行的過程。它首先將使用者的提示解構為多點研究計畫（見圖 1），然後將其呈現給使用者進行審查和修改。這允許在執行之前協作塑造研究軌跡。一旦計劃獲得批准，代理管道就會啟動其迭代搜尋和分析循環。這不僅涉及執行一系列預先定義的搜尋；代理根據收集的資訊動態地制定和完善其查詢，主動識別知識差距，證實資料點並解決差異。
 
-![Google Deep Research agent generating an execution plan for using Google Search as a tool](../assets/Google_Deep_Research_Agent_Generating_an_execution_plan_for_using_Google_Search_as_a_Tool.png)
+![Google Deep Research 代理 generating an execution plan for using Google Search as a tool](../assets/Google_Deep_Research_Agent_Generating_an_execution_plan_for_using_Google_Search_as_a_Tool.png)
 
-Fig. 1: Google Deep Research agent generating an execution plan for using Google Search as a tool.
+圖 1：Google Deep Research 代理產生使用 Google 搜尋作為工具的執行計劃。
 
-A key architectural component is the system's ability to manage this process asynchronously. This design ensures that the investigation, which can involve analyzing hundreds of sources, is resilient to single-point failures and allows the user to disengage and be notified upon completion. The system can also integrate user-provided documents, combining information from private sources with its web-based research. The final output is not merely a concatenated list of findings but a structured, multi-page report. During the synthesis phase, the model performs a critical evaluation of the collected information, identifying major themes and organizing the content into a coherent narrative with logical sections. The report is designed to be interactive, often including features like an audio overview, charts, and links to the original cited sources, allowing for verification and further exploration by the user. In addition to the synthesized results, the model explicitly returns the full list of sources it searched and consulted (see Fig.2). These are presented as citations, providing complete transparency and direct access to the primary information. This entire process transforms a simple query into a comprehensive, synthesized body of knowledge.
+一個關鍵的架構元件是系統非同步管理此過程的能力。這種設計確保可能涉及分析數百個來源的調查能夠抵禦單點故障，並允許用戶在完成後退出並收到通知。該系統還可以整合用戶提供的文件，將私人來源的資訊與其基於網路的研究相結合。最終的產出不僅僅是一個串聯的調查結果列表，而是一份結構化的多頁報告。在綜合階段，該模型對收集的資訊進行批判性評估，確定主要主題並將內容組織成具有邏輯部分的連貫敘述。該報告被設計為互動式的，通常包括音訊概述、圖表和原始引用來源的連結等功能，以便用戶進行驗證和進一步探索。除了綜合結果之外，模型還明確傳回其搜尋和查閱的來源的完整清單（見圖 2）。這些內容以引文形式呈現，提供完全的透明度和對主要資訊的直接存取。整個過程將簡單的查詢轉化為全面、綜合的知識體系。
 
 ![An example of Deep Research plan being executed, resulting in Google Search being used as a tool to search various web sources](../assests/Example_of_Deep_Research_Plan_Being_Executed_Resulting_in_Google_Search_being_used_as_a_Tool_to_Search_Various_Web_Sources.png)
 
-Fig. 2: An example of Deep Research plan being executed, resulting in Google Search being used as a tool to search various web sources.
+圖 2：正在執行的深度研究計畫的範例，導致 Google 搜尋被用作搜尋各種網路資源的工具。
 
-By mitigating the substantial time and resource investment required for manual data acquisition and synthesis, Gemini DeepResearch provides a more structured and exhaustive method for information discovery. The system's value is particularly evident in complex, multi-faceted research tasks across various domains.
+透過減少手動資料收集和合成所需的大量時間和資源投入，Gemini DeepResearch 提供了一種更結構化和詳盡的資訊發現方法。該系統的價值在跨不同領域的複雜、多面向的研究任務中尤其明顯。
 
-For instance, in competitive analysis, the agent can be directed to systematically gather and collate data on market trends, competitor product specifications, public sentiment from diverse online sources, and marketing strategies. This automated process replaces the laborious task of manually tracking multiple competitors, allowing analysts to focus on higher-order strategic interpretation rather than data collection (see Fig. 3).
+例如，在競爭分析中，可以指導代理系統地收集和整理有關市場趨勢、競爭對手產品規格、來自不同線上來源的公眾情緒以及行銷策略的數據。這種自動化流程取代了手動追蹤多個競爭對手的繁瑣任務，使分析師能夠專注於更高階的策略解釋，而不是資料收集（見圖 3）。
 
-![Final output generated by the Google Deep Research agent, analyzing on our behalf sources obtained using Google Search as a tool](../assets/Final_Output_Generated_by_Google_Deep_Research_Agent_Analyzing_on_our_Behalf_Sources_Obtained_using_Google_Search_as_a_Tool.png)
+![Final output generated by the Google Deep Research 代理, analyzing on our behalf sources obtained using Google Search as a tool](../assets/Final_Output_Generated_by_Google_Deep_Research_Agent_Analyzing_on_our_Behalf_Sources_Obtained_using_Google_Search_as_a_Tool.png)
 
-Fig. 3: Final output generated by the Google Deep Research agent, analyzing on our behalf sources obtained using Google Search as a tool.
+圖 3：Google 深度研究代理產生的最終輸出，代表我們分析使用 Google 搜尋作為工具獲得的來源。
 
-Similarly, in academic exploration, the system serves as a powerful tool for conducting extensive literature reviews. It can identify and summarize foundational papers, trace the development of concepts across numerous publications, and map out emerging research fronts within a specific field, thereby accelerating the initial and most time-consuming phase of academic inquiry.
+同樣，在學術探索中，該系統可以作為進行廣泛文獻綜述的有力工具。它可以識別和總結基礎論文，追蹤眾多出版物中概念的發展，並繪製出特定領域內的新興研究前沿，從而加速學術探究的初始和最耗時的階段。
 
-The efficiency of this approach stems from the automation of the iterative search-and-filter cycle, which is a core bottleneck in manual research. Comprehensiveness is achieved by the system's capacity to process a larger volume and variety of information sources than is typically feasible for a human researcher within a comparable timeframe. This broader scope of analysis helps to reduce the potential for selection bias and increases the likelihood of uncovering less obvious but potentially critical information, leading to a more robust and well-supported understanding of the subject matter.
+這種方法的效率源自於迭代搜尋和過濾週期的自動化，這是手動研究的核心瓶頸。綜合性是透過系統處理比人類研究人員在可比較的時間範圍內通常可行的更多數量和種類的資訊來源的能力來實現的。這種更廣泛的分析範圍有助於減少選擇偏差的可能性，並增加發現不太明顯但潛在關鍵資訊的可能性，從而對主題有更可靠和有充分支持的理解。
 
-## OpenAI Deep Research API
+## OpenAI 深度研究 API
 
-The OpenAI Deep Research API is a specialized tool designed to automate complex research tasks. It utilizes an advanced, agentic model that can independently reason, plan, and synthesize information from real-world sources. Unlike a simple Q\&A model, it takes a high-level query and autonomously breaks it down into sub-questions, performs web searches using its built-in tools, and delivers a structured, citation-rich final report. The API provides direct programmatic access to this entire process, using  at the time of writing models like o3-deep-research-2025-06-26 for high-quality synthesis and the faster o4-mini-deep-research-2025-06-26 for latency-sensitive application
+OpenAI Deep Research API 是一款專用工具，旨在自動執行複雜的研究任務。它採用先進的代理模型，可以獨立推理、規劃和綜合來自現實世界的資訊。與簡單的問答模型不同，它採用高級查詢並自動將其分解為子問題，使用其內置工具執行網絡搜索，並提供結構化的、引用豐富的最終報告。 API 提供對整個過程的直接編程訪問，在編寫模型時使用 o3-deep-research-2025-06-26 來實現高品質綜合，使用更快的 o4-mini-deep-research-2025-06-26 來實現對延遲敏感的應用程序
 
-The Deep Research API is useful because it automates what would otherwise be hours of manual research, delivering professional-grade, data-driven reports suitable for informing business strategy, investment decisions, or policy recommendations. Its key benefits include:
+Deep Research API 非常有用，因為它可以自動完成原本需要數小時的手動研究，提供專業級的數據驅動報告，適合為業務戰略、投資決策或政策建議提供資訊。其主要優點包括：
 
-* **Structured, Cited Output:** It produces well-organized reports with inline citations linked to source metadata, ensuring claims are verifiable and data-backed.  
-* **Transparency:** Unlike the abstracted process in ChatGPT, the API exposes all intermediate steps, including the agent's reasoning, the specific web search queries it executed, and any code it ran. This allows for detailed debugging, analysis, and a deeper understanding of how the final answer was constructed.  
-* **Extensibility:** It supports the Model Context Protocol (MCP), enabling developers to connect the agent to private knowledge bases and internal data sources, blending public web research with proprietary information.
+* **結構化的引用輸出：** 它產生組織良好的報告，其中內嵌引用連結到來源元數據，確保聲明可驗證且有數據支援。  
+* **透明度：** 與 ChatGPT 中的抽象流程不同，API 公開了所有中間步驟，包括代理的推理、其執行的特定 Web 搜尋查詢以及其運行的任何程式碼。這樣可以進行詳細的調試、分析，並更深入地了解最終答案的建構方式。  
+* **可擴展性：** 它支援模型上下文協定（MCP），使開發人員能夠將代理連接到私有知識庫和內部資料來源，將公共網路研究與專有資訊整合在一起。
 
-To use the API, you send a request to the client.responses.create endpoint, specifying a model, an input prompt, and the tools the agent can use. The input typically includes a `system_message` that defines the agent's persona and desired output format, along with the `user_query`. You must also include the `web_search_preview` tool and can optionally add others like `code_interpreter` or custom MCP tools (see Chapter 10) for internal data.
+若要使用 API，您需要向 client.responses.create 端點傳送請求，指定模型、輸入提示以及代理可以使用的工具。輸入通常包括定義代理角色和所需輸出格式的 `system_message` 以及 `user_query`。您還必須包含 `web_search_preview` 工具，並且可以選擇新增其他工具，例如 `code_interpreter` 或自訂 MCP 工具（請參閱第 10 章）以取得內部資料。
 
 ```python
 from openai import OpenAI
@@ -225,38 +225,38 @@ except StopIteration:
     print("\nNo code execution steps found.")
 ```
 
-This code snippet utilizes the OpenAI API to perform a "Deep Research" task. It starts by initializing the OpenAI client with your API key, which is crucial for authentication. Then, it defines the role of the AI agent as a professional researcher and sets the user's research question about the economic impact of semaglutide. The code constructs an API call to the o3-deep-research-2025-06-26 model, providing the defined system message and user query as input. It also requests an automatic summary of the reasoning and enables web search capabilities. After making the API call, it extracts and prints the final generated report.
+此程式碼片段利用 OpenAI API 執行「深度研究」任務。首先使用您的 API 金鑰初始化 OpenAI 用戶端，這對於身份驗證至關重要。然後，將人工智慧代理的角色定義為專業研究人員，並設定使用者關於索馬魯肽的經濟影響的研究問題。該程式碼建構對 o3-deep-research-2025-06-26 模型的 API 調用，提供定義的系統訊息和使用者查詢作為輸入。它還請求自動總結推理並啟用網路搜尋功能。進行 API 呼叫後，它會提取並列印最終產生的報告。
 
-Subsequently, it attempts to access and display inline citations and metadata from the report's annotations, including the cited text, title, URL, and location within the report. Finally, it inspects and prints details about the intermediate steps the model took, such as reasoning steps, web search calls (including the query executed), and any code execution steps if a code interpreter was used.
+隨後，它嘗試存取並顯示報告註釋中的內聯引用和元數據，包括報告中引用的文字、標題、URL 和位置。最後，它檢查並列印有關模型所採取的中間步驟的詳細信息，例如推理步驟、網路搜尋呼叫（包括執行的查詢）以及任何程式碼執行步驟（如果使用程式碼解釋器）。
 
-## At a Glance
+## 概覽
 
-**What:** Complex problems often cannot be solved with a single action and require foresight to achieve a desired outcome. Without a structured approach, an agentic system struggles to handle multifaceted requests that involve multiple steps and dependencies. This makes it difficult to break down high-level objectives into a manageable series of smaller, executable tasks. Consequently, the system fails to strategize effectively, leading to incomplete or incorrect results when faced with intricate goals.
+**內容：** 複雜的問題通常無法透過單一行動解決，需要有遠見才能達到預期的結果。如果沒有結構化方法，代理系統將難以處理涉及多個步驟和依賴關係的多方面請求。這使得將高階目標分解為一系列可管理的較小的可執行任務變得困難。因此，系統無法有效地制定策略，從而在面對複雜的目標時導致不完整或不正確的結果。
 
-**Why:** The Planning pattern offers a standardized solution by having an agentic system first create a coherent plan to address a goal. It involves decomposing a high-level objective into a sequence of smaller, actionable steps or sub-goals. This allows the system to manage complex workflows, orchestrate various tools, and handle dependencies in a logical order. LLMs are particularly well-suited for this, as they can generate plausible and effective plans based on their vast training data. This structured approach transforms a simple reactive agent into a strategic executor that can proactively work towards a complex objective and even adapt its plan if necessary.
+**原因：** 規劃模式透過讓代理系統首先創建一個連貫的計劃來實現目標，從而提供標準化的解決方案。它涉及將高級目標分解為一系列較小的、可操作的步驟或子目標。這使得系統能夠管理複雜的工作流程、編排各種工具並以邏輯順序處理依賴關係。LLM特別適合這一點，因為他們可以根據大量的培訓數據制定合理且有效的計劃。這種結構化方法將簡單的反應代理轉變為策略執行者，可以主動實現複雜的目標，甚至在必要時調整其計劃。
 
-**Rule of thumb:** Use this pattern when a user's request is too complex to be handled by a single action or tool. It is ideal for automating multi-step processes, such as generating a detailed research report, onboarding a new employee, or executing a competitive analysis. Apply the Planning pattern whenever a task requires a sequence of interdependent operations to reach a final, synthesized outcome.
+**經驗法則：** 當使用者的要求過於複雜而無法透過單一操作或工具處理時，請使用此模式。它非常適合自動化多步驟流程，例如產生詳細的研究報告、新員工入職或執行競爭分析。每當任務需要一系列相互依賴的操作才能達到最終的綜合結果時，請應用規劃模式。
 
-**Visual summary**  
+**視覺總結**
 
 ![Planning Design Pattern](../assets/Planning_Design_Pattern.png)
 
-Fig.4; Planning design pattern
+圖4；規劃設計模式
 
-## Key Takeaways
+## 要點
 
-* Planning enables agents to break down complex goals into actionable, sequential steps.  
-* It is essential for handling multi-step tasks, workflow automation, and navigating complex environments.  
-* LLMs can perform planning by generating step-by-step approaches based on task descriptions.  
-* Explicitly prompting or designing tasks to require planning steps encourages this behavior in agent frameworks.  
-* Google Deep Research is an agent analyzing on our behalf sources obtained using Google Search as a tool. It reflects, plans, and executes
+* 規劃使代理能夠將複雜的目標分解為可操作的連續步驟。  
+* 它對於處理多步驟任務、工作流程自動化和駕馭複雜環境至關重要。  
+* LLM可以根據任務描述產生逐步方法來執行規劃。  
+* 明確提示或設計需要規劃步驟的任務會鼓勵代理框架中的這種行為。  
+* Google Deep Research 是代表我們分析使用 Google 搜尋作為工具獲得的資源的代理。它反映、計劃和執行
 
-## Conclusion
+## 結論
 
-In conclusion, the Planning pattern is a foundational component that elevates agentic systems from simple reactive responders to strategic, goal-oriented executors. Modern large language models provide the core capability for this, autonomously decomposing high-level objectives into coherent, actionable steps. This pattern scales from straightforward, sequential task execution, as demonstrated by the CrewAI agent creating and following a writing plan, to more complex and dynamic systems. The Google DeepResearch agent exemplifies this advanced application, creating iterative research plans that adapt and evolve based on continuous information gathering. Ultimately, planning provides the essential bridge between human intent and automated execution for complex problems. By structuring a problem-solving approach, this pattern enables agents to manage intricate workflows and deliver comprehensive, synthesized results.
+總之，規劃模式是一個基本組件，它將代理系統從簡單的反應響應者提升為策略性的、以目標為導向的執行者。現代大型語言模型為此提供了核心功能，自動將高階目標分解為連貫的、可操作的步驟。這種模式從簡單、順序的任務執行（如 CrewAI 代理創建和遵循寫作計劃所證明的那樣）擴展到更複雜和動態的系統。 Google DeepResearch 代理體現了這種先進的應用程序，創建了基於持續資訊收集進行調整和發展的迭代研究計劃。最終，規劃在人類意圖和複雜問題的自動執行之間架起了重要的橋樑。透過建立解決問題的方法，該模式使代理能夠管理複雜的工作流程並提供全面的綜合結果。
 
-## References
+## 參考
 
-1. Google DeepResearch (Gemini Feature): [gemini.google.com](http://gemini.google.com)
-2. OpenAI ,Introducing deep research  [https://openai.com/index/introducing-deep-research/](https://openai.com/index/introducing-deep-research/)
-3. Perplexity, Introducing Perplexity Deep Research, [https://www.perplexity.ai/hub/blog/introducing-perplexity-deep-research](https://www.perplexity.ai/hub/blog/introducing-perplexity-deep-research)
+1. Google DeepResearch（雙子座功能）：[gemini.google.com](http://gemini.google.com)
+2. OpenAI，引入深度研究[https://openai.com/index/introducing-deep-research/](https://openai.com/index/introducing-deep-research/)
+3. 困惑，困惑深度研究簡介，[https://www.perplexity.ai/hub/blog/introducing-perplexity-deep-research](https://www.perplexity.ai/hub/blog/introducing-perplexity-deep-research)

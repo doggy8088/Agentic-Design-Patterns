@@ -1,68 +1,81 @@
-# Appendix E - AI Agents on the CLI
+# 附錄 E - CLI 上的 人工智慧 代理
 
-## Introduction
+## 介紹
 
-​​The developer's command line, long a bastion of precise, imperative commands, is undergoing a profound transformation. It is evolving from a simple shell into an intelligent, collaborative workspace powered by a new class of tools: AI Agent Command-Line Interfaces (CLIs). These agents move beyond merely executing commands; they understand natural language, maintain context about your entire codebase, and can perform complex, multi-step tasks that automate significant parts of the development lifecycle.
+開發人員的命令列長期以來一直是精確、命令式命令的堡壘，現在正在經歷深刻的轉變。它正在從一個簡單的 shell 發展成為一個由新型工具支援的智慧協作工作區：人工智慧 代理命令列介面 (CLI)。這些代理不僅僅是執行命令；他們理解自然語言，維護整個程式碼庫的上下文，並且可以執行複雜的多步驟任務，從而自動化開發生命週期的重要部分。
 
-This guide provides an in-depth look at four leading players in this burgeoning field, exploring their unique strengths, ideal use cases, and distinct philosophies to help you determine which tool best fits your workflow. It is important to note that many of the example use cases provided for a specific tool can often be accomplished by the other agents as well. The key differentiator between these tools frequently lies in the quality, efficiency, and nuance of the results they are able to achieve for a given task. There are specific benchmarks designed to measure these capabilities, which will be discussed in the following sections.
+本指南深入介紹了這個新興領域的四家領導企業，探索他們獨特的優勢、理想的用例和獨特的理念，幫助您確定哪種工具最適合您的工作流程。值得注意的是，為特定工具提供的許多範例用例通常也可以由其他代理完成。這些工具之間的主要區別通常在於它們針對給定任務能夠實現的結果的品質、效率和細微差別。有一些特定的基準旨在衡量這些功能，將在以下各節中討論。
 
-## Claude CLI (Claude Code)
+## Claude 4 CLI（克勞德代碼）
 
-Anthropic's Claude CLI is engineered as a high-level coding agent with a deep, holistic understanding of a project's architecture. Its core strength is its "agentic" nature, allowing it to create a mental model of your repository for complex, multi-step tasks. The interaction is highly conversational, resembling a pair programming session where it explains its plans before executing. This makes it ideal for professional developers working on large-scale projects involving significant refactoring or implementing features with broad architectural impacts.
+Anthropic 的 Claude CLI 被設計為高階Coding Agent，對專案架構有深入、全面的了解。它的核心優勢是它的「代理」性質，允許它為複雜的多步驟任務創建儲存庫的心理模型。這種互動是高度對話式的，類似於結對程式設計會話，在執行之前解釋其計劃。這使其成為從事涉及重大重構或實現具有廣泛架構影響的功能的大型專案的專業開發人員的理想選擇。
 
-**Example Use Cases:**
+**用例範例：**
 
-1. **Large-Scale Refactoring:** You can instruct it: "Our current user authentication relies on session cookies. Refactor the entire codebase to use stateless JWTs, updating the login/logout endpoints, middleware, and frontend token handling." Claude will then read all relevant files and perform the coordinated changes.  
-2. **API Integration:** After being provided with an OpenAPI specification for a new weather service, you could say: "Integrate this new weather API. Create a service module to handle the API calls, add a new component to display the weather, and update the main dashboard to include it."  
-3. **Documentation Generation**: Pointing it to a complex module with poorly documented code, you can ask: "Analyze the `./src/utils/data_processing.js` file. Generate comprehensive TSDoc comments for every function, explaining its purpose, parameters, and return value."
+1. **大規模重構：** 您可以指示它：「我們目前的使用者驗證依賴會話 cookie。重構整個程式碼庫以使用無狀態 JWT，更新登入/登出端點、中間件和前端令牌處理。」然後，克勞德將讀取所有相關檔案並執行協調的變更。
 
-Claude CLI functions as a specialized coding assistant, with inherent tools for core development tasks, including file ingestion, code structure analysis, and edit generation. Its deep integration with Git facilitates direct branch and commit management. The agent's extensibility is mediated by the Multi-tool Control Protocol (MCP), enabling users to define and integrate custom tools. This allows for interactions with private APIs, database queries, and execution of project-specific scripts. This architecture positions the developer as the arbiter of the agent's functional scope, effectively characterizing Claude as a reasoning engine augmented by user-defined tooling.
+2. **API 整合：** 在為新的天氣服務提供 OpenAPI 規範後，您可以說：“集成這個新的天氣 API。創建一個服務模組來處理 API 調用，添加一個新組件來顯示天氣，並更新主儀表板以包含它。”
+
+3. **文件產生**：將其指向一個代碼文件記錄不完善的複雜模組，你可以問：“分析 `./src/utils/data_processing.js` 文件。為每個函數生成全面的 TSDoc 註釋，解釋其用途、參數和返回值。”
+
+Claude CLI 充當專門的程式設計助手，具有核心開發任務的固有工具，包括文件攝取、程式碼結構分析和編輯生成。它與 Git 的深度整合有利於直接分支和提交管理。此代理的可擴展性由多工具控制協定（MCP）調節，使用戶能夠定義和整合自訂工具。這允許與私有 API、資料庫查詢和執行特定於專案的腳本進行互動。這種架構將開發人員定位為代理功能範圍的仲裁者，有效地將 Claude 描述為由使用者定義的工具增強的推理引擎。
 
 ## Gemini CLI
 
-Google's Gemini CLI is a versatile, open-source AI agent designed for power and accessibility. It stands out with the advanced Gemini 2.5 Pro model, a massive context window, and multimodal capabilities (processing images and text). Its open-source nature, generous free tier, and "Reason and Act" loop make it a transparent, controllable, and excellent all-rounder for a broad audience, from hobbyists to enterprise developers, especially those within the Google Cloud ecosystem.
+Google 的 Gemini CLI 是一款多功能開源 人工智慧 代理，專為強大功能和可訪問性而設計。它憑藉先進的 Gemini 2.5 Pro 模型、巨大的上下文視窗和多模式功能（處理圖像和文字）而脫穎而出。其開源特性、慷慨的免費套餐以及「理性與行動」循環使其成為面向廣大受眾（從愛好者到企業開發人員，尤其是 Google Cloud 生態系統內的開發人員）的透明、可控且出色的全能工具。
 
-**Example Use Cases:**
+**用例範例：**
 
-1. **Multimodal Development:** You provide a screenshot of a web component from a design file (gemini describe component.png) and instruct it: "Write the HTML and CSS code to build a React component that looks exactly like this. Make sure it's responsive."  
-2. **Cloud Resource Management:** Using its built-in Google Cloud integration, you can command: "Find all GKE clusters in the production project that are running versions older than 1.28 and generate a gcloud command to upgrade them one by one."  
-3. **Enterprise Tool Integration (via MCP):** A developer provides Gemini with a custom tool called get-employee-details that connects to the company's internal HR API. The prompt is: "Draft a welcome document for our new hire. First, use the get-employee-details --id=E90210 tool to fetch their name and team, and then populate the welcome_template.md with that information."  
-4. **Large-Scale Refactoring**: A developer needs to refactor a large Java codebase to replace a deprecated logging library with a new, structured logging framework. They can use Gemini with a prompt like: Read all *.java files in the 'src/main/java' directory. For each file, replace all instances of the 'org.apache.log4j' import and its 'Logger' class with 'org.slf4j.Logger' and 'LoggerFactory'. Rewrite the logger instantiation and all .info(), .debug(), and .error() calls to use the new structured format with key-value pairs.
+1. **多模式開發：** 您提供設計文件中的 Web 元件的螢幕截圖 (gemini describe component.png) 並指示它：“編寫 HTML 和 CSS 程式碼來建立一個看起來與此完全相同的 React 元件。確保它具有響應能力。”
 
-Gemini CLI is equipped with a suite of built-in tools that allow it to interact with its environment. These include tools for file system operations (like reading and writing), a shell tool for running commands, and tools for accessing the internet via web fetching and searching. For broader context, it uses specialized tools to read multiple files at once and a memory tool to save information for later sessions. This functionality is built on a secure foundation: sandboxing isolates the model's actions to prevent risk, while MCP servers act as a bridge, enabling Gemini to safely connect to your local environment or other APIs.
+2. **雲端資源管理：** 使用其內建的 Google Cloud 集成，您可以命令：“查找生產項目中運行早於 1.28 版本的所有 GKE 叢集，並生成 gcloud 命令將其一一升級。”
 
-## Aider
+3. **企業工具整合（透過 MCP）：** 開發人員為 Gemini 提供了一個名為 get-employee-details 的自訂工具，該工具連接到公司的內部 HR API。提示是：“為我們的新員工起草一份歡迎文件。首先，使用 get-employee-details --id=E90210 工具獲取他們的姓名和團隊，然後使用該信息填充welcome_template.md。”
 
-Aider is an open-source AI coding assistant that acts as a true pair programmer by working directly on your files and committing changes to Git. Its defining feature is its directness; it applies edits, runs tests to validate them, and automatically commits every successful change. Being model-agnostic, it gives users complete control over cost and capabilities. Its git-centric workflow makes it perfect for developers who value efficiency, control, and a transparent, auditable trail of all code modifications.
+4. **大規模重構**：開發人員需要重構大型 Java 程式碼庫，以新的結構化日誌框架取代已棄用的日誌庫。他們可以使用 Gemini 並提示如下：讀取“src/main/java”目錄中的所有 *.java 檔案。對於每個文件，將“org.apache.log4j”導入及其“Logger”類別的所有實例替換為“org.slf4j.Logger”和“LoggerFactory”。重寫記錄器實例化以及所有 .info()、.debug() 和 .error() 調用，以使用帶有鍵值對的新結構化格式。
 
-**Example Use Cases:**
+Gemini CLI 配備了一套內建工具，可使其與其環境互動。其中包括用於檔案系統操作（如讀取和寫入）的工具、用於執行命令的 shell 工具以及用於透過 Web 取得和搜尋存取網路的工具。對於更廣泛的上下文，它使用專門的工具一次讀取多個文件，並使用記憶體工具為以後的會話保存資訊。此功能建立在安全的基礎上：沙箱隔離模型的操作以防止風險，而 MCP 伺服器充當橋樑，使 Gemini 能夠安全地連接到您的本地環境或其他 API。
 
-1. **Test-Driven Development (TDD):** A developer can say: "Create a failing test for a function that calculates the factorial of a number." After Aider writes the test and it fails, the next prompt is: "Now, write the code to make the test pass." Aider implements the function and runs the test again to confirm.  
-2. **Precise Bug Squashing:** Given a bug report, you can instruct Aider: "The `calculate_total` function in billing.py fails on leap years. Add the file to the context, fix the bug, and verify your fix against the existing test suite."  
-3. **Dependency Updates:** You could instruct it: "Our project uses an outdated version of the 'requests' library. Please go through all Python files, update the import statements and any deprecated function calls to be compatible with the latest version, and then update requirements.txt."
+## 助手
+
+Aider 是一款開源 人工智慧 程式設計助手，透過直接處理您的檔案並將變更提交到 Git，充當真正的配對程式設計師。它的顯著特徵是直接性。它應用編輯，運行測試來驗證它們，並自動提交每個成功的變更。由於與模型無關，它使用戶可以完全控製成本和功能。其以 git 為中心的工作流程使其非常適合重視效率、控制以及所有程式碼修改的透明、可審核追蹤的開發人員。
+
+**用例範例：**
+
+1. **測試驅動開發 (TDD)：** 開發人員可以說：「為計算數字階乘的函數建立失敗測試。」Aider 編寫測試失敗後，下一個提示是：「現在，編寫程式碼以使測試通過」。 Aider實現該功能並再次執行測試進行確認。
+
+2. **精確的錯誤壓縮：** 給定錯誤報告，您可以指示 Aider：“billing.py 中的 `calculate_total` 函數在閏年失敗。將文件添加到上下文中，修復錯誤，並根據現有測試套件驗證您的修復。”
+
+3. **依賴項更新：** 您可以指示它：“我們的專案使用過時版本的‘requests’庫。請檢查所有Python文件，更新導入語句和任何已棄用的函數調用以與最新版本兼容，然後更新requirements.txt。”
 
 ## GitHub Copilot CLI
 
-GitHub Copilot CLI extends the popular AI pair programmer into the terminal, with its primary advantage being its native, deep integration with the GitHub ecosystem. It understands the context of a project *within GitHub*. Its agent capabilities allow it to be assigned a GitHub issue, work on a fix, and submit a pull request for human review.
+GitHub Copilot CLI 將流行的 人工智慧 對程式設計師擴展到終端，其主要優勢是與 GitHub 生態系統的原生深度整合。它了解 *GitHub 內*專案的上下文。它的代理功能允許它分配 GitHub 問題、進行修復並提交拉取請求以供人工審核。
 
-**Example Use Cases:**
+**用例範例：**
 
-1. **Automated Issue Resolution:** A manager assigns a bug ticket (e.g., "Issue #123: Fix off-by-one error in pagination") to the Copilot agent. The agent then checks out a new branch, writes the code, and submits a pull request referencing the issue, all without manual developer intervention.  
-2. **Repository-Aware Q\&A:** A new developer on the team can ask: "Where in this repository is the database connection logic defined, and what environment variables does it require?" Copilot CLI uses its awareness of the entire repo to provide a precise answer with file paths.  
-3. **Shell Command Helper:** When unsure about a complex shell command, a user can ask: gh? find all files larger than 50MB, compress them, and place them in an archive folder. Copilot will generate the exact shell command needed to perform the task.
+1. **自動問題解決：** 經理將錯誤通知單（例如，「問題 #123：修正分頁中的逐一錯誤」）指派給 Copilot 代理。然後，代理檢查一個新分支，編寫程式碼，並提交引用該問題的拉取請求，所有這些都無需開發人員手動幹預。
 
-## Terminal-Bench: A Benchmark for AI Agents in Command-Line Interfaces
+2. **儲存庫感知問答：** 團隊中的新開發人員可以問：「這個儲存庫中的什麼位置定義了資料庫連接邏輯，需要哪些環境變數？」Copilot CLI 利用其對整個儲存庫的感知來提供檔案路徑的精確答案。
 
-Terminal-Bench is a novel evaluation framework designed to assess the proficiency of AI agents in executing complex tasks within a command-line interface. The terminal is identified as an optimal environment for AI agent operation due to its text-based, sandboxed nature. The initial release, Terminal-Bench-Core-v0, comprises 80 manually curated tasks spanning domains such as scientific workflows and data analysis. To ensure equitable comparisons, Terminus, a minimalistic agent, was developed to serve as a standardized testbed for various language models. The framework is designed for extensibility, allowing for the integration of diverse agents through containerization or direct connections. Future developments include enabling massively parallel evaluations and incorporating established benchmarks. The project encourages open-source contributions for task expansion and collaborative framework enhancement.
+3. **Shell指令助手：** 當不確定複雜的shell指令時，使用者可以問：gh？找到所有大於 50MB 的文件，壓縮它們，並將它們放在存檔資料夾中。 Copilot 將產生執行任務所需的確切 shell 命令。
 
-## Conclusion
+## Terminal-Bench：命令列介面中 人工智慧 代理的基準
 
-The emergence of these powerful AI command-line agents marks a fundamental shift in software development, transforming the terminal into a dynamic and collaborative environment. As we've seen, there is no single "best" tool; instead, a vibrant ecosystem is forming where each agent offers a specialized strength. The ideal choice depends entirely on the developer's needs: Claude for complex architectural tasks, Gemini for versatile and multimodal problem-solving, Aider for git-centric and direct code editing, and GitHub Copilot for seamless integration into the GitHub workflow. As these tools continue to evolve, proficiency in leveraging them will become an essential skill, fundamentally changing how developers build, debug, and manage software.
+Terminal-Bench 是一種新穎的評估框架，旨在評估人工智慧代理在命令列介面中執行複雜任務的熟練程度。由於其基於文字的沙盒特性，該終端被認為是人工智慧代理操作的最佳環境。初始版本 Terminal-Bench-Core-v0 包含 80 個手動策劃的任務，涵蓋科學工作流程和數據分析等領域。為了確保公平比較，我們開發了一款簡約代理 Terminus，作為各種語言模型的標準化測試平台。該框架專為可擴展性而設計，允許透過容器化或直接連接整合不同的代理。未來的發展包括實現大規模平行評估並納入既定基準。該專案鼓勵開源貢獻以擴展任務和增強協作框架。
 
-## References
+## 結論
 
-1. Anthropic. *Claude*. [https://docs.anthropic.com/en/docs/claude-code/cli-reference](https://docs.anthropic.com/en/docs/claude-code/cli-reference)
+這些強大的人工智慧命令列代理的出現標誌著軟體開發的根本性轉變，將終端轉變為動態的協作環境。如我們所見，不存在單一的「最佳」工具；只有一種工具才是「最佳」工具。相反，一個充滿活力的生態系統正在形成，每個代理都提供專業的優勢。理想的選擇完全取決於開發人員的需求：Claude 用於複雜的架構任務，Gemini 用於多功能和多模式問題解決，Aider 用於以 git 為中心的直接程式碼編輯，而 GitHub Copilot 用於無縫整合到 GitHub 工作流程中。隨著這些工具的不斷發展，熟練地利用它們將成為一項基本技能，從根本上改變開發人員建構、調試和管理軟體的方式。
+
+## 參考
+
+1. 人擇。 *克勞德*。 [https://docs.anthropic.com/en/docs/claude-code/cli-reference](https://docs.anthropic.com/en/docs/claude-code/cli-reference)
+
 2. Google Gemini Cli [https://github.com/google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)
-3. Aider. [https://aider.chat/](https://aider.chat/)  
-4. GitHub *Copilot CLI* [https://docs.github.com/en/copilot/github-copilot-enterprise/copilot-cli](https://docs.github.com/en/copilot/github-copilot-enterprise/copilot-cli)  
-5. Terminal Bench: [https://www.tbench.ai/](https://www.tbench.ai/)
+
+3. 助手。 [https://aider.chat/](https://aider.chat/)
+
+4. GitHub *Copilot CLI* [https://docs.github.com/en/copilot/github-copilot-enterprise/copilot-cli](https://docs.github.com/en/copilot/github-copilot-enterprise/copilot-cli)
+
+5. 終端工作台：[https://www.tbench.ai/](https://www.tbench.ai/)

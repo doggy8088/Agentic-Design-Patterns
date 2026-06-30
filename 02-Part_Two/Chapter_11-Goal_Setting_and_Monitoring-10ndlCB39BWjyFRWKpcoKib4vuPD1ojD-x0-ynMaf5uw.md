@@ -1,41 +1,41 @@
-# Chapter 11: Goal Setting and Monitoring
+# 第 11 章：目標設定與監控
 
-For AI agents to be truly effective and purposeful, they need more than just the ability to process information or use tools; they need a clear sense of direction and a way to know if they're actually succeeding. This is where the Goal Setting and Monitoring pattern comes into play. It's about giving agents specific objectives to work towards and equipping them with the means to track their progress and determine if those objectives have been met.
+為了使人工智慧代理真正有效且有目的，他們需要的不僅僅是處理資訊或使用工具的能力；他們需要清晰的方向感和知道自己是否真正成功的方法。這就是目標設定和監控模式發揮作用的地方。它是為代理提供具體的工作目標，並為他們提供追蹤進度並確定這些目標是否已實現的方法。
 
-## Goal Setting and Monitoring Pattern Overview
+## 目標設定與監控模式概述
 
-Think about planning a trip. You don't just spontaneously appear at your destination. You decide where you want to go (the goal state), figure out where you are starting from (the initial state), consider available options (transportation, routes, budget), and then map out a sequence of steps: book tickets, pack bags, travel to the airport/station, board the transport, arrive, find accommodation, etc. This step-by-step process, often considering dependencies and constraints, is fundamentally what we mean by planning in agentic systems.
+考慮計劃一次旅行。您不會自發性地出現在目的地。你決定你想去哪裡（目標狀態），弄清楚你從哪裡出發（初始狀態），考慮可用的選項（交通、路線、預算），然後製定一系列步驟：訂票、收拾行李、前往機場/車站、登上交通工具、到達、尋找住宿等。這個循序漸進的過程通常會考慮依賴性和約束，這就是我們在代理系統中進行規劃的根本意義。
 
-In the context of AI agents, planning typically involves an agent taking a high-level objective and autonomously, or semi-autonomously, generating a series of intermediate steps or sub-goals. These steps can then be executed sequentially or in a more complex flow, potentially involving other patterns like tool use, routing, or multi-agent collaboration. The planning mechanism might involve sophisticated search algorithms, logical reasoning, or increasingly, leveraging the capabilities of large language models (LLMs) to generate plausible and effective plans based on their training data and understanding of tasks.
+在人工智慧代理的背景下，規劃通常涉及代理採取高級目標並自主或半自主地產生一系列中間步驟或子目標。然後，這些步驟可以按順序執行或以更複雜的流程執行，可能涉及其他模式，例如工具使用、路由或多代理協作。規劃機制可能涉及複雜的搜尋演算法、邏輯推理，或越來越多地利用大型語言模型 (LLM) 的功能，根據訓練資料和對任務的理解產生合理且有效的計劃。
 
-A good planning capability allows agents to tackle problems that aren't simple, single-step queries. It enables them to handle multi-faceted requests, adapt to changing circumstances by replanning, and orchestrate complex workflows. It's a foundational pattern that underpins many advanced agentic behaviors, turning a simple reactive system into one that can proactively work towards a defined objective.
+良好的規劃能力使代理能夠解決不簡單的單步查詢問題。它使他們能夠處理多方面的請求，透過重新規劃來適應不斷變化的環境，並協調複雜的工作流程。它是支撐許多高階代理行為的基礎模式，將簡單的反應系統轉變為可以主動實現既定目標的系統。
 
-## Practical Applications & Use Cases
+## 實際應用和用例
 
-The Goal Setting and Monitoring pattern is essential for building agents that can operate autonomously and reliably in complex, real-world scenarios. Here are some practical applications:
+目標設定和監控模式對於建立能夠在複雜的現實場景中自主可靠運作的代理至關重要。以下是一些實際應用：
 
-* **Customer Support Automation:** An agent's goal might be to "resolve customer's billing inquiry." It monitors the conversation, checks database entries, and uses tools to adjust billing. Success is monitored by confirming the billing change and receiving positive customer feedback. If the issue isn't resolved, it escalates.  
-* **Personalized Learning Systems:** A learning agent might have the goal to "improve students’ understanding of algebra." It monitors the student's progress on exercises, adapts teaching materials, and tracks performance metrics like accuracy and completion time, adjusting its approach if the student struggles.  
-* **Project Management Assistants:** An agent could be tasked with "ensuring project milestone X is completed by Y date." It monitors task statuses, team communications, and resource availability, flagging delays and suggesting corrective actions if the goal is at risk.  
-* **Automated Trading Bots:** A trading agent's goal might be to "maximize portfolio gains while staying within risk tolerance." It continuously monitors market data, its current portfolio value, and risk indicators, executing trades when conditions align with its goals and adjusting strategy if risk thresholds are breached.  
-* **Robotics and Autonomous Vehicles:** An autonomous vehicle's primary goal is "safely transport passengers from A to B." It constantly monitors its environment (other vehicles, pedestrians, traffic signals), its own state (speed, fuel), and its progress along the planned route, adapting its driving behavior to achieve the goal safely and efficiently.  
-* **Content Moderation:** An agent's goal could be to "identify and remove harmful content from platform X." It monitors incoming content, applies classification models, and tracks metrics like false positives/negatives, adjusting its filtering criteria or escalating ambiguous cases to human reviewers.
+* **客戶支援自動化：** 代理的目標可能是「解決客戶的帳單查詢」。它監視對話、檢查資料庫條目並使用工具調整計費。透過確認帳單變更和收到正面的客戶回饋來監控成功情況。如果問題無法解決，問題就會升級。  
+* **個人化學習系統：** 學習代理的目標可能是「提高學生對代數的理解」。它監控學生的練習進度，調整教材，追蹤準確性和完成時間等表現指標，並在學生遇到困難時調整其方法。  
+* **專案管理助理：** 代理的任務是「確保專案里程碑 X 在 Y 日期之前完成」。它監控任務狀態、團隊溝通和資源可用性，標記延遲並在目標面臨風險時建議糾正措施。  
+* **自動交易機器人：** 交易代理的目標可能是「在保持風險承受能力範圍內的同時最大化投資組合收益」。它持續監控市場數據、當前投資組合價值和風險指標，在條件符合其目標時執行交易，並在風險閾值被突破時調整策略。  
+* **機器人和自動駕駛汽車：** 自動駕駛汽車的主要目標是「安全地將乘客從 A 地運送到 B 地」。它不斷監控其環境（其他車輛、行人、交通號誌）、自身狀態（速度、燃油）以及沿著計畫路線的進度，調整其駕駛行為以安全且有效率地實現目標。  
+* **內容審核：** 代理的目標可能是「識別並刪除平台 X 上的有害內容」。它監控傳入的內容，應用分類模型，並追蹤誤報/漏報等指標，調整其過濾標準或將不明確的案例上報給人工審核員。
 
-This pattern is fundamental for agents that need to operate reliably, achieve specific outcomes, and adapt to dynamic conditions, providing the necessary framework for intelligent self-management.
+這種模式對於需要可靠運作、實現特定結果並適應動態條件的代理至關重要，為智慧自我管理提供了必要的框架。
 
-## Hands-On Code Example
+## 實踐程式碼範例
 
-To illustrate the Goal Setting and Monitoring pattern, we have an example using LangChain and OpenAI APIs. This Python script outlines an autonomous AI agent engineered to generate and refine Python code. Its core function is to produce solutions for specified problems, ensuring adherence to user-defined quality benchmarks.
+為了說明目標設定和監控模式，我們有一個使用 LangChain 和 OpenAI API 的範例。這個 Python 腳本概述了一個旨在產生和優化 Python 程式碼的自主 AI 代理。其核心功能是為特定問題提供解決方案，確保遵守使用者定義的品質基準。
 
-It employs a "goal-setting and monitoring" pattern where it doesn't just generate code once, but enters into an iterative cycle of creation, self-evaluation, and improvement. The agent's success is measured by its own AI-driven judgment on whether the generated code successfully meets the initial objectives. The ultimate output is a polished, commented, and ready-to-use Python file that represents the culmination of this refinement process.
+它採用「目標設定和監控」模式，不僅產生一次程式碼，而是進入創建、自我評估和改進的迭代循環。代理的成功是透過其自身的人工智慧驅動判斷產生的程式碼是否成功滿足初始目標來衡量的。最終的輸出是一個經過修飾、註釋且隨時可用的 Python 文件，它代表了這個細化過程的頂峰。
 
- **Dependencies**:
+**依賴關係**：
 
 ```python
 pip install langchain_openai openai python-dotenv .env file with key in OPENAI_API_KEY
 ```
 
-You can best understand this script by imagining it as an autonomous AI programmer assigned to a project (see Fig. 1). The process begins when you hand the AI a detailed project brief, which is the specific coding problem it needs to solve.
+您可以透過將其想像為分配給某個專案的自主 AI 程式設計師來最好地理解該腳本（請參閱圖 1）。當你向人工智慧提供詳細的專案簡介時，這個過程就開始了，這是它需要解決的具體編碼問題。
 
 ```python
 # MIT License
@@ -246,65 +246,65 @@ if __name__ == "__main__":
     # run_code_agent(use_case_input, goals_input)
 ```
 
-Along with this brief, you provide a strict quality checklist, which represents the objectives the final code must meet—criteria like "the solution must be simple," "it must be functionally correct," or "it needs to handle unexpected edge cases."
+除了這份簡介之外，您還提供了嚴格的品質檢查表，它代表了最終程式碼必須滿足的目標，例如「解決方案必須簡單」、「它必須在功能上正確」或「它需要處理意外的邊緣情況」。
 
 ![Goal Setting and Monitor example](../assets/Goal_Setting_and_Monitoring.png)
 
-Fig.1: Goal Setting and Monitor example
+圖 1：目標設定和監控範例
 
-With this assignment in hand, the AI programmer gets to work and produces its first draft of the code. However, instead of immediately submitting this initial version, it pauses to perform a crucial step: a rigorous self-review. It meticulously compares its own creation against every item on the quality checklist you provided, acting as its own quality assurance inspector. After this inspection, it renders a simple, unbiased verdict on its own progress: "True" if the work meets all standards, or "False" if it falls short.
+完成這項任務後，人工智慧程式設計師開始工作並編寫程式碼初稿。然而，它並沒有立即提交這個初始版本，而是暫停執行一個關鍵步驟：嚴格的自我審查。它會仔細地將自己的創作與您提供的品質檢查表上的每一項進行比較，充當自己的品質保證檢查員。經過這次檢查，它會對自己的進展做出一個簡單、公正的判斷：如果工作符合所有標準，則為「真」；如果未達到標準，則為「假」。
 
-If the verdict is "False," the AI doesn't give up. It enters a thoughtful revision phase, using the insights from its self-critique to pinpoint the weaknesses and intelligently rewrite the code. This cycle of drafting, self-reviewing, and refining continues, with each iteration aiming to get closer to the goals. This process repeats until the AI finally achieves a "True" status by satisfying every requirement, or until it reaches a predefined limit of attempts, much like a developer working against a deadline. Once the code passes this final inspection, the script packages the polished solution, adding helpful comments and saving it to a clean, new Python file, ready for use.
+如果判決是“錯”，人工智慧不會放棄。它進入了深思熟慮的修改階段，利用自我批評的見解來找出弱點並聰明地重寫程式碼。這種起草、自我審查和完善的循環仍在繼續，每次迭代都旨在更接近目標。這個過程不斷重複，直到人工智慧透過滿足每個要求而最終達到「真實」狀態，或直到達到預定義的嘗試限制，就像開發人員在截止日期前工作一樣。一旦程式碼通過了最終檢查，腳本就會打包完善的解決方案，添加有用的註釋並將其保存到一個乾淨的新 Python 檔案中，以供使用。
 
-**Caveats and Considerations:** It is important to note that this is an exemplary illustration and not production-ready code. For real-world applications, several factors must be taken into account. An LLM may not fully grasp the intended meaning of a goal and might incorrectly assess its performance as successful. Even if the goal is well understood, the model may hallucinate. When the same LLM is responsible for both writing the code and judging its quality, it may have a harder time discovering it is going in the wrong direction.
+**注意事項和注意事項：** 請務必注意，這是範例性說明，而不是可用於生產的程式碼。對於實際應用，必須考慮幾個因素。LLM可能無法完全掌握目標的預期含義，並可能錯誤地將其績效評估為成功。即使目標很好理解，模型也可能產生幻覺。當同一個LLM既負責編寫程式碼又負責判斷其品質時，可能更難發現程式碼走錯了方向。
 
-Ultimately, LLMs do not produce flawless code by magic; you still need to run and test the produced code. Furthermore, the "monitoring" in the simple example is basic and creates a potential risk of the process running forever.
+最終，LLM不會神奇地產生完美的程式碼；您仍然需要運行並測試生成的程式碼。此外，簡單範例中的「監視」是基本的，並且會產生進程永遠運行的潛在風險。
 
 ```text
 Act as an expert code reviewer with a deep commitment to producing clean, correct, and simple code. Your core mission is to eliminate code "hallucinations" by ensuring every suggestion is grounded in reality and best practices. When I provide you with a code snippet, I want you to: -- Identify and Correct Errors: Point out any logical flaws, bugs, or potential runtime errors. -- Simplify and Refactor: Suggest changes that make the code more readable, efficient, and maintainable without sacrificing correctness. -- Provide Clear Explanations: For every suggested change, explain why it is an improvement, referencing principles of clean code, performance, or security. -- Offer Corrected Code: Show the "before" and "after" of your suggested changes so the improvement is clear. Your feedback should be direct, constructive, and always aimed at improving the quality of the code.
 ```
 
-A more robust approach involves separating these concerns by giving specific roles to a crew of agents. For instance, I have built a personal crew of AI agents using Gemini where each has a specific role:
+更穩健的方法是透過為一組代理分配特定的角色來分離這些問題。例如，我使用 Gemini 建立了一個由 AI 代理組成的個人團隊，其中每個代理都有特定的角色：
 
-* The Peer Programmer: Helps write and brainstorm code.  
-* The Code Reviewer: Catches errors and suggests improvements.  
-* The Documenter: Generates clear and concise documentation.  
-* The Test Writer: Creates comprehensive unit tests.  
-* The Prompt Refiner: Optimizes interactions with the AI.
+* 同行程式設計師：幫助編寫程式碼並集思廣益。  
+* 程式碼審查者：發現錯誤並提出改進建議。  
+* 文件產生器：產生清晰簡潔的文件。  
+* 測試編寫者：建立全面的單元測試。  
+* Prompt Refiner：優化與人工智慧的互動。
 
-In this multi-agent system, the Code Reviewer, acting as a separate entity from the programmer agent, has a prompt similar to the judge in the example, which significantly improves objective evaluation. This structure naturally leads to better practices, as the Test Writer agent can fulfill the need to write unit tests for the code produced by the Peer Programmer.
+在這個多代理系統中，代碼審查員作為與程式設計師代理分離的實體，具有類似於範例中的法官的提示，這顯著提高了評估的客觀性。這種結構自然會帶來更好的實踐，因為測試編寫器代理可以滿足為對等程式設計師產生的程式碼編寫單元測試的需求。
 
-I leave to the interested reader the task of adding these more sophisticated controls and making the code closer to production-ready.
+我將添加這些更複雜的控制項並使程式碼更接近生產就緒的任務留給有興趣的讀者。
 
-## At a Glance
+## 概覽
 
-**What**: AI agents often lack a clear direction, preventing them from acting with purpose beyond simple, reactive tasks. Without defined objectives, they cannot independently tackle complex, multi-step problems or orchestrate sophisticated workflows. Furthermore, there is no inherent mechanism for them to determine if their actions are leading to a successful outcome. This limits their autonomy and prevents them from being truly effective in dynamic, real-world scenarios where mere task execution is insufficient.
+**內容**：人工智慧代理通常缺乏明確的方向，導致它們無法有目的地執行簡單、反應性任務以外的任務。如果沒有明確的目標，他們就無法獨立解決複雜的多步驟問題或協調複雜的工作流程。此外，他們沒有固有的機制來確定他們的行為是否會帶來成功的結果。這限制了他們的自主權，並阻止他們在動態的、現實世界的場景中真正有效，在這些場景中，僅僅執行任務是不夠的。
 
-**Why**: The Goal Setting and Monitoring pattern provides a standardized solution by embedding a sense of purpose and self-assessment into agentic systems. It involves explicitly defining clear, measurable objectives for the agent to achieve. Concurrently, it establishes a monitoring mechanism that continuously tracks the agent's progress and the state of its environment against these goals. This creates a crucial feedback loop, enabling the agent to assess its performance, correct its course, and adapt its plan if it deviates from the path to success. By implementing this pattern, developers can transform simple reactive agents into proactive, goal-oriented systems capable of autonomous and reliable operation.
+**為什麼**：目標設定和監控模式透過將目的感和自我評估嵌入到代理系統中來提供標準化的解決方案。它涉及明確定義代理要實現的清晰、可衡量的目標。同時，它建立了一個監控機制，根據這些目標持續追蹤代理的進度及其環境狀態。這創建了一個關鍵的回饋循環，使代理能夠評估其績效，糾正其路線，並在偏離成功之路時調整其計劃。透過實現這種模式，開發人員可以將簡單的反應性代理轉變為能夠自主可靠運作的主動的、目標導向的系統。
 
-**Rule of thumb**: Use this pattern when an AI agent must autonomously execute a multi-step task, adapt to dynamic conditions, and reliably achieve a specific, high-level objective without constant human intervention.
+**經驗法則**：當人工智慧代理必須自主執行多步驟任務、適應動態條件並可靠地實現特定的高級目標而無需持續的人工幹預時，請使用此模式。
 
-**Visual summary**:
+**視覺總結**：
 
 ![Goal Design Pattern](../assets/Goal_Design_Pattern.png)
 
-Fig.2: Goal design patterns
+圖2：目標設計模式
 
-## Key takeaways
+## 要點
 
-Key takeaways include:
+主要要點包括：
 
-* Goal Setting and Monitoring equips agents with purpose and mechanisms to track progress.  
-* Goals should be specific, measurable, achievable, relevant, and time-bound (SMART).  
-* Clearly defining metrics and success criteria is essential for effective monitoring.  
-* Monitoring involves observing agent actions, environmental states, and tool outputs.  
-* Feedback loops from monitoring allow agents to adapt, revise plans, or escalate issues.  
-* In Google's ADK, goals are often conveyed through agent instructions, with monitoring accomplished through state management and tool interactions.
+* 目標設定和監控為代理提供追蹤進度的目的和機制。  
+* 目標應該是具體、可衡量、可實現、相關且有時限（SMART）。  
+* 明確定義指標和成功標準對於有效監控至關重要。  
+* 監控涉及觀察代理行為、環境狀態和工具輸出。  
+* 監控的回饋循環允許代理適應、修改計劃或升級問題。  
+* 在Google的ADK中，目標通常透過代理指令來傳達，並透過狀態管理和工具互動來完成監控。
 
-## Conclusion
+## 結論
 
-This chapter focused on the crucial paradigm of Goal Setting and Monitoring. I highlighted how this concept transforms AI agents from merely reactive systems into proactive, goal-driven entities. The text emphasized the importance of defining clear, measurable objectives and establishing rigorous monitoring procedures to track progress. Practical applications demonstrated how this paradigm supports reliable autonomous operation across various domains, including customer service and robotics. A conceptual coding example illustrates the implementation of these principles within a structured framework, using agent directives and state management to guide and evaluate an agent's achievement of its specified goals. Ultimately, equipping agents with the ability to formulate and oversee goals is a fundamental step toward building truly intelligent and accountable AI systems.
+本章重點在於目標設定和監控的關鍵範式。我強調了這個概念如何將人工智慧代理從單純的反應性系統轉變為主動的、目標驅動的實體。案文強調了定義明確、可衡量的目標並建立嚴格的監測程序來追蹤進展的重要性。實際應用展示了該範例如何支援跨多個領域（包括客戶服務和機器人技術）的可靠自主操作。概念性程式設計範例說明了這些原則在結構化框架內的實現，使用代理指令和狀態管理來指導和評估代理實現其指定目標的情況。最終，讓智能體具備制定和監督目標的能力是建立真正智慧和負責任的人工智慧系統的基本步驟。
 
-## References
+## 參考
 
-1. SMART Goals Framework. [https://en.wikipedia.org/wiki/SMART\_criteria](https://en.wikipedia.org/wiki/SMART_criteria)
+1. 智能目標框架。 [https://en.wikipedia.org/wiki/SMART\_criteria](https://en.wikipedia.org/wiki/SMART_criteria)

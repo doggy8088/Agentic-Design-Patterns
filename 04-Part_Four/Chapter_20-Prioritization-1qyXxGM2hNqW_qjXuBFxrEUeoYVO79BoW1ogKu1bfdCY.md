@@ -1,32 +1,38 @@
-# Chapter 20: Prioritization
+# 第 20 章：優先順序
 
-In complex, dynamic environments, Agents frequently encounter numerous potential actions, conflicting goals, and limited resources. Without a defined process for determining the subsequent action, the agents may experience reduced efficiency, operational delays, or failures to achieve key objectives. The prioritization pattern addresses this issue by enabling agents to assess and rank tasks, objectives, or actions based on their significance, urgency, dependencies, and established criteria. This ensures the agents concentrate efforts on the most critical tasks, resulting in enhanced effectiveness and goal alignment.
+在複雜、動態的環境中，代理經常遇到大量潛在的行動、相互衝突的目標和有限的資源。如果沒有確定後續行動的明確流程，代理可能會遇到效率降低、操作延遲或無法實現關鍵目標的情況。優先模式透過使代理能夠根據任務、目標或行動的重要性、緊迫性、依賴性和既定標準對任務、目標或行動進行評估和排序來解決此問題。這可以確保代理將精力集中在最關鍵的任務上，從而提高效率和目標一致性。
 
-## Prioritization Pattern Overview
+## 優先權模式概述
 
-Agents employ prioritization to effectively manage tasks, goals, and sub-goals, guiding subsequent actions. This process facilitates informed decision-making when addressing multiple demands, prioritizing vital or urgent activities over less critical ones. It is particularly relevant in real-world scenarios where resources are constrained, time is limited, and objectives may conflict.
+代理利用優先順序來有效管理任務、目標和子目標，指導後續行動。此流程有助於在解決多種需求時做出明智的決策，將重要或緊急的活動優先於較不重要的活動。它在資源有限、時間有限且目標可能衝突的現實場景中尤其重要。
 
-The fundamental aspects of agent prioritization typically involve several elements. First, criteria definition establishes the rules or metrics for task evaluation. These may include urgency (time sensitivity of the task), importance (impact on the primary objective), dependencies (whether the task is a prerequisite for others), resource availability (readiness of necessary tools or information), cost/benefit analysis (effort versus expected outcome), and user preferences for personalized agents. Second, task evaluation involves assessing each potential task against these defined criteria, utilizing methods ranging from simple rules to complex scoring or reasoning by LLMs. Third, scheduling or selection logic refers to the algorithm that, based on the evaluations, selects the optimal next action or task sequence, potentially utilizing a queue or an advanced planning component. Finally, dynamic re-prioritization allows the agent to modify priorities as circumstances change, such as the emergence of a new critical event or an approaching deadline, ensuring agent adaptability and responsiveness.
+代理優先順序的基本面向通常涉及幾個要素。首先，標準定義建立任務評估的規則或指標。這些可能包括緊迫性（任務的時間敏感性）、重要性（對主要目標的影響）、依賴性（該任務是否是其他任務的先決條件）、資源可用性（必要工具或資訊的準備情況）、成本/效益分析（努力與預期結果）以及個人化代理的使用者偏好。其次，任務評估涉及根據這些定義的標準評估每項潛在任務，使用從簡單規則到複雜評分或大型語言模型推理的方法。第三，調度或選擇邏輯是指基於評估來選擇最佳的下一個動作或任務序列的演算法，可能利用佇列或高階規劃元件。最後，動態重新確定優先順序允許代理根據情況變化（例如出現新的關鍵事件或臨近截止日期）修改優先級，從而確保代理的適應性和回應能力。
 
-Prioritization can occur at various levels: selecting an overarching objective (high-level goal prioritization), ordering steps within a plan (sub-task prioritization), or choosing the next immediate action from available options (action selection). Effective prioritization enables agents to exhibit more intelligent, efficient, and robust behavior, especially in complex, multi-objective environments. This mirrors human team organization, where managers prioritize tasks by considering input from all members.
+優先順序劃分可以發生在各個層級：選擇總體目標（進階目標優先順序劃分）、計畫內的步驟排序（子任務優先順序劃分）或從可用選項中選擇下一個立即行動（行動選擇）。有效的優先順序劃分使代理能夠表現出更聰明、更有效率、更穩健的行為，尤其是在複雜的多目標環境中。這反映了人類團隊組織，管理者透過考慮所有成員的意見來確定任務的優先順序。
 
-## Practical Applications & Use Cases
+## 實際應用程式和用例
 
-In various real-world applications, AI agents demonstrate a sophisticated use of prioritization to make timely and effective decisions.
+在各種現實應用中，人工智慧代理展示瞭如何複雜地使用優先順序來做出及時有效的決策。
 
-* **Automated Customer Support**: Agents prioritize urgent requests, like system outage reports, over routine matters, such as password resets. They may also give preferential treatment to high-value customers.  
-* **Cloud Computing**: AI manages and schedules resources by prioritizing allocation to critical applications during peak demand, while relegating less urgent batch jobs to off-peak hours to optimize costs.  
-* **Autonomous Driving Systems**: Continuously prioritize actions to ensure safety and efficiency. For example, braking to avoid a collision takes precedence over maintaining lane discipline or optimizing fuel efficiency.  
-* **Financial Trading**: Bots prioritize trades by analyzing factors like market conditions, risk tolerance, profit margins, and real-time news, enabling prompt execution of high-priority transactions.  
-* **Project Management**: AI agents prioritize tasks on a project board based on deadlines, dependencies, team availability, and strategic importance.  
-* **Cybersecurity**: Agents monitoring network traffic prioritize alerts by assessing threat severity, potential impact, and asset criticality, ensuring immediate responses to the most dangerous threats.  
-* **Personal Assistant AIs**: Utilize prioritization to manage daily lives, organizing calendar events, reminders, and notifications according to user-defined importance, upcoming deadlines, and current context.
+* **自動化客戶支援**：代理優先處理緊急請求（例如係統中斷報告），而不是常規事務（例如密碼重設）。他們也可能為高價值客戶提供優惠待遇。
 
-These examples collectively illustrate how the ability to prioritize is fundamental to the enhanced performance and decision-making capabilities of AI agents across a wide spectrum of situations.
+* **雲端運算**：人工智慧透過在高峰需求期間優先分配給關鍵應用程式來管理和調度資源，同時將不太緊急的批次作業轉移到非高峰時段以優化成本。
 
-## Hands-On Code Example
+* **自動駕駛系統**：不斷確定行動的優先順序，以確保安全和效率。例如，煞車以避免碰撞優先於維持車道紀律或優化燃油效率。
 
-The following demonstrates the development of a Project Manager AI agent using LangChain. This agent facilitates the creation, prioritization, and assignment of tasks to team members, illustrating the application of large language models with bespoke tools for automated project management.
+* **金融交易**：機器人透過分析市場狀況、風險承受能力、利潤率和即時新聞等因素來確定交易的優先級，從而能夠迅速執行高優先級的交易。
+
+* **專案管理**：人工智慧代理根據截止日期、依賴性、團隊可用性和策略重要性對專案板上的任務進行優先排序。
+
+* **網路安全**：監控網路流量的代理透過評估威脅嚴重性、潛在影響和資產關鍵性來確定警報的優先級，確保立即回應最危險的威脅。
+
+* **個人助理人工智慧**：利用優先順序來管理日常生活，根據使用者定義的重要性、即將到來的截止日期和當前上下文組織日曆事件、提醒和通知。
+
+這些例子共同說明了確定優先順序的能力對於在各種情況下增強人工智慧代理的效能和決策能力至關重要。
+
+## 實踐程式碼範例
+
+以下示範使用LangChain開發一個Project Manager AI代理。該代理有助於創建任務、確定優先順序以及將任務分配給團隊成員，展示大型語言模型與自動化專案管理客製化工具的應用。
 
 ```python
 import os
@@ -224,45 +230,50 @@ if __name__ == "__main__":
     asyncio.run(run_simulation())
 ```
 
-This code implements a simple task management system using Python and LangChain, designed to simulate a project manager agent powered by a large language model.
+程式碼使用Python和LangChain實作了一個簡單的任務管理系統，旨在模擬由大型語言模型支援的專案經理代理。
 
-The system employs a SuperSimpleTaskManager class to efficiently manage tasks within memory, utilizing a dictionary structure for rapid data retrieval. Each task is represented by a Task Pydantic model, which encompasses attributes such as a unique identifier, a descriptive text, an optional priority level (P0, P1, P2), and an optional assignee designation.Memory usage varies based on task type, the number of workers, and other contributing factors. The task manager provides methods for task creation, task modification, and retrieval of all tasks.
+系統採用 SuperSimpleTaskManager 類別來有效管理記憶體中的任務，並利用字典結構進行快速資料檢索。每個任務都由 Task Pydantic 模型表示，該模型包含諸如唯一識別碼、描述性文字、可選優先順序（P0、P1、P2）和可選受讓人指定等屬性。記憶體使用情況會根據任務類型、工作人員數量和其他影響因素而變化。任務管理器提供任務建立、任務修改和檢索所有任務的方法。
 
-The agent interacts with the task manager via a defined set of Tools. These tools facilitate the creation of new tasks, the assignment of priorities to tasks, the allocation of tasks to personnel, and the listing of all tasks. Each tool is encapsulated to enable interaction with an instance of the SuperSimpleTaskManager. Pydantic models are utilized to delineate the requisite arguments for the tools, thereby ensuring data validation.
+代理透過一組定義的工具與任務管理器互動。這些工具有助於建立新任務、分配任務優先順序、將任務分配給人員以及列出所有任務。每個工具都經過封裝，可以與 SuperSimpleTaskManager 的實例進行互動。 Pydantic 模型用於描述工具的必要參數，從而確保資料驗證。
 
-An AgentExecutor is configured with the language model, the toolset, and a conversation memory component to maintain contextual continuity. A specific ChatPromptTemplate is defined to direct the agent's behavior in its project management role. The prompt instructs the agent to initiate by creating a task, subsequently assigning priority and personnel as specified, and concluding with a comprehensive task list. Default assignments, such as P1 priority and 'Worker A', are stipulated within the prompt for instances where information is absent.
+AgentExecutor 配置語言模型、工具集和會話記憶體元件，以保持上下文連續性。定義特定的 ChatPromptTemplate 來指導代理在其專案管理角色中的行為。此提示指示代理透過建立任務來啟動，隨後依指定指派優先順序和人員，最後提供一份全面的任務清單。對於缺少資訊的情況，提示中規定了預設分配，例如 P1 優先順序和「工作人員 A」。
 
-The code incorporates a simulation function (`run_simulation`) of asynchronous nature to demonstrate the agent's operational capacity. The simulation executes two distinct scenarios: the management of an urgent task with designated personnel, and the management of a less urgent task with minimal input. The agent's actions and logical processes are outputted to the console due to the activation of verbose=True within the AgentExecutor.
+程式碼結合了非同步性質的模擬函數（`run_simulation`）來示範代理的操作能力。此模擬執行兩個不同的場景：由指定人員管理緊急任務，以及以最少的輸入管理不太緊急的任務。由於 AgentExecutor 中 verbose=True 的激活，代理的動作和邏輯過程被輸出到控制台。
 
-# At a Glance
+# 概覽
 
-**What:** AI agents operating in complex environments face a multitude of potential actions, conflicting goals, and finite resources. Without a clear method to determine their next move, these agents risk becoming inefficient and ineffective. This can lead to significant operational delays or a complete failure to accomplish primary objectives. The core challenge is to manage this overwhelming number of choices to ensure the agent acts purposefully and logically.
+**內容：** 在複雜環境中運作的人工智慧代理面臨著大量潛在的行動、相互衝突的目標和有限的資源。如果沒有明確的方法來確定下一步行動，這些代理將面臨效率低下和無效的風險。這可能會導致嚴重的營運延誤或完全無法實現主要目標。核心挑戰是管理如此多的選擇，以確保代理有目的地、有邏輯地行動。
 
-**Why:** The Prioritization pattern provides a standardized solution for this problem by enabling agents to rank tasks and goals. This is achieved by establishing clear criteria such as urgency, importance, dependencies, and resource cost. The agent then evaluates each potential action against these criteria to determine the most critical and timely course of action. This Agentic capability allows the system to dynamically adapt to changing circumstances and manage constrained resources effectively. By focusing on the highest-priority items, the agent's behavior becomes more intelligent, robust, and aligned with its strategic goals.
+**原因：** 優先模式透過使代理能夠對任務和目標進行排序，為該問題提供了標準化的解決方案。這是透過建立明確的標準（例如緊迫性、重要性、依賴性和資源成本）來實現的。然後，代理根據這些標準評估每個潛在的行動，以確定最關鍵和最及時的行動方案。這種代理功能允許系統動態地適應不斷變化的環境並有效地管理有限的資源。透過專注於最高優先事項的項目，代理的行為變得更加聰明、穩健，並與其策略目標保持一致。
 
-**Rule of thumb:** Use the Prioritization pattern when an Agentic system must autonomously manage multiple, often conflicting, tasks or goals under resource constraints to operate effectively in a dynamic environment.
+**經驗法則：** 當 代理式 系統必須在資源限制下自主管理多個經常相互衝突的任務或目標，以便在動態環境中有效運作時，請使用優先權模式。
 
-**Visual summary:**
+**視覺總結：**
 
-**![Prioritization Design Pattern](../assets/Prioritization_Design_Pattern.png )
+**![優先權設計模式](../assets/Prioritization_Design_Pattern.png )
 
-Fig.1: Prioritization Design pattern
+圖1：優先設計模式
 
-# Key Takeaways
+# 要點
 
-* Prioritization enables AI agents to function effectively in complex, multi-faceted environments.  
-* Agents utilize established criteria such as urgency, importance, and dependencies to evaluate and rank tasks.  
-* Dynamic re-prioritization allows agents to adjust their operational focus in response to real-time changes.
-* Prioritization occurs at various levels, encompassing overarching strategic objectives and immediate tactical decisions.
-* Effective prioritization results in increased efficiency and improved operational robustness of AI agents.
+* 優先排序使人工智慧代理能夠在複雜、多方面的環境中有效發揮作用。
 
-# Conclusions
+* 代理利用既定標準（例如緊迫性、重要性和依賴性）來評估任務並對其進行排名。
 
-In conclusion, the prioritization pattern is a cornerstone of effective agentic AI, equipping systems to navigate the complexities of dynamic environments with purpose and intelligence. It allows an agent to autonomously evaluate a multitude of conflicting tasks and goals, making reasoned decisions about where to focus its limited resources. This agentic capability moves beyond simple task execution, enabling the system to act as a proactive, strategic decision-maker. By weighing criteria such as urgency, importance, and dependencies, the agent demonstrates a sophisticated, human-like reasoning process.
+* 動態重新優先權允許代理調整其操作重點以回應即時變化。
 
-A key feature of this agentic behavior is dynamic re-prioritization, which grants the agent the autonomy to adapt its focus in real-time as conditions change. As demonstrated in the code example, the agent interprets ambiguous requests, autonomously selects and uses the appropriate tools, and logically sequences its actions to fulfill its objectives. This ability to self-manage its workflow is what separates a true agentic system from a simple automated script. Ultimately, mastering prioritization is fundamental for creating robust and intelligent agents that can operate effectively and reliably in any complex, real-world scenario.
+* 優先順序劃分發生在各個層面，包括整體策略目標和即時戰術決策。
 
-# References
+* 有效的優先順序劃分可以提高人工智慧代理的效率和操作穩健性。
 
-1. Examining the Security of Artificial Intelligence in Project Management: A Case Study of AI-driven Project Scheduling and Resource Allocation in Information Systems Projects ; [https://www.irejournals.com/paper-details/1706160](https://www.irejournals.com/paper-details/1706160)
-2. AI-Driven Decision Support Systems in Agile Software Project Management: Enhancing Risk Mitigation and Resource Allocation; [https://www.mdpi.com/2079-8954/13/3/208](https://www.mdpi.com/2079-8954/13/3/208)  
+# 結論
+
+總之，優先模式是有效代理工智慧的基石，使系統能夠有目的地和智慧地駕馭動態環境的複雜性。它允許代理自主評估大量相互衝突的任務和目標，就將有限的資源集中在哪裡做出合理的決定。這種代理能力超越了簡單的任務執行，使系統能夠充當主動的策略決策者。透過權衡緊迫性、重要性和依賴性等標準，代理展示了複雜的、類似人類的推理過程。
+
+這種代理行為的一個關鍵特徵是動態重新確定優先級，它賦予代理在條件變化時即時調整其焦點的自主權。如程式碼範例所示，代理解釋不明確的請求，自主選擇和使用適當的工具，並按邏輯順序排列其操作以實現其目標。這種自我管理工作流程的能力是將真正的代理系統與簡單的自動化腳本區分開來的。最終，掌握優先順序對於創建強大且智慧的代理至關重要，這些代理可以在任何複雜的現實場景中有效且可靠地運作。
+
+＃ 參考
+
+1. 檢視人工智慧在專案管理中的安全性：以人工智慧驅動的資訊系統專案排程與資源分配為例； [https://www.irejournals.com/paper-details/1706160](https://www.irejournals.com/paper-details/1706160)
+
+2. 敏捷軟體專案管理中人工智慧驅動的決策支援系統：增強風險緩解和資源分配； [https://www.mdpi.com/2079-8954/13/3/208](https://www.mdpi.com/2079-8954/13/3/208)

@@ -1,33 +1,33 @@
-# Acknowledgment
+# 致謝
 
-I would like to express my sincere gratitude to the many individuals and teams who made this book possible.
+我謹向許多使這本書成為可能的個人和團隊表示誠摯的謝意。
 
-First and foremost, I thank Google for adhering to its mission, empowering Googlers, and respecting the opportunity to innovate.
+首先，我感謝 Google 恪守其使命，為 Google 員工提供支持，並尊重創新機會。
 
-I am grateful to the Office of the CTO for giving me the opportunity to explore new areas, for adhering to its mission of "practical magic," and for its capacity to adapt to new emerging opportunities.
+感謝CTO辦公室給我探索新領域的機會，感謝其堅守「實用魔法」的使命，感謝其適應新機會的能力。
 
-I would like to extend my heartfelt thanks to Will Grannis, our VP, for the trust he puts in people and for being a servant leader. To John Abel, my manager, for encouraging me to pursue my activities and for always providing great guidance with his British acumen.I extend my gratitude to Antoine Larmanjat for our work on LLMs in code, Hann Hann Wang for agent discussions, and Yingchao Huang for time series insights. Thanks to Ashwin Ram for leadership, Massy Mascaro for inspiring work, Jennifer Bennett for technical expertise, Brett Slatkin for engineering, and Eric Schen for stimulating discussions. The OCTO team, especially Scott Penberthy, deserves recognition. Finally, deep appreciation to Patricia Florissi for her inspiring vision of Agents' societal impact.
+我衷心感謝我們的副總裁威爾·格蘭尼斯 (Will Grannis) 對人們的信任以及他作為僕人式領導者的身份。感謝我的經理約翰·阿貝爾 (John Abel)，他鼓勵我繼續我的活動，並始終以他的英國智慧為我提供良好的指導。我感謝 Antoine Larmanjat 在代碼大型語言模型（LLM）方面所做的工作，感謝 Hann Hann Wang 進行代理討論，感謝黃穎超對時間序列的見解。感謝 Ashwin Ram 的領導、Massy Mascaro 的啟發性工作、Jennifer Bennett 的技術專業知識、Brett Slatkin 的工程技術以及 Eric Sc​​​​hen 的激發討論。 OCTO 團隊，尤其是 Scott Penberthy，值得認可。最後，衷心感謝 Patricia Florissi 對特工社會影響力的鼓舞人心的願景。
 
-My appreciation also goes to Marco Argenti for the challenging and motivating vision of agents augmenting the human workforce. My thanks also go to Jim Lanzone and Jordi Ribas for pushing the bar on the relationship between the world of Search and the world of Agents.
+我還要感謝 Marco Argenti，他在增強勞動力方面具有挑戰性和激勵性的願景。我還要感謝 Jim Lanzone 和 Jordi Ribas，他們推動了搜索世界和特工世界之間關係的發展。
 
-I am also indebted to the Cloud AI teams, especially their leader Saurabh Tiwary, for driving the AI organization towards principled progress. Thank you to Salem Salem Haykal, the Area Technical Leader, for being an inspiring colleague. My thanks to Vladimir Vuskovic, co-founder of Google Agentspace, Kate (Katarzyna) Olszewska for our Agentic collaboration on Kaggle Game Arena, and Nate Keating for driving Kaggle with passion, a community that has given so much to AI. My thanks also to Kamelia Aryafa, leading applied AI and ML teams focused on Agentspace and Enterprise NotebookLM, and to Jahn Wooland, a true leader focused on delivering and a personal friend always there to provide advice.
+我還感謝 Cloud AI 團隊，尤其是他們的領導者 Saurabh Tiwary，推動 AI 組織取得原則性進展。感謝區域技術負責人 Salem Salem Haykal 是一位鼓舞人心的同事。我感謝 Google Agentspace 聯合創始人 Vladimir Vuskovic，感謝 Kate (Katarzyna) Olszewska 在 Kaggle Game Arena 上與我們進行 代理式 合作，感謝 Nate Keating 滿懷熱情地推動 Kaggle，這個社區為 AI 做出了巨大貢獻。我還要感謝 Kamelia Aryafa，她領導著專注於 Agentspace 和 Enterprise NotebookLM 的應用 AI 和 ML 團隊，還要感謝 Jahn Wooland，她是一位專注於交付的真正領導者，也是一位隨時提供建議的私人朋友。
 
-A special thanks to Yingchao Huang for being a brilliant AI engineer with a great career in front of you, Hann Wang for challenging me to return to my interest in Agents after an initial interest in 1994, and to Lee Boonstra for your amazing work on prompt engineering.
+特別感謝黃英超，他是一位出色的人工智慧工程師，在你面前有著美好的職業生涯；感謝 Hann Wang，在 1994 年最初對 代理 產生興趣後，他向我發起挑戰，讓我重新恢復對 代理 的興趣；感謝 Lee Boonstra 在即時工程方面所做的出色工作。
 
-My thanks also go to the 5 Days of GenAI team, including our VP Alison Wagonfeld for the trust put in the team, Anant Nawalgaria for always delivering, and Paige Bailey for her can-do attitude and leadership.
+我還要感謝 GenAI 5 天團隊，包括我們的副總裁 Alison Wagonfeld 對團隊的信任，Anant Nawalgaria 始終如一的交付，以及 Paige Bailey 的進取態度和領導力。
 
-I am also deeply grateful to Mike Styer, Turan Bulmus, and Kanchana Patlolla for helping me ship three Agents at Google I/O 2025\. Thank you for your immense work.
+我還深深感謝 Mike Styer、Turan Bulmus 和 Kanchana Patlolla 幫助我在 Google I/O 2025 上發布了三個 代理。感謝您所做的巨大工作。
 
-I want to express my sincere gratitude to Thomas Kurian for his unwavering leadership, passion, and trust in driving the Cloud and AI initiatives. I also deeply appreciate Emanuel Taropa, whose inspiring "can-do" attitude made him the most exceptional colleague I've encountered at Google, setting a truly profound example. Finally, thanks to Fiona Cicconi for our engaging discussions about Google.
+我想對 Thomas Kurian 在推動雲端和人工智慧計畫方面堅定不移的領導、熱情和信任表示誠摯的謝意。我還深深感謝伊曼紐爾·塔羅帕 (Emanuel Taropa)，他鼓舞人心的「我能做到」的態度使他成為我在 Google 遇到的最傑出的同事，樹立了真正深刻的榜樣。最後，感謝 Fiona Cicconi 為我們帶來了 Google 的精彩討論。
 
-I extend my gratitude to Demis Hassabis, Pushmeet Kohli, and the entire GDM team for their passionate efforts in developing Gemini, AlphaFold, AlphaGo, and AlphaGenome, among other projects, and for their contributions to advancing science for the benefit of society. A special thank you to Yossi Matias for his leadership of Google Research and for consistently offering invaluable advice. I have learned a great deal from you.
+我向 Demis Hassabis、Pushmeet Kohli 和整個 GDM 團隊表示感謝，感謝他們在開發 Gemini、AlphaFold、AlphaGo 和 AlphaGenome 等專案方面所做的熱情努力，以及他們為推進科學造福社會所做的貢獻。特別感謝 Yossi Matias 對 Google 研究的領導以及不斷提供的寶貴建議。我從你身上學到了很多。
 
-A special thanks to Patti Maes, who pioneered the concept of Software Agents in the 90s and remains focused on the question of how computer systems and digital devices might augment people and assist them with issues such as memory, learning, decision making, health, and wellbeing. Your vision back in '91 became a reality today.
+特別感謝 Patti Maes，她在 90 年代率先提出了軟體代理的概念，並始終專注於電腦系統和數位設備如何增強人們的能力並幫助他們解決記憶、學習、決策、健康和福祉等問題。您 91 年的願景今天已成為現實。
 
-I also want to extend my gratitude to Paul Drougas and all the Publisher team at Springer for making this book possible.
+我還要向 Paul Drougas 和 Springer 的所有出版團隊致以謝意，是你們讓這本書成為可能。
 
-I am deeply indebted to the many talented people who helped bring this book to life. My heartfelt thanks go to Marco Fago for his immense contributions, from code and diagrams to reviewing the entire text. I’m also grateful to Mahtab Syed for his coding work and to Ankita Guha for her incredibly detailed feedback on so many chapters. The book was significantly improved by the insightful amendments from Priya Saxena, the careful reviews from Jae Lee, and the dedicated work of Mario da Roza in creating the NotebookLM version. I was fortunate to have a team of expert reviewers for the initial chapters, and I thank Dr. Amita Kapoor, Fatma Tarlaci, PhD, Dr. Alessandro Cornacchia, and Aditya Mandlekar for lending their expertise. My sincere appreciation also goes to Ashley Miller, A Amir John, and Palak Kamdar (Vasani) for their unique contributions. For their steadfast support and encouragement, a final, warm thank you is due to Rajat Jain, Aldo Pahor, Gaurav Verma, Pavithra Sainath, Mariusz Koczwara, Abhijit Kumar, Armstrong Foundjem, Haiming Ran, Udita Patel, and Kaurnakar Kotha.
+我深深感謝許多有才華的人，他們幫助本書實現。我衷心感謝 Marco Fago 從程式碼和圖表到審閱整個文本的巨大貢獻。我還感謝 Mahtab Syed 的編碼工作，以及 Ankita Guha 對如此多章節的極其詳細的回饋。 Priya Saxena 的富有洞察力的修改、Jae Lee 的仔細審閱以及 Mario da Roza 在創建 NotebookLM 版本時的專注工作使本書得到了顯著改進。我很幸運有一個由專家審稿團隊組成的最初幾章的評審團隊，我感謝 Amita Kapoor 博士、Fatma Tarlaci 博士、Alessandro Cornacchia 博士和 Aditya Mandlekar 提供的專業知識。我還要衷心感謝 Ashley Miller、A Amir John 和 Palak Kamdar（Vasani）的獨特貢獻。最後，衷心感謝 Rajat Jain、Aldo Pahor、Gaurav Verma、Pavithra Sainath、Mariusz Koczwara、Abhijit Kumar、Armstrong Foundjem、Haiming Ran、Udita Patel 和 Kaurnakar Kotha。
 
-This project truly would not have been possible without you. All the credit goes to you, and all the mistakes are mine.
+如果沒有你們，這個計畫確實不可能實現。所有的功勞都歸於你，所有的錯誤都是我的。
 
-*All my royalties are donated to Save the Children.*
+*我所有的版稅都捐給救助兒童會。 *
