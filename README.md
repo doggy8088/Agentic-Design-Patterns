@@ -96,3 +96,27 @@
 該儲存庫已依據 [MIT 授權條款](LICENSE) 公開授權。
 
 ![代理設計模式](assets/Agentic_Design_Patterns.png)
+
+<footer class="site-footer-translation">
+  <a href="https://www.facebook.com/will.fans/">正體中文翻譯由 Will 保哥的技術交流中心</a> 貢獻完成
+</footer>
+
+<style>
+  .site-footer-translation {
+    position: fixed;
+    left: 12px;
+    bottom: 12px;
+    z-index: 999;
+    font-size: 12px;
+    background: transparent;
+    color: #555;
+    padding: 0;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .site-footer-translation a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
