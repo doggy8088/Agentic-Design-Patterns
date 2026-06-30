@@ -95,4 +95,4 @@
 
 該儲存庫已依據 [MIT 授權條款](LICENSE) 公開授權。
 
-![代理設計模式](assets/Agentic_Design_Patterns.png)
+<!-- ![代理設計模式](assets/Agentic_Design_Patterns.png) -->
